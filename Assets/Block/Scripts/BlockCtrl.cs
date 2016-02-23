@@ -34,19 +34,21 @@ public class BlockCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// しきい値からブロックをでたブロックを削除
-		if(map_creator.isDelete(this.gameObject)){
-			Destroy (this.gameObject);
-		}
+		// スクロールモード
+		if(GameMgr.game_mode == "Scroll"){
+			// しきい値からブロックをでたブロックを削除
+			if(map_creator.isDelete(this.gameObject)){
+				Destroy (this.gameObject);
+			}
 
-		// 一度エネミーを作ったエネミーはもう作れない
-		if(!is_create_new){
-			// ある一定のしきい値をエネミーが超えたら次のエネミー作成
-			if(map_creator.isCreate(this.gameObject)){
-				is_create_new = true;
+			// 一度エネミーを作ったエネミーはもう作れない
+			if(!is_create_new){
+				// ある一定のしきい値をエネミーが超えたら次のエネミー作成
+				if(map_creator.isCreate(this.gameObject)){
+					is_create_new = true;
+				}
 			}
 		}
-
 	}
 
 	// 衝突した時
