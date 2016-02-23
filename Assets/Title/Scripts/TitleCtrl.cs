@@ -9,14 +9,17 @@ public class TitleCtrl : MonoBehaviour {
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+
+	public void Scroll(){
+		scene = "scPlay1";
+		//Application.LoadLevelAdditive (scene);
+		Application.LoadLevel(scene);
 	}
 
-	public void Play(){
-		scene = "scPlay1";
-		Application.LoadLevel (scene);
+	// タイムアタックモード
+	public void TimeAttack(){
+		scene = "scAttack";
+		Application.LoadLevel(scene);
 	}
 }

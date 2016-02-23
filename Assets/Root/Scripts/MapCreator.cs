@@ -32,10 +32,11 @@ public class MapCreator : MonoBehaviour {
 		// 最初の敵を作成
 		this.create_enemy ();
 
-		this.level_ctrl = new LevelCtrl ();
+		this.level_ctrl = gameObject.AddComponent<LevelCtrl> ();
 		this.level_ctrl.initialize ();
 		this.level_ctrl.loadLevelData (this.level_data_txt);
-		this.score_ctrl = new ScoreCtrl ();
+		this.score_ctrl = this.gameObject.GetComponent<ScoreCtrl> ();
+
 	}
 	
 	// Update is called once per frame
@@ -131,7 +132,7 @@ public class MapCreator : MonoBehaviour {
 
 		do {
 			// 左のしきい値の計算
-			float limit_left = player_ctrl.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN + 5) / 2.0f);
+			float limit_left = player_ctrl.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN + 8) / 2.0f);
 			// ブロックがしきい値をでていたら削除の指示
 			if(player.transform.position.x < limit_left){
 				ret = true;

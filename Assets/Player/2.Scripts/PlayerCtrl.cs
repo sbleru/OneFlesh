@@ -74,36 +74,39 @@ public class PlayerCtrl : MonoBehaviour {
 			velocity_b.y = Y_b * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
 		}
 
-			
-		// プレイヤーAの操作
-		// 順に左、上、下、右
-		if(Input.GetKey(KeyCode.H)){
-			velocity_a.x = -Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-		}
-		if(Input.GetKey(KeyCode.J)){
-			velocity_a.y = Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-		}
-		if(Input.GetKey(KeyCode.K)){
-			velocity_a.y = -Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-		}
-		if(Input.GetKey(KeyCode.L)){
-			velocity_a.x = Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+
+		if(!Application.isMobilePlatform){
+			// プレイヤーAの操作
+			// 順に左、上、下、右
+			if(Input.GetKey(KeyCode.H)){
+				velocity_a.x = -Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+			}
+			if(Input.GetKey(KeyCode.J)){
+				velocity_a.y = Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+			}
+			if(Input.GetKey(KeyCode.K)){
+				velocity_a.y = -Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+			}
+			if(Input.GetKey(KeyCode.L)){
+				velocity_a.x = Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+			}
+
+			// プレイヤーBの操作
+			// 順に左、上、右、下
+			if(Input.GetKey(KeyCode.A)){
+				velocity_b.x = -Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+			}
+			if(Input.GetKey(KeyCode.S)){
+				velocity_b.y = Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+			}
+			if(Input.GetKey(KeyCode.D)){
+				velocity_b.y = -Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+			}
+			if(Input.GetKey(KeyCode.F)){
+				velocity_b.x = Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+			}
 		}
 
-		// プレイヤーBの操作
-		// 順に左、上、右、下
-		if(Input.GetKey(KeyCode.A)){
-			velocity_b.x = -Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-		}
-		if(Input.GetKey(KeyCode.S)){
-			velocity_b.y = Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-		}
-		if(Input.GetKey(KeyCode.D)){
-			velocity_b.y = -Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-		}
-		if(Input.GetKey(KeyCode.F)){
-			velocity_b.x = Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-		}
 			
 		// 速度を適用
 		this.rigidbody_a.velocity = velocity_a;

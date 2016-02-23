@@ -13,6 +13,12 @@ public class UICtrl : MonoBehaviour {
 
 	public Text score;	//ゲームスコア
 
+	LinkCtrl link_ctrl;
+	RaycastHit[] hits;	// レイに当たったオブジェクトを格納
+	private Ray worldPoint;	// レイをだすポイント
+	public bool isLinkMode;
+	public bool isMainPlayer;
+
 	// Use this for initialization
 	void Start () {
 		currentXpos = 0.0f;
@@ -26,11 +32,42 @@ public class UICtrl : MonoBehaviour {
 		touchStart = false;
 
 		score.text = "Score: " + 0;
+		this.link_ctrl = GameObject.FindGameObjectWithTag ("Root").GetComponent<LinkCtrl> ();
+
+		isLinkMode = false;
+		isMainPlayer = false;
 	}
 
 	void Update(){
 		// スコア更新
 		score.text = "Score: " + SetValue.total_score;
+
+		// 画面のタップを検出
+		if(Input.GetMouseButtonDown(0)){
+			
+			// リンクモードかどうか
+			if(!isLinkMode){
+				worldPoint = Camera.main.ScreenPointToRay (Input.mousePosition);
+				hits = Physics.RaycastAll (worldPoint.origin, worldPoint.direction, 100);
+				// プレイヤーAorBがタップされているか
+				foreach (RaycastHit hit in hits) {
+					if(hit.collider.gameObject.tag == "PlayerA"){
+						isMainPlayer = true;
+					} else if(hit.collider.gameObject.tag == "PlayerB"){
+						isMainPlayer = false;
+					}
+					// リンクスタート
+					isLinkMode = true;
+					this.link_ctrl.Link_start ();
+				}
+			}
+		}
+	}
+
+	// リンクモード終了
+	public void LinkEnd(){
+		this.link_ctrl.Link_end ();
+		isLinkMode = false;
 	}
 
 	// 仮想操作パッド

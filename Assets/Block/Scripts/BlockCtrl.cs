@@ -5,6 +5,8 @@ public class BlockCtrl : MonoBehaviour {
 
 	MapCreator map_creator;
 	ScoreCtrl score_ctrl;
+	LinkCtrl link_ctrl;
+	UICtrl ui_ctrl;
 	public int block_type;
 	bool is_create_new = false;
 
@@ -13,11 +15,21 @@ public class BlockCtrl : MonoBehaviour {
 	SoundMgr sound_mgr;	
 	public AudioClip clip;	// 爆発サウンド
 
+	private struct Block{
+		public bool is_link_block;
+		public bool is_last_link_block;
+	};
+
+	Block link_block;
+
 	// Use this for initialization
 	void Start () {
-		map_creator = GameObject.FindGameObjectWithTag ("Root").GetComponent<MapCreator> ();
-		this.score_ctrl = new ScoreCtrl ();
-		sound_mgr = GameObject.FindGameObjectWithTag ("Root").GetComponent<SoundMgr> ();
+		this.map_creator = GameObject.FindGameObjectWithTag ("Root").GetComponent<MapCreator> ();
+		this.score_ctrl = GameObject.FindGameObjectWithTag ("Root").GetComponent<ScoreCtrl> ();
+		this.sound_mgr = GameObject.FindGameObjectWithTag ("Root").GetComponent<SoundMgr> ();
+		this.ui_ctrl = GameObject.FindGameObjectWithTag ("Root").GetComponent<UICtrl> ();
+		link_block.is_link_block = false;
+		link_block.is_last_link_block = false;
 	}
 	
 	// Update is called once per frame
@@ -58,6 +70,20 @@ public class BlockCtrl : MonoBehaviour {
 			sound_mgr.PlayClip (clip);
 			// 加点
 			score_ctrl.Add (30);
+		}
+	}
+
+	// リンクモード時にタップされたとき呼ばれる
+	public void LinkBlock(){
+		// 1度目のタップ
+		if(!link_block.is_link_block){
+			link_block.is_link_block = true;
+		} else {
+			// 2度目のタップ
+			if(!link_block.is_last_link_block){
+				ui_ctrl.LinkEnd ();
+				link_block.is_last_link_block = true;
+			}
 		}
 	}
 }
