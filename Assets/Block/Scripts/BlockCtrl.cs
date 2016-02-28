@@ -54,7 +54,7 @@ public class BlockCtrl : MonoBehaviour {
 	// 衝突した時
 	void OnCollisionEnter(Collision collision){
 		// block_type 0:赤 1:青
-		if(block_type == 0 && collision.gameObject.tag == "PlayerA"){
+		if (block_type == 0 && collision.gameObject.tag == "PlayerA") {
 			// Destroyだとエネミー作成していない場合、作成してくれない
 			this.gameObject.GetComponent<Collider> ().enabled = false;
 			this.gameObject.GetComponent<Renderer> ().enabled = false;
@@ -63,8 +63,7 @@ public class BlockCtrl : MonoBehaviour {
 			sound_mgr.PlayClip (clip);
 			// 加点
 			score_ctrl.Add (10);
-		}
-		if(block_type == 1 && collision.gameObject.tag == "PlayerB"){
+		} else if (block_type == 1 && collision.gameObject.tag == "PlayerB") {
 			this.gameObject.GetComponent<Collider> ().enabled = false;
 			this.gameObject.GetComponent<Renderer> ().enabled = false;
 			// 爆発エフェクトのプレハブを呼び出す

@@ -15,12 +15,12 @@ public class MapCreator : MonoBehaviour {
 
 	private ScoreCtrl score_ctrl;
 
-	private struct FloorBlock{
-		public bool is_last_block;
-		public Vector3 block_pos;
-	};
-
-	FloorBlock last_block;
+//	private struct FloorBlock{
+//		public bool is_last_block;
+//		public Vector3 block_pos;
+//	};
+//
+//	FloorBlock last_block;
 	BlockCreator block_creator;
 	GameObject player_ctrl;
 
@@ -28,7 +28,7 @@ public class MapCreator : MonoBehaviour {
 	void Start () {
 		block_creator = this.gameObject.GetComponent<BlockCreator> ();
 		player_ctrl = GameObject.FindGameObjectWithTag ("Keeper");
-		last_block.is_last_block = false;
+		//last_block.is_last_block = false;
 		// 最初の敵を作成
 		this.create_enemy ();
 
@@ -110,7 +110,7 @@ public class MapCreator : MonoBehaviour {
 		// エネミーのY位置
 		next_enemy_position.y = Random.Range (-(float)SCREEN_HEIGHT, (float)SCREEN_HEIGHT);
 		// エネミー作成指示
-		block_creator.createBlock (next_enemy_position);
+		block_creator.createBlock2 (next_enemy_position, Random.Range(0,2));
 	}
 
 	// 渡されたオブジェクトを削除するか判定

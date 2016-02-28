@@ -1,17 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Text;
+using System.IO;
 
 [RequireComponent (typeof(BlockCreator))]
 public class StageCreator : MonoBehaviour {
 	public static float BLOCK_WIDTH = 1.0f;
 	public static float BLOCK_HEIGHT = 0.2f;
 	public static int BLOCK_NUM_IN_SCREEN = 40;
-	public static int SCREEN_HEIGHT = 20;
+	public static int SCREEN_HEIGHT = 24;
 
 	GameObject Player;
 	ScoreCtrl score_ctrl;
 	PlayerCtrl player_ctrl;
 	BlockCreator block_creator;
+
+	private TextAsset stage_asset;  // ステージテキストを取り込む
+	string stage_txt;
+	public int[,] stage_data = new int[BLOCK_NUM_IN_SCREEN, SCREEN_HEIGHT];
 
 	// Use this for initialization
 	void Start () {
@@ -19,29 +25,75 @@ public class StageCreator : MonoBehaviour {
 		this.score_ctrl = this.gameObject.GetComponent<ScoreCtrl> ();
 		this.player_ctrl = GameObject.FindGameObjectWithTag ("PlayerA").GetComponent<PlayerCtrl> ();
 		this.block_creator = GameObject.FindGameObjectWithTag ("Root").GetComponent<BlockCreator> ();
-		// 最初の敵を作成
-		this.create_enemy ();
+		// ステージテキストを取り込む
+		stage_asset = Resources.Load ("stage1") as TextAsset;
+		stage_txt = stage_asset.text;
+		get_stage_data ();
+		// ステージを作成する
 		create_stage ();
 	}
 
 	// ステージ作成
-	private void create_stage(){
-		
+	private void get_stage_data(){
+
+		string[] lines = stage_txt.Split ('\n');
+		int i=0, j=0;
+
+		//lines内の各行に対して、順番に処理していくループ
+		foreach(var line in lines){
+			if(line == ""){ //行がなければ
+				continue;  
+			}
+
+			//print (line);
+			string[] words = line.Split ();
+
+			//words内の各ワードに対して、順番に処理していくループ
+			foreach(var word in words){
+				if(word == ""){
+					continue;
+				}
+				stage_data [i, j] = int.Parse (word);
+				
+				j++;
+				if (j > SCREEN_HEIGHT-1){
+					break;
+				}
+			}
+			j = 0;
+			i++;
+			if (i > BLOCK_NUM_IN_SCREEN-1){
+				break;
+			}
+		}
 	}
 
-	// エネミーの位置を決定
-	public void create_enemy(){
-		// これから作るエネミーの位置
-		Vector3 next_enemy_position;
-		// エネミーの位置をとりあえずプレイヤーの下にする
-		next_enemy_position = Player.transform.position;
-		// エネミーのX位置
-		next_enemy_position.x += BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
-		//next_enemy_position.x = Random.Range(next_enemy_position.x, next_enemy_position.x + INTERVAL/2);
-		// エネミーのY位置
-		next_enemy_position.y = Random.Range (-(float)SCREEN_HEIGHT, (float)SCREEN_HEIGHT);
-		// エネミー作成指示
-		block_creator.createBlock (next_enemy_position);
+	//
+	private void create_stage(){
+		int i, j;
+
+		for(i=0; i<BLOCK_NUM_IN_SCREEN; i++){
+
+			for(j=0; j<SCREEN_HEIGHT; j++){
+				
+				do {
+					switch(stage_data[i,j]){
+					// 中身が1なら赤作成
+					case 1:
+						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 0);
+						break;
+					case 2:
+						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 1);
+						break;
+					case 3:
+						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 2);
+						break;
+					default:
+						break;
+					}
+				} while(false);
+			}
+		}
 	}
 		
 

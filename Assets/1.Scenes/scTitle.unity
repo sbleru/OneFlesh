@@ -811,6 +811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 
+  game_mode: 
 --- !u!4 &2084793551
 Transform:
   m_ObjectHideFlags: 0
