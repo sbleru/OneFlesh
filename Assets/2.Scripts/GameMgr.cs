@@ -3,15 +3,16 @@ using System.Collections;
 
 public class GameMgr : MonoBehaviour {
 	static public string game_mode;
-
-	// Use this for initialization
-	void Start () {
-		initialize ();
-	}
+	static public int stage_num;
+	static public int left_block;
+	static public float time_score;
+	//public static int stage_num;
 	
 	//
-	private void initialize(){
+	static public void initialize(){
 		game_mode = "TimeAttack";
+		stage_num = 1;
+		left_block = 0;
 	}
 
 	// タイトル画面のゲームモード選択で文字列変更

@@ -61,16 +61,31 @@ public class BlockCtrl : MonoBehaviour {
 			// 爆発エフェクトのプレハブを呼び出す
 			Instantiate (explosion, this.gameObject.transform.position, Quaternion.identity);
 			sound_mgr.PlayClip (clip);
-			// 加点
-			score_ctrl.Add (10);
+
+			// モードごとの処理
+			if (GameMgr.game_mode == "TimeAttack") {
+				GameMgr.left_block--;	// 残りブロック数を更新
+			}
+			else if(GameMgr.game_mode == "Scroll"){
+				// 加点
+				score_ctrl.Add (10);
+			}
+
 		} else if (block_type == 1 && collision.gameObject.tag == "PlayerB") {
 			this.gameObject.GetComponent<Collider> ().enabled = false;
 			this.gameObject.GetComponent<Renderer> ().enabled = false;
 			// 爆発エフェクトのプレハブを呼び出す
 			Instantiate (explosion, this.gameObject.transform.position, Quaternion.identity);
 			sound_mgr.PlayClip (clip);
-			// 加点
-			score_ctrl.Add (30);
+
+			// モードごとの処理
+			if (GameMgr.game_mode == "TimeAttack") {
+				GameMgr.left_block--;	// 残りブロック数を更新
+			}
+			else if(GameMgr.game_mode == "Scroll"){
+				// 加点
+				score_ctrl.Add (30);
+			}
 		}
 	}
 

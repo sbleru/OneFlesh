@@ -5,8 +5,8 @@ using System.Collections;
 public class MapCreator : MonoBehaviour {
 	public static float BLOCK_WIDTH = 1.0f;
 	public static float BLOCK_HEIGHT = 0.2f;
-	public static int BLOCK_NUM_IN_SCREEN = 24;
-	public static int SCREEN_HEIGHT = 12;
+	public static int BLOCK_NUM_IN_SCREEN = 40;
+	public static int SCREEN_HEIGHT = 24;
 
 	public float INTERVAL;  // エネミーの出現間隔 ゲームの難易度を決める
 
@@ -22,12 +22,12 @@ public class MapCreator : MonoBehaviour {
 //
 //	FloorBlock last_block;
 	BlockCreator block_creator;
-	GameObject player_ctrl;
+	GameObject player_keeper;
 
 	// Use this for initialization
 	void Start () {
 		block_creator = this.gameObject.GetComponent<BlockCreator> ();
-		player_ctrl = GameObject.FindGameObjectWithTag ("Keeper");
+		player_keeper = GameObject.FindGameObjectWithTag ("Keeper");
 		//last_block.is_last_block = false;
 		// 最初の敵を作成
 		this.create_enemy ();
@@ -42,7 +42,7 @@ public class MapCreator : MonoBehaviour {
 	// Update is called once per frame
 //	void Update () {
 //		// しきい値の位置
-//		float block_generation_x = player_ctrl.transform.position.x + (((float)BLOCK_NUM_IN_SCREEN + 1) / 2.0f);
+//		float block_generation_x = player_keeper.transform.position.x + (((float)BLOCK_NUM_IN_SCREEN + 1) / 2.0f);
 //		// プレイヤーがしきい値を超えたらブロックを作成する
 //		if(this.last_block.block_pos.x < block_generation_x){
 //			create_floor_block ();
@@ -60,7 +60,7 @@ public class MapCreator : MonoBehaviour {
 //		if(!last_block.is_last_block){
 //			
 //			// ブロックの位置をとりあえずプレイヤーの下にする
-//			block_position = player_ctrl.transform.position;
+//			block_position = player_keeper.transform.position;
 //			// ブロックの位置をスクリーンの左端に移動
 //			block_position.x -= BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
 //			// ブロックのY位置を0に
@@ -90,7 +90,7 @@ public class MapCreator : MonoBehaviour {
 
 		bool ret = false;
 		// エネミーが出てくる間隔 しきい値で指定する
-		float enemy_limit = player_ctrl.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN) / 2.0f) + INTERVAL;
+		float enemy_limit = player_keeper.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN) / 2.0f) + INTERVAL;
 		if (enemy.transform.position.x < enemy_limit) {
 			this.create_enemy ();
 			ret = true;
@@ -103,12 +103,12 @@ public class MapCreator : MonoBehaviour {
 		// これから作るエネミーの位置
 		Vector3 next_enemy_position;
 		// エネミーの位置をとりあえずプレイヤーの下にする
-		next_enemy_position = player_ctrl.transform.position;
+		next_enemy_position = player_keeper.transform.position;
 		// エネミーのX位置
 		next_enemy_position.x += BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
 		//next_enemy_position.x = Random.Range(next_enemy_position.x, next_enemy_position.x + INTERVAL/2);
 		// エネミーのY位置
-		next_enemy_position.y = Random.Range (-(float)SCREEN_HEIGHT, (float)SCREEN_HEIGHT);
+		next_enemy_position.y = Random.Range (-(float)SCREEN_HEIGHT/2.0f, (float)SCREEN_HEIGHT/2.0f);
 		// エネミー作成指示
 		block_creator.createBlock2 (next_enemy_position, Random.Range(0,2));
 	}
@@ -117,7 +117,7 @@ public class MapCreator : MonoBehaviour {
 	public bool isDelete(GameObject block_obj){
 		bool ret = false;
 		// しきい値の計算
-		float limit = player_ctrl.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN + 5) / 2.0f);
+		float limit = player_keeper.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN + 8) / 2.0f);
 		// ブロックがしきい値をでていたら削除の指示
 		if(block_obj.transform.position.x < limit){
 			ret = true;
@@ -132,20 +132,20 @@ public class MapCreator : MonoBehaviour {
 
 		do {
 			// 左のしきい値の計算
-			float limit_left = player_ctrl.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN + 8) / 2.0f);
+			float limit_left = player_keeper.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN + 8) / 2.0f);
 			// ブロックがしきい値をでていたら削除の指示
 			if(player.transform.position.x < limit_left){
 				ret = true;
 				break;
 			}
 			// 上のしきい値の計算
-			float limit_up = player_ctrl.transform.position.y + (float)SCREEN_HEIGHT;
+			float limit_up = player_keeper.transform.position.y + (float)SCREEN_HEIGHT / 2.0f;
 			if(player.transform.position.y > limit_up){
 				ret = true;
 				break;
 			}
 			// 上のしきい値の計算
-			float limit_down = player_ctrl.transform.position.y - (float)SCREEN_HEIGHT;
+			float limit_down = player_keeper.transform.position.y - (float)SCREEN_HEIGHT / 2.0f;
 			if(player.transform.position.y < limit_down){
 				ret = true;
 				break;

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Text;
 using System.IO;
@@ -18,19 +19,24 @@ public class StageCreator : MonoBehaviour {
 	private TextAsset stage_asset;  // ステージテキストを取り込む
 	string stage_txt;
 	public int[,] stage_data = new int[BLOCK_NUM_IN_SCREEN, SCREEN_HEIGHT];
+	public Text stage_name;	// どのステージか
 
 	// Use this for initialization
 	void Start () {
+		//GameMgr.initialize ();
 		this.Player = GameObject.FindGameObjectWithTag ("Player");
 		this.score_ctrl = this.gameObject.GetComponent<ScoreCtrl> ();
 		this.player_ctrl = GameObject.FindGameObjectWithTag ("PlayerA").GetComponent<PlayerCtrl> ();
 		this.block_creator = GameObject.FindGameObjectWithTag ("Root").GetComponent<BlockCreator> ();
-		// ステージテキストを取り込む
-		stage_asset = Resources.Load ("stage1") as TextAsset;
+		// ステージ番号に応じたステージテキストを取り込む
+		stage_asset = Resources.Load ("stage" + GameMgr.stage_num) as TextAsset;
 		stage_txt = stage_asset.text;
 		get_stage_data ();
 		// ステージを作成する
 		create_stage ();
+		// ステージ名表記
+		stage_name.color = new Color (1, 1, 1, 255);
+		stage_name.text = "Stage" + GameMgr.stage_num;
 	}
 
 	// ステージ作成
@@ -78,14 +84,16 @@ public class StageCreator : MonoBehaviour {
 				
 				do {
 					switch(stage_data[i,j]){
-					// 中身が1なら赤作成
-					case 1:
+		
+					case 1:	// 中身が1なら赤作成
 						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 0);
+						GameMgr.left_block++;	// 残りブロックとして登録
 						break;
-					case 2:
+					case 2:	// 中身が2なら青作成
 						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 1);
+						GameMgr.left_block++;	// 残りブロックとして登録
 						break;
-					case 3:
+					case 3:	
 						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 2);
 						break;
 					default:

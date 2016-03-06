@@ -5,12 +5,7 @@ public class TitleCtrl : MonoBehaviour {
 
 	public string scene, game_mode;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-
-
+	// スクロールモードでゲーム開始
 	public void Scroll(){
 		scene = "scPlay1";
 		game_mode = "Scroll";
@@ -19,11 +14,11 @@ public class TitleCtrl : MonoBehaviour {
 		Application.LoadLevel(scene);
 	}
 
-	// タイムアタックモード
+	// タイムアタックモードでゲーム開始
 	public void TimeAttack(){
 		game_mode = "TimeAttack";
 		GameMgr.GameMode (game_mode);
-		scene = "scAttack";
+		scene = "scStageSelect";
 		Application.LoadLevel(scene);
 	}
 }

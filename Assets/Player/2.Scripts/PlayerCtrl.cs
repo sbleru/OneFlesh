@@ -123,12 +123,12 @@ public class PlayerCtrl : MonoBehaviour {
 				velocity_a.y = (float)Y * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
 			}
 			// プレイヤーB
-			int X_b = ui_ctrl.movingXpos_b;
-			int Y_b = ui_ctrl.movingYpos_b;
-			if(X_b != 0 || Y_b != 0){
-				velocity_b.x = X_b * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-				velocity_b.y = Y_b * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-			}
+//			int X_b = ui_ctrl.movingXpos_b;
+//			int Y_b = ui_ctrl.movingYpos_b;
+//			if(X_b != 0 || Y_b != 0){
+//				velocity_b.x = X_b * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+//				velocity_b.y = Y_b * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+//			}
 
 
 			if(!Application.isMobilePlatform){
@@ -185,5 +185,13 @@ public class PlayerCtrl : MonoBehaviour {
 	IEnumerator NextScene(){
 		yield return new WaitForSeconds (1.0f);
 		Application.LoadLevel ("scScore");
+	}
+		
+	void StartGame(){
+		enabled = true;
+	}
+
+	void GameClear(){
+		enabled = false;
 	}
 }
