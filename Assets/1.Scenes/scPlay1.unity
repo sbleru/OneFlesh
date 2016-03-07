@@ -586,6 +586,8 @@ MonoBehaviour:
   blockPrefabs:
   - {fileID: 128122, guid: e059538e472254a5ba41b86f126fa080, type: 2}
   - {fileID: 157600, guid: 8b2458ee71eaa4f86ae0ace957cc9979, type: 2}
+  - {fileID: 188452, guid: 51f9f9f5631da4267bda07dfcce1b506, type: 2}
+  - {fileID: 174072, guid: 5b4cf103c17a547e691733280b46199d, type: 2}
 --- !u!4 &528091403
 Transform:
   m_ObjectHideFlags: 0
@@ -625,8 +627,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingXpos: 0
   movingYpos: 0
-  movingXpos_b: 0
-  movingYpos_b: 0
   score: {fileID: 57411357}
   isLinkMode: 0
   isMainPlayer: 0
@@ -773,6 +773,26 @@ Prefab:
     - target: {fileID: 425830, guid: 63e0fefa2ca754a33a487f5e33b81898, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2343052, guid: 63e0fefa2ca754a33a487f5e33b81898, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 140534, guid: 63e0fefa2ca754a33a487f5e33b81898, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2343052, guid: 63e0fefa2ca754a33a487f5e33b81898, type: 2}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2343052, guid: 63e0fefa2ca754a33a487f5e33b81898, type: 2}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2343052, guid: 63e0fefa2ca754a33a487f5e33b81898, type: 2}
+      propertyPath: m_UseLightProbes
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 63e0fefa2ca754a33a487f5e33b81898, type: 2}

@@ -22,6 +22,8 @@ public class BlockCtrl : MonoBehaviour {
 
 	Block link_block;
 
+	private float elapsed_time;	// ブロックが生成されてからの時間
+
 	// Use this for initialization
 	void Start () {
 		this.map_creator = GameObject.FindGameObjectWithTag ("Root").GetComponent<MapCreator> ();
@@ -30,29 +32,41 @@ public class BlockCtrl : MonoBehaviour {
 		this.ui_ctrl = GameObject.FindGameObjectWithTag ("Root").GetComponent<UICtrl> ();
 		link_block.is_link_block = false;
 		link_block.is_last_link_block = false;
+		elapsed_time = 0.0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		// スクロールモード
 		if(GameMgr.game_mode == "Scroll"){
+			// 時間計測
+			elapsed_time += Time.deltaTime;
 			// しきい値からブロックをでたブロックを削除
 			if(map_creator.isDelete(this.gameObject)){
 				Destroy (this.gameObject);
 			}
 
-			// 一度エネミーを作ったエネミーはもう作れない
-			if(!is_create_new){
-				// ある一定のしきい値をエネミーが超えたら次のエネミー作成
-				if(map_creator.isCreate(this.gameObject)){
-					is_create_new = true;
+			// ブロックタイプが境界線ブロック以外だったら
+			if(this.block_type != 2 && this.block_type != 3){
+				// 一度ブロックを作ったブロックはもう作れない
+				if(!is_create_new){
+					// 生成されてからある一定の時間が経過したら次のブロック作成
+					if(map_creator.isCreate(this.elapsed_time)){
+						is_create_new = true;
+					}
+					// ある一定のしきい値をエネミーが超えたら次のエネミー作成
+					//				if(map_creator.isCreate(this.gameObject)){
+					//					is_create_new = true;
+					//				}
 				}
 			}
+	
 		}
 	}
 
 	// 衝突した時
 	void OnCollisionEnter(Collision collision){
+
 		// block_type 0:赤 1:青
 		if (block_type == 0 && collision.gameObject.tag == "PlayerA") {
 			// Destroyだとエネミー作成していない場合、作成してくれない
@@ -86,6 +100,11 @@ public class BlockCtrl : MonoBehaviour {
 				// 加点
 				score_ctrl.Add (30);
 			}
+
+		} else if(block_type == 3 && collision.gameObject.tag == "PlayerA" || 
+			block_type == 3 && collision.gameObject.tag == "PlayerB"){
+				// プレイヤーの消滅関数呼び出し
+				GameObject.FindWithTag ("PlayerA").SendMessage ("Vanish");
 		}
 	}
 

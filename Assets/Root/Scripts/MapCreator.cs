@@ -7,20 +7,27 @@ public class MapCreator : MonoBehaviour {
 	public static float BLOCK_HEIGHT = 0.2f;
 	public static int BLOCK_NUM_IN_SCREEN = 40;
 	public static int SCREEN_HEIGHT = 24;
+	// ブロックの種類
+	public static int RED = 0;
+	public static int BLUE = 1;
+	public static int METAL = 2;
+	public static int NEEDLE = 3;
 
-	public float INTERVAL;  // エネミーの出現間隔 ゲームの難易度を決める
+	public float INTERVAL;  // ブロックの出現間隔 ゲームの難易度を決める
 
 	public LevelCtrl level_ctrl = null;
 	public TextAsset level_data_txt = null;
 
 	private ScoreCtrl score_ctrl;
 
-//	private struct FloorBlock{
-//		public bool is_last_block;
-//		public Vector3 block_pos;
-//	};
-//
-//	FloorBlock last_block;
+	// 上下のブロック
+	private struct BorderBlock{
+		public bool is_last_block;
+		public Vector3 block_pos;
+	};
+		
+
+	BorderBlock last_block, last_up_block;
 	BlockCreator block_creator;
 	GameObject player_keeper;
 
@@ -28,9 +35,10 @@ public class MapCreator : MonoBehaviour {
 	void Start () {
 		block_creator = this.gameObject.GetComponent<BlockCreator> ();
 		player_keeper = GameObject.FindGameObjectWithTag ("Keeper");
-		//last_block.is_last_block = false;
+		last_block.is_last_block = false;
+		last_up_block.is_last_block = false;
 		// 最初の敵を作成
-		this.create_enemy ();
+		this.create_block ();
 
 		this.level_ctrl = gameObject.AddComponent<LevelCtrl> ();
 		this.level_ctrl.initialize ();
@@ -40,77 +48,111 @@ public class MapCreator : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-//	void Update () {
-//		// しきい値の位置
-//		float block_generation_x = player_keeper.transform.position.x + (((float)BLOCK_NUM_IN_SCREEN + 1) / 2.0f);
-//		// プレイヤーがしきい値を超えたらブロックを作成する
-//		if(this.last_block.block_pos.x < block_generation_x){
-//			create_floor_block ();
+	void Update () {
+		// しきい値の位置
+		float block_generation_x = player_keeper.transform.position.x + (((float)BLOCK_NUM_IN_SCREEN + 1) / 2.0f);
+		// プレイヤーがしきい値を超えたらブロックを作成する
+		if(this.last_block.block_pos.x < block_generation_x){
+			create_border_block ();
+		}
+	}
+
+
+	// ブロックを作成する位置を決める
+	private void create_border_block(){
+ 		//Floor作成
+		// これから作るブロックの位置
+		Vector3 block_position;
+		Vector3 up_block_position;
+		
+		// 最後のブロックが作られていなかったら
+		if(!last_block.is_last_block){
+			
+			// ブロックの位置をとりあえずプレイヤーの下にする
+			block_position = player_keeper.transform.position;
+			// ブロックの位置をスクリーンの左端に移動
+			block_position.x -= BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
+			// ブロックのY位置を上下の境界線にする
+			block_position.y = -((float)SCREEN_HEIGHT - 1.0f) / 2.0f;
+		} else {
+			// 今回作るブロックを前回作ったブロックと同じ位置にする
+			block_position = last_block.block_pos;
+		}
+
+		// 最後のブロックが作られていなかったら
+		if(!last_up_block.is_last_block){
+
+			// ブロックの位置をとりあえずプレイヤーの下にする
+			up_block_position = player_keeper.transform.position;
+			// ブロックの位置をスクリーンの左端に移動
+			up_block_position.x -= BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
+			// ブロックのY位置を上下の境界線にする
+			up_block_position.y = ((float)SCREEN_HEIGHT - 1.0f) / 2.0f;
+		} else {
+			// 今回作るブロックを前回作ったブロックと同じ位置にする
+			up_block_position = last_up_block.block_pos;
+		}
+
+		//ブロックの位置を1ブロック分、右へ移動
+		block_position.x += BLOCK_WIDTH;
+		up_block_position.x += BLOCK_WIDTH;
+
+		// ブロック作成指示
+		block_creator.createBlock2 (block_position, METAL);
+		block_creator.createBlock2 (up_block_position, METAL);
+
+		// last_blockを更新
+		last_block.block_pos = block_position;
+		last_up_block.block_pos = up_block_position;
+		// 
+		last_block.is_last_block = true;
+		last_up_block.is_last_block = true;
+	}
+
+
+//	// ブロックを作るかどうか
+//	public bool isCreate(GameObject block){
+//		// レベルデザインのためスコアを渡す
+//		INTERVAL = this.level_ctrl.getPlayerInterval (this.score_ctrl.Return ());
+//
+//		bool ret = false;
+//		// ブロックが出てくる間隔 しきい値で指定する
+//		float block_limit = player_keeper.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN) / 2.0f) + INTERVAL;
+//		if (block.transform.position.x < block_limit) {
+//			this.create_block ();
+//			ret = true;
 //		}
-//	}
-//
-//	// ブロックを作成する位置を決める
-//	private void create_floor_block(){
-//
-// Floor作成
-//		// これから作るブロックの位置
-//		Vector3 block_position;
-//		
-//		// 最後のブロックが作られていなかったら
-//		if(!last_block.is_last_block){
-//			
-//			// ブロックの位置をとりあえずプレイヤーの下にする
-//			block_position = player_keeper.transform.position;
-//			// ブロックの位置をスクリーンの左端に移動
-//			block_position.x -= BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
-//			// ブロックのY位置を0に
-//			block_position.y = 0.0f;
-//
-//		} else {
-//			// 今回作るブロックを前回作ったブロックと同じ位置にする
-//			block_position = last_block.block_pos;
-//		}
-//
-//		//ブロックの位置を1ブロック分、右へ移動
-//		block_position.x += BLOCK_WIDTH;
-//
-//		// ブロック作成指示
-//		block_creator.createBlock (block_position);
-//
-//		// last_blockを更新
-//		last_block.block_pos = block_position;
-//		// 
-//		last_block.is_last_block = true;
+//		return(ret);
 //	}
 
-	// エネミーを作るかどうか
-	public bool isCreate(GameObject enemy){
+	// ブロックを作るかどうか
+	public bool isCreate(float elapsed_time){
 		// レベルデザインのためスコアを渡す
 		INTERVAL = this.level_ctrl.getPlayerInterval (this.score_ctrl.Return ());
 
 		bool ret = false;
-		// エネミーが出てくる間隔 しきい値で指定する
-		float enemy_limit = player_keeper.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN) / 2.0f) + INTERVAL;
-		if (enemy.transform.position.x < enemy_limit) {
-			this.create_enemy ();
+		// ブロックが出てくる時間間隔 しきい値で指定する
+		float block_limit = INTERVAL;
+		if (elapsed_time > block_limit) {
+			this.create_block ();
 			ret = true;
 		}
 		return(ret);
 	}
 
-	// エネミーの位置を決定
-	public void create_enemy(){
-		// これから作るエネミーの位置
-		Vector3 next_enemy_position;
-		// エネミーの位置をとりあえずプレイヤーの下にする
-		next_enemy_position = player_keeper.transform.position;
-		// エネミーのX位置
-		next_enemy_position.x += BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
-		//next_enemy_position.x = Random.Range(next_enemy_position.x, next_enemy_position.x + INTERVAL/2);
-		// エネミーのY位置
-		next_enemy_position.y = Random.Range (-(float)SCREEN_HEIGHT/2.0f, (float)SCREEN_HEIGHT/2.0f);
-		// エネミー作成指示
-		block_creator.createBlock2 (next_enemy_position, Random.Range(0,2));
+	// ブロックの位置を決定
+	public void create_block(){
+		// これから作るブロックの位置
+		Vector3 next_block_position;
+		// ブロックの位置をとりあえずプレイヤーの下にする
+		next_block_position = player_keeper.transform.position;
+		// ブロックのX位置
+		next_block_position.x += BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
+		//next_block_position.x = Random.Range(next_block_position.x, next_block_position.x + INTERVAL/2);
+		// ブロックのY位置
+		next_block_position.y = Random.Range (-(float)SCREEN_HEIGHT/2.0f, (float)SCREEN_HEIGHT/2.0f);
+		// ブロック作成指示
+		block_creator.createBlock2 (next_block_position, Random.Range(0,2));
 	}
 
 	// 渡されたオブジェクトを削除するか判定

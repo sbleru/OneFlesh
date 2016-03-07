@@ -172,17 +172,20 @@ public class PlayerCtrl : MonoBehaviour {
 			// しきい値からでたらゲームオーバー
 			if(map_creator.isOut(this.gameObject)){
 				if(!isVanish){
-					// 消滅エフェクトのプレハブを呼び出す
-					Instantiate (vanishEffect, this.gameObject.transform.position, Quaternion.identity);
-					sound_mgr.PlayClip (clip);
-					StartCoroutine ("NextScene");
+					StartCoroutine (Vanish());
 				}
 				isVanish = true;
 			}
 		}
 	}
+		
 
-	IEnumerator NextScene(){
+	IEnumerator Vanish(){
+		// 消滅エフェクトのプレハブを呼び出す
+		Instantiate (vanishEffect, this.gameObject.transform.position, Quaternion.identity);
+		sound_mgr.PlayClip (clip);
+		this.gameObject.GetComponent<Renderer> ().enabled = false;
+		GameObject.FindWithTag("PlayerB").GetComponent<Renderer> ().enabled = false;
 		yield return new WaitForSeconds (1.0f);
 		Application.LoadLevel ("scScore");
 	}
