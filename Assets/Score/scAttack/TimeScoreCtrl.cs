@@ -21,14 +21,24 @@ public class TimeScoreCtrl : MonoBehaviour {
 	void Start () {
 		Initialize ();
 
-		// タイムがはやくなれば
-		if (high_score > GameMgr.time_score) {
-			high_score = GameMgr.time_score;
-			Save();
+		// ゲームリタイアかどうか
+		if(!GameMgr.isRetire){
+			// タイムがはやくなれば
+			if (high_score > GameMgr.time_score) {
+				high_score = GameMgr.time_score;
+				Save();
+			}
+			// スコア・ハイスコアを表示する
+			highcoreText.text = "HIGH : " + high_score;
+			scoreText.text = "SCORE : " + GameMgr.time_score;
+
+		} else {
+			// スコア・ハイスコアを表示する
+			highcoreText.text = "HIGH : " + high_score;
+			scoreText.text = "RETIRE";
 		}
-		// スコア・ハイスコアを表示する
-		highcoreText.text = "HIGH : " + high_score;
-		scoreText.text = "SCORE : " + GameMgr.time_score;
+
+
 	}
 
 	// 初期化
@@ -43,6 +53,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 		// ハイスコアを保存する
 		//PlayerPrefs.SetInt (highScoreKey, 0);
 		PlayerPrefs.SetFloat (highScoreKey, high_score);
+//		PlayerPrefs.SetFloat (highScoreKey, 60f);
 		PlayerPrefs.SetFloat (thistimeScoreKey, GameMgr.time_score);
 		PlayerPrefs.Save ();
 

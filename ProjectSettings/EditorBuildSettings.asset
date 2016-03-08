@@ -10,7 +10,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scenes/scStageSelect.unity
   - enabled: 1
-    path: Assets/1.Scenes/scPlay1.unity
+    path: Assets/1.Scenes/scScrollStageSelect.unity
+  - enabled: 1
+    path: Assets/1.Scenes/scScroll.unity
   - enabled: 1
     path: Assets/1.Scenes/scAttack.unity
   - enabled: 0
@@ -18,4 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/1.Scenes/scTimeScore.unity
   - enabled: 1
-    path: Assets/1.Scenes/scScore.unity
+    path: Assets/1.Scenes/scScrollScore.unity

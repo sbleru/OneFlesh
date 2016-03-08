@@ -8,6 +8,7 @@ public class BlockCtrl : MonoBehaviour {
 	LinkCtrl link_ctrl;
 	UICtrl ui_ctrl;
 	public int block_type;
+	public bool isBorder = false;
 	bool is_create_new = false;
 
 	public GameObject explosion;	// 爆発エフェクトのプレハブ
@@ -47,7 +48,7 @@ public class BlockCtrl : MonoBehaviour {
 			}
 
 			// ブロックタイプが境界線ブロック以外だったら
-			if(this.block_type != 2 && this.block_type != 3){
+			if(!isBorder){
 				// 一度ブロックを作ったブロックはもう作れない
 				if(!is_create_new){
 					// 生成されてからある一定の時間が経過したら次のブロック作成

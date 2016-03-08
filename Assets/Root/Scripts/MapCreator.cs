@@ -17,6 +17,8 @@ public class MapCreator : MonoBehaviour {
 
 	public LevelCtrl level_ctrl = null;
 	public TextAsset level_data_txt = null;
+	public TextAsset hlevel_data_txt = null;
+	public TextAsset vhlevel_data_txt = null;
 
 	private ScoreCtrl score_ctrl;
 
@@ -42,7 +44,21 @@ public class MapCreator : MonoBehaviour {
 
 		this.level_ctrl = gameObject.AddComponent<LevelCtrl> ();
 		this.level_ctrl.initialize ();
-		this.level_ctrl.loadLevelData (this.level_data_txt);
+		// レベルに応じたテキストを読み込む
+		switch(GameMgr.scroll_stage_num){
+		case 1:
+			this.level_ctrl.loadLevelData (this.level_data_txt);
+			break;
+		case 2:
+			this.level_ctrl.loadLevelData (this.hlevel_data_txt);
+			break;
+		case 3:
+			this.level_ctrl.loadLevelData (this.vhlevel_data_txt);
+			break;
+		default:
+			break;
+		}
+
 		this.score_ctrl = this.gameObject.GetComponent<ScoreCtrl> ();
 
 	}
@@ -98,8 +114,15 @@ public class MapCreator : MonoBehaviour {
 		up_block_position.x += BLOCK_WIDTH;
 
 		// ブロック作成指示
-		block_creator.createBlock2 (block_position, METAL);
-		block_creator.createBlock2 (up_block_position, METAL);
+		if (GameMgr.scroll_stage_num == 1 || GameMgr.scroll_stage_num == 2) {
+			block_creator.createBlock2 (block_position, METAL, true);
+			block_creator.createBlock2 (up_block_position, METAL, true);
+		} 
+		else if(GameMgr.scroll_stage_num == 3){
+			block_creator.createBlock2 (block_position, NEEDLE, true);
+			block_creator.createBlock2 (up_block_position, NEEDLE, true);
+		}
+
 
 		// last_blockを更新
 		last_block.block_pos = block_position;
@@ -151,8 +174,16 @@ public class MapCreator : MonoBehaviour {
 		//next_block_position.x = Random.Range(next_block_position.x, next_block_position.x + INTERVAL/2);
 		// ブロックのY位置
 		next_block_position.y = Random.Range (-(float)SCREEN_HEIGHT/2.0f, (float)SCREEN_HEIGHT/2.0f);
-		// ブロック作成指示
-		block_creator.createBlock2 (next_block_position, Random.Range(0,2));
+		// ブロック作成指示  ステージレベルごとに
+		if(GameMgr.scroll_stage_num == 1){
+			block_creator.createBlock2 (next_block_position, Random.Range(0,2), false);
+		}
+		else if(GameMgr.scroll_stage_num == 2){
+			block_creator.createBlock2 (next_block_position, Random.Range(0,4), false);
+		}
+		else if(GameMgr.scroll_stage_num == 3){
+			block_creator.createBlock2 (next_block_position, Random.Range(0,4), false);
+		}
 	}
 
 	// 渡されたオブジェクトを削除するか判定

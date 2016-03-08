@@ -179,15 +179,17 @@ public class PlayerCtrl : MonoBehaviour {
 		}
 	}
 		
-
+	// ゲームオーバー
 	IEnumerator Vanish(){
 		// 消滅エフェクトのプレハブを呼び出す
 		Instantiate (vanishEffect, this.gameObject.transform.position, Quaternion.identity);
 		sound_mgr.PlayClip (clip);
 		this.gameObject.GetComponent<Renderer> ().enabled = false;
 		GameObject.FindWithTag("PlayerB").GetComponent<Renderer> ().enabled = false;
-		yield return new WaitForSeconds (1.0f);
-		Application.LoadLevel ("scScore");
+		GameMgr.isRetire = true;	// タイムアタックモードの場合はリタイア
+		// ゲームオーバーをタイムマネージャーに伝える
+		GameObject.FindWithTag ("TimeMgr").SendMessage ("SendGameOver");
+		yield return null;
 	}
 		
 	void StartGame(){

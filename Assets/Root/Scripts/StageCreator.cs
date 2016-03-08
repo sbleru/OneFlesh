@@ -86,15 +86,18 @@ public class StageCreator : MonoBehaviour {
 					switch(stage_data[i,j]){
 		
 					case 1:	// 中身が1なら赤作成
-						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 0);
+						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 0);
 						GameMgr.left_block++;	// 残りブロックとして登録
 						break;
 					case 2:	// 中身が2なら青作成
-						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 1);
+						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 1);
 						GameMgr.left_block++;	// 残りブロックとして登録
 						break;
-					case 3:	
-						block_creator.createBlock2(new Vector3((float)i, (float)j, 0.0f), 2);
+					case 3:	// 破壊不可ブロック
+						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 2);
+						break;
+					case 4:	// ニードル
+						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 3);
 						break;
 					default:
 						break;

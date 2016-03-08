@@ -7,7 +7,7 @@ public class TitleCtrl : MonoBehaviour {
 
 	// スクロールモードでゲーム開始
 	public void Scroll(){
-		scene = "scPlay1";
+		scene = "scScrollStageSelect";
 		game_mode = "Scroll";
 		GameMgr.GameMode (game_mode);
 		//Application.LoadLevelAdditive (scene);

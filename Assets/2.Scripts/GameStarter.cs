@@ -40,4 +40,9 @@ public class GameStarter : MonoBehaviour {
 		}
 	}
 
+	// 空呼び出し
+	private void StartGame(){
+		// 
+	}
+
 }

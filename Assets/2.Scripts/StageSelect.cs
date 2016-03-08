@@ -16,4 +16,9 @@ public class StageSelect : MonoBehaviour {
 		GameMgr.stage_num = int.Parse(this.GetComponent<Text> ().text);
 		Application.LoadLevel ("scAttack");
 	}
+
+	public void ToScroll(){
+		GameMgr.scroll_stage_num = int.Parse (this.GetComponent<Text> ().text);
+		Application.LoadLevel ("scScroll");
+	}
 }

@@ -10,4 +10,8 @@ public class RootCtrl : MonoBehaviour {
 	public void ToStageSelect(){
 		Application.LoadLevel ("scStageSelect");
 	}
+
+	public void ToScrollStageSelect(){
+		Application.LoadLevel ("scScrollStageSelect");
+	}
 }

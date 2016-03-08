@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ScoreDisplay : MonoBehaviour {
+public class ScrollScoreCtrl : MonoBehaviour {
 
 	// スコア表示
 	public Text scoreText;
@@ -13,7 +13,7 @@ public class ScoreDisplay : MonoBehaviour {
 
 
 	// PlayerPrefsで保存するためのキー
-	private string highScoreKey = "highScore";
+	private string highScoreKey = "scrollhighScore" + GameMgr.scroll_stage_num;
 	private string thistimeScoreKey = "thistimeScore";
 
 	// Use this for initialization
