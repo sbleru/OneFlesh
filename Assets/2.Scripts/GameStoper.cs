@@ -5,11 +5,13 @@ using System.Collections;
 public class GameStoper : MonoBehaviour {
 
 	private bool isGameClear;
+	private bool isExecuteSendGameOver;
 	public Text finish;
 
 	// Use this for initialization
 	void Start () {
 		isGameClear = false;
+		isExecuteSendGameOver = false;
 		finish.text = "";
 	}
 	
@@ -19,9 +21,8 @@ public class GameStoper : MonoBehaviour {
 			if(!isGameClear){
 				// すべてのブロックを破壊したら
 				if(GameMgr.left_block < 1){
-					SendGameOver ();
 					isGameClear = true;
-					GameMgr.isRetire = false;	// ゲームクリア
+					SendGameOver ();
 				}
 			}
 		} 
@@ -29,17 +30,27 @@ public class GameStoper : MonoBehaviour {
 
 	// ゲームオーバーを伝える
 	public void SendGameOver(){
-		if(GameMgr.game_mode == "TimeAttack"){
-			//終了の合図を送る
-			BroadcastMessage ("GameClear");
-			GameObject.FindWithTag ("PlayerA").SendMessage ("GameClear");
-			GameObject.FindWithTag ("Root").SendMessage ("GameClear");
-			// ゲームリタイアかどうか
-			StartCoroutine ("NextScene", "scTimeScore");
-		} 
-		else {
-			StartCoroutine ("NextScene", "scScrollScore");
+		// この関数は一回だけ機能するようにする
+		if(!isExecuteSendGameOver){
+			if(GameMgr.game_mode == "TimeAttack"){
+				//終了の合図を送る
+				BroadcastMessage ("GameClear");
+				GameObject.FindWithTag ("PlayerA").SendMessage ("GameClear");
+				GameObject.FindWithTag ("Root").SendMessage ("GameClear");
+				// ゲームクリアの方なら
+				if(isGameClear){
+					GameMgr.isRetire = false;
+				} else {
+					GameMgr.isRetire = true;
+				}
+				StartCoroutine ("NextScene", "scTimeScore");
+			} 
+			else {
+				StartCoroutine ("NextScene", "scScrollScore");
+			}
+			isExecuteSendGameOver = true;
 		}
+
 	}
 
 
@@ -48,7 +59,8 @@ public class GameStoper : MonoBehaviour {
 		Time.timeScale = 0.3f;	// スローモーションにする
 		yield return new WaitForSeconds (1.0f);
 		Time.timeScale = 1.0f;
-//		Application.LoadLevel ("scTimeScore");
+
+		//GameMgr.left_block = 0;	// 残りブロック数を初期化
 		Application.LoadLevel (scene);
 	}
 		

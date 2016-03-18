@@ -38,6 +38,7 @@ public class BlockCtrl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 		// スクロールモード
 		if(GameMgr.game_mode == "Scroll"){
 			// 時間計測
@@ -104,7 +105,7 @@ public class BlockCtrl : MonoBehaviour {
 
 		} else if(block_type == 3 && collision.gameObject.tag == "PlayerA" || 
 			block_type == 3 && collision.gameObject.tag == "PlayerB"){
-				// プレイヤーの消滅関数呼び出し
+				// プレイヤーの消滅関数呼び出し クラスPlayerCtrl
 				GameObject.FindWithTag ("PlayerA").SendMessage ("Vanish");
 		}
 	}
@@ -112,14 +113,16 @@ public class BlockCtrl : MonoBehaviour {
 	// リンクモード時にタップされたとき呼ばれる
 	public void LinkBlock(){
 		// 1度目のタップ
-		if(!link_block.is_link_block){
+		if (!link_block.is_link_block) {
 			link_block.is_link_block = true;
 		} else {
 			// 2度目のタップ
-			if(!link_block.is_last_link_block){
+			if (!link_block.is_last_link_block) {
 				ui_ctrl.LinkEnd ();
 				link_block.is_last_link_block = true;
 			}
 		}
 	}
+
+
 }

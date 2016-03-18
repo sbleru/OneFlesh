@@ -6,14 +6,14 @@ public class GameStarter : MonoBehaviour {
 
 	public Text starter;
 	private float timer;
-	int sw;
-	int sh;
+//	int sw;
+//	int sh;
 
 	// Use this for initialization
 	void Start () {
 		timer = 3.2f; //3秒 + α
-		sw = Screen.width;
-		sh = Screen.height;
+//		sw = Screen.width;
+//		sh = Screen.height;
 	}
 
 	// Update is called once per frame

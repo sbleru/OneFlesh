@@ -6,7 +6,8 @@ public class MapCreator : MonoBehaviour {
 	public static float BLOCK_WIDTH = 1.0f;
 	public static float BLOCK_HEIGHT = 0.2f;
 	public static int BLOCK_NUM_IN_SCREEN = 40;
-	public static int SCREEN_HEIGHT = 24;
+	//public static int SCREEN_HEIGHT = 24;
+	public static int SCREEN_HEIGHT = 22;
 	// ブロックの種類
 	public static int RED = 0;
 	public static int BLUE = 1;
@@ -119,8 +120,8 @@ public class MapCreator : MonoBehaviour {
 			block_creator.createBlock2 (up_block_position, METAL, true);
 		} 
 		else if(GameMgr.scroll_stage_num == 3){
-			block_creator.createBlock2 (block_position, NEEDLE, true);
-			block_creator.createBlock2 (up_block_position, NEEDLE, true);
+//			block_creator.createBlock2 (block_position, NEEDLE, true);
+//			block_creator.createBlock2 (up_block_position, NEEDLE, true);
 		}
 
 
@@ -179,10 +180,36 @@ public class MapCreator : MonoBehaviour {
 			block_creator.createBlock2 (next_block_position, Random.Range(0,2), false);
 		}
 		else if(GameMgr.scroll_stage_num == 2){
-			block_creator.createBlock2 (next_block_position, Random.Range(0,4), false);
+			switch(Random.Range(1,4) % 3){
+			case 0:
+				block_creator.createBlock2 (next_block_position, RED, false);
+				break;
+			case 1:
+				block_creator.createBlock2 (next_block_position, BLUE, false);
+				break;
+			case 2:
+				block_creator.createBlock2 (next_block_position, NEEDLE, false);
+				break;
+			default:
+				break;
+			}
+			//block_creator.createBlock2 (next_block_position, Random.Range(0,4), false);
 		}
 		else if(GameMgr.scroll_stage_num == 3){
-			block_creator.createBlock2 (next_block_position, Random.Range(0,4), false);
+			switch(Random.Range(1,4) % 3){
+			case 0:
+				block_creator.createBlock2 (next_block_position, RED, false);
+				break;
+			case 1:
+				block_creator.createBlock2 (next_block_position, BLUE, false);
+				break;
+			case 2:
+				block_creator.createBlock2 (next_block_position, NEEDLE, false);
+				break;
+			default:
+				break;
+			}
+			//block_creator.createBlock2 (next_block_position, Random.Range(0,4), false);
 		}
 	}
 
@@ -213,13 +240,13 @@ public class MapCreator : MonoBehaviour {
 			}
 			// 上のしきい値の計算
 			float limit_up = player_keeper.transform.position.y + (float)SCREEN_HEIGHT / 2.0f;
-			if(player.transform.position.y > limit_up){
+			if(player.transform.position.y > limit_up + 2.0f){
 				ret = true;
 				break;
 			}
 			// 上のしきい値の計算
 			float limit_down = player_keeper.transform.position.y - (float)SCREEN_HEIGHT / 2.0f;
-			if(player.transform.position.y < limit_down){
+			if(player.transform.position.y < limit_down - 2.0f){
 				ret = true;
 				break;
 			}
@@ -227,4 +254,5 @@ public class MapCreator : MonoBehaviour {
 
 		return ret;
 	}
+
 }

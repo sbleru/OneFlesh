@@ -11,9 +11,9 @@ public class StageCreator : MonoBehaviour {
 	public static int BLOCK_NUM_IN_SCREEN = 40;
 	public static int SCREEN_HEIGHT = 24;
 
-	GameObject Player;
-	ScoreCtrl score_ctrl;
-	PlayerCtrl player_ctrl;
+	//GameObject Player;
+	//ScoreCtrl score_ctrl;
+	//PlayerCtrl player_ctrl;
 	BlockCreator block_creator;
 
 	private TextAsset stage_asset;  // ステージテキストを取り込む
@@ -21,12 +21,13 @@ public class StageCreator : MonoBehaviour {
 	public int[,] stage_data = new int[BLOCK_NUM_IN_SCREEN, SCREEN_HEIGHT];
 	public Text stage_name;	// どのステージか
 
+
 	// Use this for initialization
 	void Start () {
 		//GameMgr.initialize ();
-		this.Player = GameObject.FindGameObjectWithTag ("Player");
-		this.score_ctrl = this.gameObject.GetComponent<ScoreCtrl> ();
-		this.player_ctrl = GameObject.FindGameObjectWithTag ("PlayerA").GetComponent<PlayerCtrl> ();
+		//this.Player = GameObject.FindGameObjectWithTag ("Player");
+		//this.score_ctrl = this.gameObject.GetComponent<ScoreCtrl> ();
+		//this.player_ctrl = GameObject.FindGameObjectWithTag ("PlayerA").GetComponent<PlayerCtrl> ();
 		this.block_creator = GameObject.FindGameObjectWithTag ("Root").GetComponent<BlockCreator> ();
 		// ステージ番号に応じたステージテキストを取り込む
 		stage_asset = Resources.Load ("stage" + GameMgr.stage_num) as TextAsset;
@@ -35,8 +36,8 @@ public class StageCreator : MonoBehaviour {
 		// ステージを作成する
 		create_stage ();
 		// ステージ名表記
-		stage_name.color = new Color (1, 1, 1, 255);
-		stage_name.text = "Stage" + GameMgr.stage_num;
+//		stage_name.color = new Color (1, 1, 1, 255);
+//		stage_name.text = "Stage" + GameMgr.stage_num;
 	}
 
 	// ステージ作成
@@ -81,7 +82,6 @@ public class StageCreator : MonoBehaviour {
 		for(i=0; i<BLOCK_NUM_IN_SCREEN; i++){
 
 			for(j=0; j<SCREEN_HEIGHT; j++){
-				
 				do {
 					switch(stage_data[i,j]){
 		

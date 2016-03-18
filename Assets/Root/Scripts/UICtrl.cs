@@ -19,6 +19,10 @@ public class UICtrl : MonoBehaviour {
 	public bool isLinkMode;
 	public bool isMainPlayer;
 
+	// コントローラUIを表現するオブジェクト
+	public GameObject controll_area, controll_stick;
+//	private SpriteRenderer spRenderer;
+
 	// Use this for initialization
 	void Start () {
 	//	enabled = false;	// スクリプト無効
@@ -37,11 +41,14 @@ public class UICtrl : MonoBehaviour {
 
 		isLinkMode = false;
 		isMainPlayer = false;
+		// タッチしていない時はコントローラは非表示
+		controll_area.SetActive (false);
+		controll_stick.SetActive (false);
 	}
 
 	void Update(){
 		// スコア更新
-		score.text = "Score: " + SetValue.total_score;
+		score.text = "Score: " + GameMgr.total_score;
 
 		// 画面のタップを検出
 		if(Input.GetMouseButtonDown(0)){
@@ -84,8 +91,25 @@ public class UICtrl : MonoBehaviour {
 					// タッチした瞬間の座標を保存
 					startXpos = currentXpos;
 					startYpos = currentYpos;
+					// タッチした場所にコントローラを表示
+					controll_area.SetActive (true);
+					controll_stick.SetActive (true);
+			
+					controll_area.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
+					controll_stick.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
 					touchStart = true;
 				}
+
+				// エリアは固定 小円は指に追従
+				controll_stick.transform.position = new Vector3 (currentXpos, currentYpos, 0.0f);
+//				Vector3 l = controll_area.transform.position - controll_stick.transform.position;
+//				if(l.magnitude < 50.0f){
+//					controll_stick.transform.position = new Vector3 (currentXpos, currentYpos, 0.0f);
+//				} else {
+////					controll_stick.transform.position = new Vector3 (startXpos + currentXpos * (50.0f / l.magnitude), startYpos + currentYpos * (50.0f / l.magnitude), 0.0f);
+//					controll_stick.transform.position = new Vector3 (startXpos + l.x, startYpos + l.y, 0.0f);
+//
+//				}
 			}
 				
 			// 画面の右側に指があるか判定
@@ -126,6 +150,9 @@ public class UICtrl : MonoBehaviour {
 			movingYpos = 0;
 //			movingXpos_b = 0;
 //			movingYpos_b = 0;
+			// コントローラを非表示にする
+			controll_area.SetActive (false);
+			controll_stick.SetActive (false);
 			touchStart = false;
 		}
 		// 移動地計算 X軸
@@ -171,6 +198,8 @@ public class UICtrl : MonoBehaviour {
 	}
 
 	void GameClear(){
+		controll_area.SetActive (false);
+		controll_stick.SetActive (false);
 		enabled = false;
 	}
 }

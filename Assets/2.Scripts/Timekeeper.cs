@@ -22,7 +22,7 @@ public class Timekeeper : MonoBehaviour {
 		elapsedTime = Mathf.CeilToInt (elapsedTime * 100);
 		elapsedTime /= 100;
 		text = elapsedTime.ToString ();
-		time.color = new Color (1, 1, 1, elapsedTime - Mathf.FloorToInt (elapsedTime));
+		time.color = new Color (1, 1, 1, 1);
 		// 残り時間を更新
 		time.text = text;
 

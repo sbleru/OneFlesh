@@ -186,7 +186,7 @@ public class PlayerCtrl : MonoBehaviour {
 		sound_mgr.PlayClip (clip);
 		this.gameObject.GetComponent<Renderer> ().enabled = false;
 		GameObject.FindWithTag("PlayerB").GetComponent<Renderer> ().enabled = false;
-		GameMgr.isRetire = true;	// タイムアタックモードの場合はリタイア
+
 		// ゲームオーバーをタイムマネージャーに伝える
 		GameObject.FindWithTag ("TimeMgr").SendMessage ("SendGameOver");
 		yield return null;

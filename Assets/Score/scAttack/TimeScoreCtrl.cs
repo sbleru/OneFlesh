@@ -38,7 +38,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 			scoreText.text = "RETIRE";
 		}
 
-
+		//Save ();
 	}
 
 	// 初期化
@@ -53,7 +53,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 		// ハイスコアを保存する
 		//PlayerPrefs.SetInt (highScoreKey, 0);
 		PlayerPrefs.SetFloat (highScoreKey, high_score);
-//		PlayerPrefs.SetFloat (highScoreKey, 60f);
+		//PlayerPrefs.SetFloat (highScoreKey, 60f);
 		PlayerPrefs.SetFloat (thistimeScoreKey, GameMgr.time_score);
 		PlayerPrefs.Save ();
 

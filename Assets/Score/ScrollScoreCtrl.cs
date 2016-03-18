@@ -21,13 +21,13 @@ public class ScrollScoreCtrl : MonoBehaviour {
 		Initialize ();
 
 		// スコアがハイスコアより大きければ
-		if (high_score < SetValue.total_score) {
-			high_score = SetValue.total_score;
+		if (high_score < GameMgr.total_score) {
+			high_score = GameMgr.total_score;
 			Save();
 		}
 		// スコア・ハイスコアを表示する
 		highcoreText.text = "HIGH : " + high_score;
-		scoreText.text = "SCORE : " + SetValue.total_score;
+		scoreText.text = "SCORE : " + GameMgr.total_score;
 	}
 
 	// 初期化
@@ -43,7 +43,7 @@ public class ScrollScoreCtrl : MonoBehaviour {
 		// ハイスコアを保存する
 		//PlayerPrefs.SetInt (highScoreKey, 0);
 		PlayerPrefs.SetInt (highScoreKey, high_score);
-		PlayerPrefs.SetInt (thistimeScoreKey, SetValue.total_score);
+		PlayerPrefs.SetInt (thistimeScoreKey, GameMgr.total_score);
 		PlayerPrefs.Save ();
 
 		// ゲーム開始前の状態に戻す
