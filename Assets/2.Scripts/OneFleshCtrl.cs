@@ -20,10 +20,10 @@ public class OneFleshCtrl : MonoBehaviour {
 
 		// タップされたら
 		if(Input.touchCount>0){
-			Application.LoadLevel ("scTitle");
+			FadeManager.Instance.LoadLevel ("scTitle", 1.0f);
 		}
 		if(Input.GetMouseButtonDown(0)){
-			Application.LoadLevel ("scTitle");
+			FadeManager.Instance.LoadLevel ("scTitle", 1.0f);
 		}
 	}
 }

@@ -53,11 +53,12 @@ public class SelectorCtrl : MonoBehaviour {
 		if(swipestart){
 			if((startYpos - currentYpos) < (Screen.height * -0.08f)){
 				LowerArea ();
+				swipestart = false;	// スワイプ一回で一つエリアを移動させるための処理
 			} else if ((startYpos - currentYpos) > (Screen.height * 0.08f)){
 				HigherArea ();
+				swipestart = false;
 			} 
 		}
-		swipestart = false;	// スワイプ一回で一つエリアを移動させるための処理
 
 	}
 

@@ -21,9 +21,9 @@ public class GameMgr : MonoBehaviour {
 	}
 
 	// タイトル画面のゲームモード選択で文字列変更
-	static public void GameMode(string mode){
-		game_mode = mode;
-	}
+//	static public void GameMode(string mode){
+//		game_mode = mode;
+//	}
 }
 
 //public class AudioManager : MonoBehaviour {
