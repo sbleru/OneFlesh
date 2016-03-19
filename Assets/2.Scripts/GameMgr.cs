@@ -9,6 +9,9 @@ public class GameMgr : MonoBehaviour {
 	static public float time_score;
 	static public bool isRetire;	// ゲームリタイアかどうか
 	static public int total_score;
+
+	static public int[] rank = new int[30];
+//	int i,j;
 	
 	//
 	static public void initialize(){
@@ -18,6 +21,10 @@ public class GameMgr : MonoBehaviour {
 		left_block = 0;
 		isRetire = false;
 		total_score = 0;
+
+		for(int i=0; i<30; i++){
+			rank [i] = 1;
+		}
 	}
 
 	// タイトル画面のゲームモード選択で文字列変更

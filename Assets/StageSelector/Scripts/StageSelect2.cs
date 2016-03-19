@@ -2,9 +2,11 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class StageSelect : MonoBehaviour {
+public class StageSelect2 : MonoBehaviour {
 
 	public string next_scene;
+	private int stage_num;
+
 
 	void Awake(){
 		GameMgr.left_block = 0;
@@ -30,4 +32,5 @@ public class StageSelect : MonoBehaviour {
 		Time.timeScale = 1.0f;
 		Application.LoadLevel (next_scene);
 	}
+		
 }
