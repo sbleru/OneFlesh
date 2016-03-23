@@ -20,6 +20,7 @@ public class StageSelect : MonoBehaviour {
 		// スタンプを選択する
 		#region select stamp
 		switch(PlayerPrefs.GetInt ("rank"+this.stage_num, 0)){
+//		switch(PlayerPrefs.GetInt ("rank"+this.stage_num, -1)){
 
 		case 0:	// ランクなし
 			// 何もしない

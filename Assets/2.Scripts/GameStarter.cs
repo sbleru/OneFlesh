@@ -6,14 +6,11 @@ public class GameStarter : MonoBehaviour {
 
 	public Text starter;
 	private float timer;
-//	int sw;
-//	int sh;
 
 	// Use this for initialization
 	void Start () {
 		timer = 3.2f; //3秒 + α
-//		sw = Screen.width;
-//		sh = Screen.height;
+		GameMgr.total_score = 0;
 	}
 
 	// Update is called once per frame
@@ -24,7 +21,6 @@ public class GameStarter : MonoBehaviour {
 		string text = Mathf.CeilToInt (timer).ToString ();
 		//タイマーの少数部分をアルファ値とすることで文字をフェードアウト
 		starter.color = new Color (1, 1, 1, timer - Mathf.FloorToInt (timer));
-		//starter.rectTransform = new Vector3 (sw / 2, sh / 2, 0);
 		starter.text = text;
 
 		if(timer < 0.0f){

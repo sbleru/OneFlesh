@@ -51,11 +51,10 @@ public class PlayerCtrl : MonoBehaviour {
 			// UIボタンからプレイヤーの移動先を決定する
 			// プレイヤーA
 			ui_ctrl.player_direction();
-			int X = ui_ctrl.movingXpos;
-			int Y = ui_ctrl.movingYpos;
-			if(X != 0 || Y != 0){
-				velocity_a.x = (float)X * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-				velocity_a.y = (float)Y * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+
+			if(Mathf.Abs(ui_ctrl.movingXpos) > 0.0f || Mathf.Abs(ui_ctrl.movingYpos) > 0.0f){
+				velocity_a.x = ui_ctrl.movingXpos * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+				velocity_a.y = ui_ctrl.movingYpos * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
 			}
 
 			if (!Application.isMobilePlatform) {
@@ -116,11 +115,11 @@ public class PlayerCtrl : MonoBehaviour {
 			// UIボタンからプレイヤーの移動先を決定する
 			// プレイヤーA
 			ui_ctrl.player_direction();
-			int X = ui_ctrl.movingXpos;
-			int Y = ui_ctrl.movingYpos;
-			if(X != 0 || Y != 0){
-				velocity_a.x = (float)X * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
-				velocity_a.y = (float)Y * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+	
+			if(Mathf.Abs(ui_ctrl.movingXpos) > 0.0f || Mathf.Abs(ui_ctrl.movingYpos) > 0.0f){
+			//if(X != 0 || Y != 0){
+				velocity_a.x = ui_ctrl.movingXpos * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
+				velocity_a.y = ui_ctrl.movingYpos * Mathf.Sqrt(2.0f * 9.8f * PlayerCtrl.JUMP_HEIGHT_MAX);
 			}
 			// プレイヤーB
 //			int X_b = ui_ctrl.movingXpos_b;

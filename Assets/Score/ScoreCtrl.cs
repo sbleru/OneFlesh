@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ScoreCtrl : MonoBehaviour {
 
-	public int result;
+	private int result;
 
 	// 引数のスコアを加点する
 	public void Add(int score){

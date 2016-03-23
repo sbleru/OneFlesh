@@ -3,15 +3,14 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class TimeScoreCtrl : MonoBehaviour {
-	public static int STAGE_NUM = 6;	// 全ステージ数
-	public static int RANK_NUM = 3;		// ランクの段階数
+	public static int STAGE_NUM = 18;	// 全ステージ数
+	public static int RANK_NUM = 3;		// ランクの段階数（Cランク除く）
 
 	public Text scoreText;	// スコア表示
-	public Text highcoreText;	// ハイスコアを表示するGUIText
+	public Text highscoreText;	// ハイスコアを表示するGUIText
 	private float high_score;	// ハイスコア
 
-	// PlayerPrefsで保存するためのキー
-	// ステージごとに別に保存
+	// PlayerPrefsで保存するためのキー　ステージごとに別に保存
 	private string highScoreKey = "highScore" + GameMgr.stage_num;
 	private string thistimeScoreKey = "thistimeScore";
 
@@ -25,6 +24,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 	public GameObject[] rank_stamp;
 	public Text to_next_rank;
 	public GameObject retire_txt;	// リタイアテキスト
+	private bool isRegister;
 	#endregion
 
 	// Use this for initialization
@@ -45,8 +45,9 @@ public class TimeScoreCtrl : MonoBehaviour {
 				high_score = GameMgr.time_score;
 				Save();
 			}
+
 			// スコア・ハイスコアを表示する
-			highcoreText.text = "HIGHSCORE : " + high_score;
+			highscoreText.text = "HIGHSCORE : " + high_score;
 			scoreText.text = "SCORE : " + GameMgr.time_score;
 
 			// ハイスコアからランクを登録する
@@ -57,20 +58,35 @@ public class TimeScoreCtrl : MonoBehaviour {
 
 		} else {
 			// スコア・ハイスコアを表示する
-			highcoreText.text = "HIGHSCORE : " + high_score;
+			highscoreText.text = "";
 			scoreText.text = "";
 			retire_txt.SetActive (true);
+
+			// ランクが登録されていない状態でリタイアした場合はハイスコアを表示しない
+			if(isRegister){
+				highscoreText.text = "HIGHSCORE : " + high_score;
+			}
+
 		}
 
-		// 次のランク解放のためのスコアを表示する
-		next_rank ();
+		if(isRegister){
+			// 次のランク解放のためのスコアを表示する
+			next_rank ();
+		} else {
+			to_next_rank.text = "No Records";
+		}
 		//Save ();
 	}
 
 	// 初期化
 	private void Initialize(){ 
+		
 		// ハイスコアを取得する。保存されてなければ60を取得する。
-		high_score = PlayerPrefs.GetFloat (highScoreKey, 60f);
+		high_score = PlayerPrefs.GetFloat (highScoreKey, 100f);
+		isRegister = true;
+		if(high_score > 99f){
+			isRegister = false;
+		}
 	}
 
 	// ハイスコアの保存
@@ -132,30 +148,46 @@ public class TimeScoreCtrl : MonoBehaviour {
 
 	//
 	private void rank_register(){
+		bool isSet = false;
 
-		for(int i=0; i<RANK_NUM; i++){
+		for(int i=RANK_NUM; i>=0; i--){
 
-			if(high_score < rank_data[GameMgr.stage_num-1, i]){
-				
+			// 高ランクからチェックして当てはまった時点で保存してbreak
+			if(high_score < rank_data[GameMgr.stage_num-1, i-1]){
 				PlayerPrefs.SetInt (rankKey, i+1);
 				PlayerPrefs.Save ();
+				isSet = true;
+				break;
 			}
+		}
+		if(!isSet){
+			PlayerPrefs.SetInt (rankKey, 1);	// Cランクを登録
+			PlayerPrefs.Save ();
 		}
 	}
 
 	//
 	private void rank_thistime(){
+		bool isSet = false;
+
 		for(int i=RANK_NUM-1; i>=0; i--){
 
+			// 高ランクからチェックして当てはまった時点でアクティブにしてbreak
 			if(GameMgr.time_score < rank_data[GameMgr.stage_num-1, i]){
-				rank_stamp_thistime [i].SetActive (true);
+				rank_stamp_thistime [i+1].SetActive (true);
+				isSet = true;
 				break;
 			}
+		}
+		if(!isSet){
+			rank_stamp_thistime [0].SetActive (true);
 		}
 	}
 
 	//
 	private void next_rank(){
+		bool isSet = false;
+
 		for(int i=RANK_NUM-1; i>0; i--){
 
 			if(high_score < rank_data[GameMgr.stage_num-1, i]){
@@ -164,9 +196,13 @@ public class TimeScoreCtrl : MonoBehaviour {
 				} else {
 					to_next_rank.text = "Next : " + rank_data [GameMgr.stage_num - 1, i+1];
 				}
-				rank_stamp [i].SetActive (true);
+				rank_stamp [i+1].SetActive (true);
+				isSet = true;
 				break;
 			}
+		}
+		if(!isSet){
+			rank_stamp[0].SetActive (true);
 		}
 	}
 }

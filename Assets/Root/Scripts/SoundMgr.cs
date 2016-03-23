@@ -11,11 +11,7 @@ public class SoundMgr : MonoBehaviour {
 		instance = this;
 		audioSource = GetComponent<AudioSource>();
 	}
-
-	// Update is called once per frame
-	void Update () {
-
-	}
+		
 
 	// Singletonインスタンスを取得する
 	public static SoundMgr GetInstance() {

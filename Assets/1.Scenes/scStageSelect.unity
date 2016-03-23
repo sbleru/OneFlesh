@@ -3407,6 +3407,7 @@ MonoBehaviour:
   - {fileID: 22404993}
   - {fileID: 1080661642}
   - {fileID: 65807735}
+  - {fileID: 721070863}
 --- !u!114 &651184706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4565,6 +4566,7 @@ MonoBehaviour:
   - {fileID: 206228702}
   - {fileID: 2085165295}
   - {fileID: 397874752}
+  - {fileID: 504623303}
 --- !u!114 &867859802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5177,6 +5179,7 @@ MonoBehaviour:
   - {fileID: 1270456095}
   - {fileID: 545111723}
   - {fileID: 666606628}
+  - {fileID: 1099878393}
 --- !u!114 &1024727017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7381,6 +7384,7 @@ MonoBehaviour:
   - {fileID: 1580395254}
   - {fileID: 672985243}
   - {fileID: 495436250}
+  - {fileID: 1447717899}
 --- !u!1 &1469472022
 GameObject:
   m_ObjectHideFlags: 0
@@ -7431,6 +7435,7 @@ MonoBehaviour:
   - {fileID: 1752099727}
   - {fileID: 689750230}
   - {fileID: 1206422820}
+  - {fileID: 1520202379}
 --- !u!114 &1469472025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9063,6 +9068,7 @@ MonoBehaviour:
   - {fileID: 1029435706}
   - {fileID: 1423376461}
   - {fileID: 1014825647}
+  - {fileID: 664983186}
 --- !u!114 &1806537370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9134,6 +9140,7 @@ MonoBehaviour:
   - {fileID: 1028219557}
   - {fileID: 1870143584}
   - {fileID: 1314536059}
+  - {fileID: 465370426}
 --- !u!224 &1823182499
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9440,6 +9447,7 @@ MonoBehaviour:
   - {fileID: 136412975}
   - {fileID: 946877791}
   - {fileID: 1620012330}
+  - {fileID: 76041246}
 --- !u!114 &1915890975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9974,6 +9982,7 @@ MonoBehaviour:
   - {fileID: 2073414320}
   - {fileID: 690372770}
   - {fileID: 357218725}
+  - {fileID: 274997856}
 --- !u!114 &2014929086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10180,7 +10189,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <Title
+  m_Text: 
 --- !u!222 &2045200633
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10238,7 +10247,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110.899994, y: -44}
+  m_AnchoredPosition: {x: 110.899994, y: -37}
   m_SizeDelta: {x: 250.699997, y: 78}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &2054510315
@@ -10324,8 +10333,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 60a3e5348a90c4a2c83c8b1ba4761782, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
