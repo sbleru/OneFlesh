@@ -3,7 +3,8 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.SceneManagement;
+
 
 // シーン遷移時のフェードイン・アウトを制御するためのクラス .
 public class FadeManager : MonoBehaviour
@@ -88,7 +89,7 @@ public class FadeManager : MonoBehaviour
 		}
 		
 		//シーン切替 .
-		Application.LoadLevel (scene);
+		SceneManager.LoadScene(scene);
 		
 		//だんだん明るく .
 		time = 0;
