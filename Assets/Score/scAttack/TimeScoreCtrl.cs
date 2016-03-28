@@ -27,6 +27,13 @@ public class TimeScoreCtrl : MonoBehaviour {
 	private bool isRegister;
 	#endregion
 
+	public iTween.EaseType stampEaseType;
+	public iTween.EaseType retireEaseType;
+
+	// サウンド
+	public SoundMgr sound_mgr;
+	public AudioClip stamp_clip, retire_clip;
+
 	// Use this for initialization
 	void Start () {
 		Initialize ();
@@ -61,6 +68,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 			highscoreText.text = "";
 			scoreText.text = "";
 			retire_txt.SetActive (true);
+			RetireAnim (retire_txt);
 
 			// ランクが登録されていない状態でリタイアした場合はハイスコアを表示しない
 			if(isRegister){
@@ -150,7 +158,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 	private void rank_register(){
 		bool isSet = false;
 
-		for(int i=RANK_NUM; i>=0; i--){
+		for(int i=RANK_NUM; i>0; i--){
 
 			// 高ランクからチェックして当てはまった時点で保存してbreak
 			if(high_score < rank_data[GameMgr.stage_num-1, i-1]){
@@ -174,13 +182,17 @@ public class TimeScoreCtrl : MonoBehaviour {
 
 			// 高ランクからチェックして当てはまった時点でアクティブにしてbreak
 			if(GameMgr.time_score < rank_data[GameMgr.stage_num-1, i]){
+				
 				rank_stamp_thistime [i+1].SetActive (true);
+				StampAnim (rank_stamp_thistime [i + 1]);
+
 				isSet = true;
 				break;
 			}
 		}
 		if(!isSet){
 			rank_stamp_thistime [0].SetActive (true);
+			StampAnim (rank_stamp_thistime [0]);
 		}
 	}
 
@@ -188,7 +200,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 	private void next_rank(){
 		bool isSet = false;
 
-		for(int i=RANK_NUM-1; i>0; i--){
+		for(int i=RANK_NUM-1; i>=0; i--){
 
 			if(high_score < rank_data[GameMgr.stage_num-1, i]){
 				if(i==RANK_NUM-1){
@@ -202,7 +214,36 @@ public class TimeScoreCtrl : MonoBehaviour {
 			}
 		}
 		if(!isSet){
+			to_next_rank.text = "Next : " + rank_data [GameMgr.stage_num - 1, 0];
 			rank_stamp[0].SetActive (true);
 		}
 	}
+
+	// スタンプアニメーション
+	private void StampAnim(GameObject obj){
+		obj.transform.localScale = new Vector3 (2, 2, 2);
+		iTween.ScaleTo(obj.gameObject, iTween.Hash("scale", Vector3.one,
+			"time", 1,
+			"easetype", stampEaseType
+		));
+		sound_mgr.PlayClip (stamp_clip, 0.7f);
+	}
+
+	// リタイアアニメーション
+	private void RetireAnim(GameObject obj){
+		iTween.MoveTo(obj.gameObject, iTween.Hash("position", Vector3.zero + new Vector3(Screen.width/4,Screen.height/4,0),
+			"islocal", true,
+			"time", 1,
+			"easetype", retireEaseType
+		));
+
+		iTween.RotateTo(obj.gameObject, iTween.Hash("z", -30,
+			"islocal", true,
+			"time", 1,
+			"easetype", retireEaseType
+		));
+
+		sound_mgr.PlayClip (retire_clip, 0.1f);
+	}
+
 }

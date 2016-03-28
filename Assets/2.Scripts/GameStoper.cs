@@ -57,11 +57,12 @@ public class GameStoper : MonoBehaviour {
 	IEnumerator NextScene(string scene){
 		finish.text = "FINISH!!";
 		Time.timeScale = 0.3f;	// スローモーションにする
-		yield return new WaitForSeconds (1.0f);
+		yield return new WaitForSeconds (0.5f);
 		Time.timeScale = 1.0f;
 
 		//GameMgr.left_block = 0;	// 残りブロック数を初期化
 		Application.LoadLevel (scene);
+//		FadeManager.Instance.LoadLevel (scene, 0.1f);
 	}
 		
 }

@@ -7,10 +7,14 @@ public class GameStarter : MonoBehaviour {
 	public Text starter;
 	private float timer;
 
+	void Awake(){
+		GameMgr.left_block = 0;
+		GameMgr.total_score = 0;
+	}
+
 	// Use this for initialization
 	void Start () {
 		timer = 3.2f; //3秒 + α
-		GameMgr.total_score = 0;
 	}
 
 	// Update is called once per frame

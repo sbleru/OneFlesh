@@ -23,8 +23,18 @@ public class SoundMgr : MonoBehaviour {
 		audioSource.PlayOneShot(clip);
 	}
 
+	// 指定した時間遅らせて指定されたクリップを再生する
+	public void PlayClip(AudioClip clip, float time) {
+		StartCoroutine (delayPlay (clip, time));
+	}
+
 	// 指定されたクリップを再生する
 	public static void Play(AudioClip clip) {
+		GetInstance().PlayClip(clip);
+	}
+
+	IEnumerator delayPlay(AudioClip clip, float time){
+		yield return new WaitForSeconds (time);
 		GetInstance().PlayClip(clip);
 	}
 }

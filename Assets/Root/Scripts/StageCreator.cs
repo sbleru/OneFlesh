@@ -19,6 +19,7 @@ public class StageCreator : MonoBehaviour {
 	private TextAsset stage_asset;  // ステージテキストを取り込む
 	string stage_txt;
 	public int[,] stage_data = new int[BLOCK_NUM_IN_SCREEN, SCREEN_HEIGHT];
+	public GameObject player;
 	public Text stage_name;	// どのステージか
 
 
@@ -98,6 +99,9 @@ public class StageCreator : MonoBehaviour {
 						break;
 					case 4:	// ニードル
 						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 3);
+						break;
+					case 9: // プレイヤー
+						Instantiate(player,new Vector3((float)i, (float)j, 0.0f), Quaternion.Euler(new Vector3(0f,90f,0f)));
 						break;
 					default:
 						break;

@@ -76,7 +76,7 @@ public class BlockCtrl : MonoBehaviour {
 			this.gameObject.GetComponent<Renderer> ().enabled = false;
 			// 爆発エフェクトのプレハブを呼び出す
 			Instantiate (explosion, this.gameObject.transform.position, Quaternion.identity);
-			sound_mgr.PlayClip (clip);
+			sound_mgr.PlayClip(clip);
 
 			// モードごとの処理
 			if (GameMgr.game_mode == "TimeAttack") {
