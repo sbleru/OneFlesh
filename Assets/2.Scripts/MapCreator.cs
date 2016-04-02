@@ -53,11 +53,12 @@ public class MapCreator : MonoBehaviour {
 	};
 		
 	BorderBlock last_block, last_up_block;
-	GameObject player_keeper;
+	[SerializeField]
+	private GameObject player_keeper;
 
 	// Use this for initialization
 	void Start () {
-		player_keeper = GameObject.FindGameObjectWithTag ("Keeper");
+//		player_keeper = GameObject.FindGameObjectWithTag ("Keeper");
 		last_block.is_last_block = false;
 		last_up_block.is_last_block = false;
 		// 最初の敵を作成
@@ -249,19 +250,19 @@ public class MapCreator : MonoBehaviour {
 			// 左のしきい値の計算
 			float limit_left = player_keeper.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN + 8) / 2.0f);
 			// ブロックがしきい値をでていたら削除の指示
-			if(player.transform.position.x < limit_left){
+			if(player.transform.position.x < limit_left + 2.0f){
 				ret = true;
 				break;
 			}
 			// 上のしきい値の計算
 			float limit_up = player_keeper.transform.position.y + (float)SCREEN_HEIGHT / 2.0f;
-			if(player.transform.position.y > limit_up + 2.0f){
+			if(player.transform.position.y > limit_up + 3.0f){
 				ret = true;
 				break;
 			}
 			// 上のしきい値の計算
 			float limit_down = player_keeper.transform.position.y - (float)SCREEN_HEIGHT / 2.0f;
-			if(player.transform.position.y < limit_down - 2.0f){
+			if(player.transform.position.y < limit_down - 3.0f){
 				ret = true;
 				break;
 			}

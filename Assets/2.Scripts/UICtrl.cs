@@ -31,7 +31,6 @@ public class UICtrl : MonoBehaviour {
 	// コントローラUIを表現するオブジェクト
 	[SerializeField]
 	private GameObject controll_area, controll_stick;
-//	private SpriteRenderer spRenderer;
 
 	// Use this for initialization
 	void Start () {

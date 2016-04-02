@@ -68,7 +68,8 @@ public class TimeScoreCtrl : MonoBehaviour {
 			highscoreText.text = "";
 			scoreText.text = "";
 			retire_txt.SetActive (true);
-			RetireAnim (retire_txt);
+			StartCoroutine (RetireAnim (retire_txt));
+//			RetireAnim (retire_txt);
 
 			// ランクが登録されていない状態でリタイアした場合はハイスコアを表示しない
 			if(isRegister){
@@ -230,8 +231,12 @@ public class TimeScoreCtrl : MonoBehaviour {
 	}
 
 	// リタイアアニメーション
-	private void RetireAnim(GameObject obj){
-		iTween.MoveTo(obj.gameObject, iTween.Hash("position", Vector3.zero + new Vector3(Screen.width/4,Screen.height/4,0),
+//	private void RetireAnim(GameObject obj){
+	IEnumerator RetireAnim(GameObject obj){
+		obj.SetActive (true);
+		obj.GetComponent<Text> ().color = new Color(1, 0, 0, 1);
+	
+		iTween.MoveTo(obj.gameObject, iTween.Hash("position", Vector3.zero,
 			"islocal", true,
 			"time", 1,
 			"easetype", retireEaseType
@@ -242,8 +247,18 @@ public class TimeScoreCtrl : MonoBehaviour {
 			"time", 1,
 			"easetype", retireEaseType
 		));
-
 		sound_mgr.PlayClip (retire_clip, 0.1f);
+		yield return new WaitForSeconds (2f);
+
+		float timer = 0.8f;
+		while(true){
+			if (timer < 0)
+				break;
+			
+				timer -= Time.deltaTime;		
+				obj.GetComponent<Text> ().color = new Color (1, 0, 0, 0.2f + timer);
+				yield return null;
+		}
 	}
 
 }

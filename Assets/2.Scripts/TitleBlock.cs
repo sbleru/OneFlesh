@@ -18,9 +18,9 @@ public class TitleBlock : MonoBehaviour {
 		this.sound_mgr = GameObject.FindGameObjectWithTag ("Root").GetComponent<SoundMgr> ();
 	}
 	
-	void OnCollisionEnter(Collision collision){
-		this.gameObject.GetComponent<Collider> ().enabled = false;
-		this.gameObject.GetComponent<Renderer> ().enabled = false;
+	void OnCollisionEnter2D(Collision2D collision){
+		this.gameObject.GetComponent<Collider2D> ().enabled = false;
+		this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 
 		if (collision.gameObject.tag == "PlayerA") {
 			scroll_button.SetActive (false);
