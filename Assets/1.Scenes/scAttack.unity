@@ -766,7 +766,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 140534, guid: 63e0fefa2ca754a33a487f5e33b81898, type: 2}
-  player2d: {fileID: 134184, guid: b688d6c83505447bdbcf760e66c0160f, type: 2}
+  player2d:
+  - {fileID: 134184, guid: 0afb1371afc0b4bc08ab353ae7ac6c5c, type: 2}
+  - {fileID: 134184, guid: d2e42228ec99240c68b900019cc15bf0, type: 2}
 --- !u!114 &528091405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1000,6 +1002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: {fileID: 2027605951}
+  elapsedTime: 0
 --- !u!4 &836252456
 Transform:
   m_ObjectHideFlags: 0
@@ -1275,7 +1278,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 2ebfde234e81e407abcc487b34d261b9, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 60
     m_Alignment: 4

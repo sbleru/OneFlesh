@@ -4238,7 +4238,7 @@ public class iTween : MonoBehaviour{
 		
 		if(tweenArguments.Contains("looktarget")){
 			currentRotation = thisTransform.eulerAngles;
-			thisTransform.eulerAngles = vector3s[4];	
+			thisTransform.eulerAngles = vector3s[4];
 		}
 		
 		//calculate:
@@ -4599,7 +4599,7 @@ public class iTween : MonoBehaviour{
 		CallBack("onstart");
 		
 		if(!loop){//only if this is not a loop
-			ConflictCheck();
+			ConflictCheck();	//isRunnningしているか
 			GenerateTargets();
 		}
 				

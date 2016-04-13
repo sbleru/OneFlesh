@@ -10,7 +10,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: shin
-  productName: oneflesh2
+  productName: oneflesh2D
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_ShowUnitySplashScreen: 1
@@ -89,7 +89,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleIdentifier: com.shin.oneflesh2
+  bundleIdentifier: com.shin.oneflesh2D
   bundleVersion: 1.0
   preloadedAssets: []
   metroEnableIndependentInputSource: 0
@@ -445,13 +445,21 @@ PlayerSettings:
   WebGL::useEmbeddedResources: 0
   XboxOne::enus: 1
   stringPropertyNames:
+  - Build_ServiceEnabled::Build_ServiceEnabled
+  - ErrorHub_ServiceEnabled::ErrorHub_ServiceEnabled
+  - Hub_ServiceEnabled::Hub_ServiceEnabled
+  - UNet_ServiceEnabled::UNet_ServiceEnabled
   - WebGL::emscriptenArgs
   - WebGL::template
   - additionalIl2CppArgs::additionalIl2CppArgs
+  Build_ServiceEnabled::Build_ServiceEnabled: True
+  ErrorHub_ServiceEnabled::ErrorHub_ServiceEnabled: False
+  Hub_ServiceEnabled::Hub_ServiceEnabled: False
+  UNet_ServiceEnabled::UNet_ServiceEnabled: True
   WebGL::emscriptenArgs: 
   WebGL::template: APPLICATION:Default
   additionalIl2CppArgs::additionalIl2CppArgs: 
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
+  cloudProjectId: a3b2acac-92b4-4910-8ab1-aa67838f9b9e
+  projectName: oneflesh2
+  organizationId: shinji-maruyama
   cloudEnabled: 0

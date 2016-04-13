@@ -32,6 +32,12 @@ public class UICtrl : MonoBehaviour {
 	[SerializeField]
 	private GameObject controll_area, controll_stick;
 
+	// OneFleshモードの確認
+	private bool isOneFlesh;
+	private bool isTapFirst;
+	private bool isTapSecond;
+	private float double_tap_interval;
+
 	// Use this for initialization
 	void Start () {
 	//	enabled = false;	// スクリプト無効
@@ -52,11 +58,41 @@ public class UICtrl : MonoBehaviour {
 		// タッチしていない時はコントローラは非表示
 		controll_area.SetActive (false);
 		controll_stick.SetActive (false);
+
+		isOneFlesh = false;
+		isTapFirst = false;
+		isTapSecond = false;
+		double_tap_interval = 0.5f;
 	}
 
 	void Update(){
 		// スコア更新
 		score.text = "Score: " + GameMgr.total_score;
+
+		// 画面を同じ箇所素早く2度タップするとチェーンを短くすることを伝える
+		if(!isOneFlesh){
+			if (!Application.isMobilePlatform) {
+//				if(Input.GetMouseButtonDown(0)){
+//					isOneFlesh = true;
+//					SendMessage ("ModeChange");
+//				}
+			}
+			else{
+				// ダブルタップを検出
+				if (Input.touchCount > 0)
+				{
+					foreach (Touch touch in Input.touches)
+					{
+						if (touch.tapCount > 1)
+						{
+							isOneFlesh = true;
+							SendMessage ("ModeChange");
+						}
+					}
+				}
+			}
+		}
+			
 
 		// 画面のタップを検出
 //		if(Input.GetMouseButtonDown(0)){
@@ -90,46 +126,49 @@ public class UICtrl : MonoBehaviour {
 	public void player_direction(){
 
 		// デバッグ用
-		if(Input.GetMouseButton(0)){
-			// 指があった場合、座標を格納
-			currentXpos = Input.mousePosition.x;
-			currentYpos = Input.mousePosition.y;
-			if (!touchStart) {
-				// タッチした瞬間の座標を保存
-				startXpos = currentXpos;
-				startYpos = currentYpos;
-				// タッチした場所にコントローラを表示
-				controll_area.SetActive (true);
-				controll_stick.SetActive (true);
+		if (!Application.isMobilePlatform) {
+			if(Input.GetMouseButton(0)){
+				// 指があった場合、座標を格納
+				currentXpos = Input.mousePosition.x;
+				currentYpos = Input.mousePosition.y;
+				if (!touchStart) {
+					// タッチした瞬間の座標を保存
+					startXpos = currentXpos;
+					startYpos = currentYpos;
+					// タッチした場所にコントローラを表示
+					controll_area.SetActive (true);
+					controll_stick.SetActive (true);
 
-				controll_area.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
-				controll_stick.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
-				touchStart = true;
+					controll_area.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
+					controll_stick.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
+					touchStart = true;
+				}
+				// エリアは固定 小円は指に追従
+				Vector3 l = (controll_area.transform.position - Input.mousePosition) * 0.4f;
+				controll_stick.transform.position = new Vector3 (startXpos-l.x, startYpos-l.y, 0.0f);
 			}
-			// エリアは固定 小円は指に追従
-			Vector3 l = (controll_area.transform.position - Input.mousePosition) * 0.4f;
-			controll_stick.transform.position = new Vector3 (startXpos-l.x, startYpos-l.y, 0.0f);
-		}
-		else {
-			// 画面に指が触れていない場合
-			currentXpos = 0.0f;
-			currentYpos = 0.0f;
-			startXpos = 0.0f;
-			startYpos = 0.0f;
+			else {
+				// 画面に指が触れていない場合
+				currentXpos = 0.0f;
+				currentYpos = 0.0f;
+				startXpos = 0.0f;
+				startYpos = 0.0f;
 
-			//			currentXpos_b = 0.0f;
-			//			currentYpos_b = 0.0f;
-			//			startXpos_b = 0.0f;
-			//			startYpos_b = 0.0f;
-			movingXpos = 0.0f;
-			movingYpos = 0.0f;
-			//			movingXpos_b = 0;
-			//			movingYpos_b = 0;
-			// コントローラを非表示にする
-			controll_area.SetActive (false);
-			controll_stick.SetActive (false);
-			touchStart = false;
+				//			currentXpos_b = 0.0f;
+				//			currentYpos_b = 0.0f;
+				//			startXpos_b = 0.0f;
+				//			startYpos_b = 0.0f;
+				movingXpos = 0.0f;
+				movingYpos = 0.0f;
+				//			movingXpos_b = 0;
+				//			movingYpos_b = 0;
+				// コントローラを非表示にする
+				controll_area.SetActive (false);
+				controll_stick.SetActive (false);
+				touchStart = false;
+			}
 		}
+
 
 		// 仮想操作パッド
 		for(int i = 0; i < Input.touchCount; i++){
@@ -180,26 +219,29 @@ public class UICtrl : MonoBehaviour {
 //			}
 		}
 
-//		if(Input.touchCount == 0){
-//			// 画面に指が触れていない場合
-//			currentXpos = 0.0f;
-//			currentYpos = 0.0f;
-//			startXpos = 0.0f;
-//			startYpos = 0.0f;
-//
-////			currentXpos_b = 0.0f;
-////			currentYpos_b = 0.0f;
-////			startXpos_b = 0.0f;
-////			startYpos_b = 0.0f;
-//			movingXpos = 0.0f;
-//			movingYpos = 0.0f;
-////			movingXpos_b = 0;
-////			movingYpos_b = 0;
-//			// コントローラを非表示にする
-//			controll_area.SetActive (false);
-//			controll_stick.SetActive (false);
-//			touchStart = false;
-//		}
+		if (Application.isMobilePlatform) {
+			if(Input.touchCount == 0){
+				// 画面に指が触れていない場合
+				currentXpos = 0.0f;
+				currentYpos = 0.0f;
+				startXpos = 0.0f;
+				startYpos = 0.0f;
+
+				//			currentXpos_b = 0.0f;
+				//			currentYpos_b = 0.0f;
+				//			startXpos_b = 0.0f;
+				//			startYpos_b = 0.0f;
+				movingXpos = 0.0f;
+				movingYpos = 0.0f;
+				//			movingXpos_b = 0;
+				//			movingYpos_b = 0;
+				// コントローラを非表示にする
+				controll_area.SetActive (false);
+				controll_stick.SetActive (false);
+				touchStart = false;
+			}
+		}
+
 		// 移動地計算 X軸
 		if((startXpos - currentXpos) < (Screen.width * -0.02f)){
 			movingXpos = 0.5f;
@@ -252,6 +294,7 @@ public class UICtrl : MonoBehaviour {
 	}
 		
 	void StartGame(){
+//		Debug.Log ("hoge");
 		enabled = true;
 	}
 

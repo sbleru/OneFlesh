@@ -4,7 +4,8 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-
+
+
 
 // シーン遷移時のフェードイン・アウトを制御するためのクラス .
 public class FadeManager : MonoBehaviour

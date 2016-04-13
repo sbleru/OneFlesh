@@ -58,8 +58,8 @@ public class Title0Ctrl : MonoBehaviour {
 //			"time", 1,
 //			"easetype", playerEaseType
 //		));
-		player_a.AddForce(new Vector2(1, -10) * 100, ForceMode2D.Impulse);
-		player_b.AddForce(new Vector2(-1, -10) * 100, ForceMode2D.Impulse);
+		player_a.AddForce(new Vector2(1, -10) * 10, ForceMode2D.Impulse);
+		player_b.AddForce(new Vector2(-1, -10) * 10, ForceMode2D.Impulse);
 
 
 

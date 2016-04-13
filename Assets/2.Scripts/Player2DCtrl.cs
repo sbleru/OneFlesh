@@ -239,6 +239,7 @@ public class Player2DCtrl : MonoBehaviour {
 	}
 
 	void StartGame(){
+//		Debug.Log ("hoge2");
 		enabled = true;
 	}
 

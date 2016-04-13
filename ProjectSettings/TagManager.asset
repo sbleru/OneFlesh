@@ -22,9 +22,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - String
+  - Block
+  - Player
   - 
   - 
   - 

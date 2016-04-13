@@ -30,6 +30,7 @@ public class GameStarter : MonoBehaviour {
 		if(timer < 0.0f){
 			// 開始メッセージをブロードキャストして終了する
 			BroadcastMessage ("StartGame");
+			GameObject.FindWithTag ("Root").SendMessage ("StartGame");
 			GameObject.FindWithTag ("PlayerA").SendMessage ("StartGame");
 
 			starter.text = "GO!!";

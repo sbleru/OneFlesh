@@ -5,7 +5,7 @@ using System.Collections;
 public class Timekeeper : MonoBehaviour {
 
 	public Text time;
-	private float elapsedTime; // ゲームの長さ
+	public float elapsedTime; // ゲームの長さ
 	string text;
 
 	void Start(){

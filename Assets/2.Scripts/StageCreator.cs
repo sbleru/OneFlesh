@@ -21,6 +21,15 @@ public class StageCreator : MonoBehaviour {
 		}
 	}
 
+	private Timekeeper _time_keeper;
+	public Timekeeper time_keeper
+	{
+		get { 
+			_time_keeper = _time_keeper ?? (GameObject.FindGameObjectWithTag ("TimeMgr").GetComponent<Timekeeper> ());
+			return this._time_keeper; 
+		}
+	}
+
 	private TextAsset stage_asset;  // ステージテキストを取り込む
 	string stage_txt;
 	[SerializeField]
@@ -29,11 +38,20 @@ public class StageCreator : MonoBehaviour {
 	private GameObject player;
 
 	[SerializeField]
-	private GameObject player2d;
+	private GameObject[] player2d;
+	private GameObject tempObj;
+
+	private bool isDestroyPlayer1, isDestroyPlayer2;
+	private float time_mode_change;
+	private bool isModeChange;
 
 
 	// Use this for initialization
 	void Start () {
+		isDestroyPlayer1 = false;
+		isDestroyPlayer2 = false;
+		time_mode_change = 5.0f;
+		isModeChange = false;
 
 		// ステージ番号に応じたステージテキストを取り込む
 		stage_asset = Resources.Load ("stage" + GameMgr.stage_num) as TextAsset;
@@ -43,6 +61,55 @@ public class StageCreator : MonoBehaviour {
 		// ステージを作成する
 		create_stage ();
 	}
+
+	// 試しの設定
+	void Update(){
+		// 経過時間に応じてチェーンの長さを短くする
+//		if(!isDestroyPlayer1){
+//			if(time_keeper.elapsedTime > 10.0f){
+//				float i = tempObj.transform.position.x;
+//				float j = tempObj.transform.position.y;
+//				Destroy (tempObj);
+//				tempObj = Instantiate(player2d[1],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f))) as GameObject;
+//				isDestroyPlayer1 = true;
+//			}
+//		}
+//		if(!isDestroyPlayer2){
+//			if(time_keeper.elapsedTime > 20.0f){
+//				float i = tempObj.transform.position.x;
+//				float j = tempObj.transform.position.y;
+//				Destroy (tempObj);
+//				tempObj = Instantiate(player2d[2],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f))) as GameObject;
+//				isDestroyPlayer2 = true;
+//			}
+//		}
+
+		if(isModeChange){
+			time_mode_change -= Time.deltaTime;
+			if(time_mode_change < 0.0f){
+				float i = tempObj.transform.position.x;
+				float j = tempObj.transform.position.y;
+				Destroy (tempObj);
+				tempObj = Instantiate(player2d[0],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f))) as GameObject;
+
+				tempObj.GetComponent<Player2DCtrl> ().enabled = true;
+
+				isModeChange = false;
+			}
+		}
+
+	}
+
+
+	public void ModeChange(){
+
+		float i = tempObj.transform.position.x;
+		float j = tempObj.transform.position.y;
+		Destroy (tempObj);
+		tempObj = Instantiate(player2d[1],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f))) as GameObject;
+		isModeChange = true;
+	}
+
 
 	// ステージ作成
 	private void get_stage_data(){
@@ -108,7 +175,7 @@ public class StageCreator : MonoBehaviour {
 						break;
 					case 9: // プレイヤー
 //						Instantiate(player,new Vector3((float)i, (float)j, 0.0f), Quaternion.Euler(new Vector3(0f,90f,0f)));
-						Instantiate(player2d,new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f)));
+						tempObj = Instantiate(player2d[0],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f))) as GameObject;
 						break;
 					default:
 						break;
