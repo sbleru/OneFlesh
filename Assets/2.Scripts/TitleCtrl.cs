@@ -29,17 +29,18 @@ public class TitleCtrl : MonoBehaviour {
 	}
 
 	// スクロールモードでゲーム開始
+	// レベルをなくしてモードを一つにした
 	public void Scroll(){
-//		iTween.MoveTo( player_a.gameObject, new Vector2(1.0f,-1.0f), 0.5f );
 		player_a.AddForce(new Vector2(1, -1)*20, ForceMode2D.Impulse);
 		GameMgr.game_mode = "Scroll";
-		FadeManager.Instance.LoadLevel ("scScrollStageSelect", 0.8f);
+		GameMgr.scroll_stage_num = 2;
+		FadeManager.Instance.LoadLevel ("scScroll", 0.8f);
+//		FadeManager.Instance.LoadLevel ("scScrollStageSelect", 0.8f);
 	}
 
 
 	// タイムアタックモードでゲーム開始
 	public void TimeAttack(){
-//		iTween.MoveTo( player_b.gameObject, new Vector2(-1.0f,-1.0f), 0.5f ); 
 		player_b.AddForce(new Vector2(-1, -1)*20, ForceMode2D.Impulse);
 		GameMgr.game_mode = "TimeAttack";
 		FadeManager.Instance.LoadLevel ("scStageSelect", 0.8f);

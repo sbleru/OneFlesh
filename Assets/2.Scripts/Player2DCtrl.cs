@@ -75,11 +75,13 @@ public class Player2DCtrl : MonoBehaviour {
 
 	public AudioClip clip;	// 消滅サウンド
 	public bool isVanish;	// 消滅したか
+	public bool isModeChange;	// モードチェンジ状態か
 
 
 	// Use this for initialization
 	void Start () {
 		isVanish = false;
+		isModeChange = false;
 	}
 
 	// Update is called once per frame
@@ -224,6 +226,7 @@ public class Player2DCtrl : MonoBehaviour {
 			}
 		}
 	}
+		
 
 	// ゲームオーバー
 	IEnumerator Vanish(){

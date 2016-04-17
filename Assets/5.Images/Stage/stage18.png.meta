@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 6ad8bedc5740c4e97803160954926bd3
-timeCreated: 1458590695
-licenseType: Pro
+guid: 9d5abd3dac04a457d85aa7ec5cd0e50d
+timeCreated: 1460658846
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -26,7 +26,7 @@ TextureImporter:
   cubemapConvolutionSteps: 7
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: -2
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: 
+  spritePackingTag: Stage
   userData: 
   assetBundleName: 
   assetBundleVariant: 

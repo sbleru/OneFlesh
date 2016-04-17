@@ -34,9 +34,7 @@ public class UICtrl : MonoBehaviour {
 
 	// OneFleshモードの確認
 	private bool isOneFlesh;
-	private bool isTapFirst;
-	private bool isTapSecond;
-	private float double_tap_interval;
+
 
 	// Use this for initialization
 	void Start () {
@@ -60,35 +58,25 @@ public class UICtrl : MonoBehaviour {
 		controll_stick.SetActive (false);
 
 		isOneFlesh = false;
-		isTapFirst = false;
-		isTapSecond = false;
-		double_tap_interval = 0.5f;
 	}
 
 	void Update(){
 		// スコア更新
 		score.text = "Score: " + GameMgr.total_score;
 
-		// 画面を同じ箇所素早く2度タップするとチェーンを短くすることを伝える
-		if(!isOneFlesh){
-			if (!Application.isMobilePlatform) {
-//				if(Input.GetMouseButtonDown(0)){
-//					isOneFlesh = true;
-//					SendMessage ("ModeChange");
-//				}
+		// モードチェンジする関数を呼び出す
+		if (!Application.isMobilePlatform) {
+			// Aを入力
+			if(Input.GetKeyDown(KeyCode.A)){
+				SendMessage ("ModeChange");
 			}
-			else{
-				// ダブルタップを検出
-				if (Input.touchCount > 0)
-				{
-					foreach (Touch touch in Input.touches)
-					{
-						if (touch.tapCount > 1)
-						{
-							isOneFlesh = true;
-							SendMessage ("ModeChange");
-						}
-					}
+		}
+		else{
+			// プレイヤーの操作とは別のタップを検出
+			if (Input.touchCount > 1)
+			{
+				if(Input.GetTouch(1).phase == TouchPhase.Ended){
+					SendMessage ("ModeChange");
 				}
 			}
 		}

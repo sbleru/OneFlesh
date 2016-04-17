@@ -719,6 +719,7 @@ GameObject:
   - 82: {fileID: 528091407}
   - 114: {fileID: 528091408}
   - 114: {fileID: 528091404}
+  - 114: {fileID: 528091409}
   m_Layer: 0
   m_Name: GameRoot
   m_TagString: Root
@@ -881,6 +882,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99effd7e61a484f7b87efb733cc0bee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &528091409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 528091401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 256a2f8857afc406699973a436ed3ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player2d:
+  - {fileID: 134184, guid: 0afb1371afc0b4bc08ab353ae7ac6c5c, type: 2}
+  - {fileID: 134184, guid: d2e42228ec99240c68b900019cc15bf0, type: 2}
 --- !u!1 &737027630
 GameObject:
   m_ObjectHideFlags: 0
