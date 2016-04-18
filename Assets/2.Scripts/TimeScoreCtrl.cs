@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class TimeScoreCtrl : MonoBehaviour {
 	public static int STAGE_NUM = 18;	// 全ステージ数
@@ -34,6 +37,13 @@ public class TimeScoreCtrl : MonoBehaviour {
 	public SoundMgr sound_mgr;
 	public AudioClip stamp_clip, retire_clip;
 
+	[SerializeField]
+	UnityAdsController unity_ads_controller;
+
+	void Awake(){
+		
+	}
+
 	// Use this for initialization
 	void Start () {
 		Initialize ();
@@ -44,6 +54,8 @@ public class TimeScoreCtrl : MonoBehaviour {
 		rank_txt = rank_asset.text;
 		get_rank_data();
 		#endregion
+
+		string stageID = "stage" + GameMgr.stage_num;
 
 		// ゲームリタイアかどうか
 		if(!GameMgr.isRetire){
@@ -63,6 +75,13 @@ public class TimeScoreCtrl : MonoBehaviour {
 			// 現スコアの評価を与える
 			rank_thistime ();
 
+			// ゲームクリア時の分析
+			Analytics.CustomEvent("gameClear", new Dictionary<string, object>{
+				{"stage number", stageID},
+				{"thistime score", GameMgr.time_score},
+				{"high score", high_score},
+			});
+
 		} else {
 			// スコア・ハイスコアを表示する
 			highscoreText.text = "";
@@ -76,6 +95,12 @@ public class TimeScoreCtrl : MonoBehaviour {
 				highscoreText.text = "HIGHSCORE : " + high_score;
 			}
 
+			// ゲームリタイア時の分析
+			Analytics.CustomEvent("gameRetire", new Dictionary<string, object>{
+				{"stage number", stageID},
+				{"thistime score time", GameMgr.time_score},
+			});
+
 		}
 
 		if(isRegister){
@@ -84,6 +109,9 @@ public class TimeScoreCtrl : MonoBehaviour {
 		} else {
 			to_next_rank.text = "No Records";
 		}
+			
+		// Unity Ads表示
+		unity_ads_controller.WaitAndShowUnityAds (1.0f);
 		//Save ();
 	}
 
@@ -102,12 +130,9 @@ public class TimeScoreCtrl : MonoBehaviour {
 	public void Save ()
 	{
 		// ハイスコアを保存する
-		//PlayerPrefs.SetInt (highScoreKey, 0);
 		PlayerPrefs.SetFloat (highScoreKey, high_score);
-		//PlayerPrefs.SetFloat (highScoreKey, 60f);
 		PlayerPrefs.SetFloat (thistimeScoreKey, GameMgr.time_score);
 		PlayerPrefs.Save ();
-
 		// ゲーム開始前の状態に戻す
 		Initialize ();
 	}

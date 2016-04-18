@@ -10,6 +10,7 @@ public class GameStarter : MonoBehaviour {
 	void Awake(){
 		GameMgr.left_block = 0;
 		GameMgr.total_score = 0;
+		Application.targetFrameRate = 60;
 	}
 
 	// Use this for initialization

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ScrollScoreCtrl : MonoBehaviour {
 
@@ -10,6 +13,9 @@ public class ScrollScoreCtrl : MonoBehaviour {
 	public Text highcoreText;
 
 	private int high_score;	// ハイスコア
+
+	[SerializeField]
+	UnityAdsController unity_ads_controller;
 
 
 	// PlayerPrefsで保存するためのキー
@@ -26,8 +32,18 @@ public class ScrollScoreCtrl : MonoBehaviour {
 			Save();
 		}
 		// スコア・ハイスコアを表示する
-		highcoreText.text = "HIGH : " + high_score;
+		highcoreText.text = "HIGHSCORE : " + high_score;
 		scoreText.text = "SCORE : " + GameMgr.total_score;
+
+		// CustomEvent を作る　クリア時
+		Analytics.CustomEvent ("Clear", new Dictionary<string, object> {
+			{ "scene ID", SceneManager.GetActiveScene().buildIndex },
+			{"thistime score", GameMgr.total_score},
+			{ "high score", high_score },
+		});
+
+		// UnityAds表示
+		unity_ads_controller.WaitAndShowUnityAds (1.0f);
 	}
 
 	// 初期化

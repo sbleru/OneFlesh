@@ -700,6 +700,7 @@ MonoBehaviour:
   sound_mgr: {fileID: 540926922}
   stamp_clip: {fileID: 8300000, guid: 442ff32530c494d54b2569d69fa5588d, type: 3}
   retire_clip: {fileID: 8300000, guid: 2cb9ad0e077544a2eb6db04d6c48c6f1, type: 3}
+  unity_ads_controller: {fileID: 549086845}
 --- !u!4 &540926921
 Transform:
   m_ObjectHideFlags: 0
@@ -881,6 +882,54 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 547054065}
+--- !u!1001 &549086844
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &549086845 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11426586, guid: 2222d52d86c4149bd9c5a0d2e4b185cc,
+    type: 2}
+  m_PrefabInternal: {fileID: 549086844}
+  m_Script: {fileID: 11500000, guid: d3e4bde32f2d0465cac30e533d546b22, type: 3}
 --- !u!1 &595130249
 GameObject:
   m_ObjectHideFlags: 0
