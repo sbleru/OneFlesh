@@ -18,7 +18,8 @@ using UnityEngine.Events;
 public class UnityAdsController : MonoBehaviour
 {
 	[SerializeField]
-	string zoneID = "rewardedVideo";
+//	string zoneID = "rewardedVideo";
+	string zoneID = "video";
 	[SerializeField]
 	string gameID_iOS = "1055025";
 	[SerializeField]

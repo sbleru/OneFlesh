@@ -317,7 +317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 139192}
-  EaseType: 0
 --- !u!114 &11408520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -333,6 +332,7 @@ MonoBehaviour:
   vanishEffect: {fileID: 135706, guid: a41e91c8d5b3e4b1584df061bdb365fe, type: 2}
   clip: {fileID: 8300000, guid: 8e2db3f79a2c541dca4583bc2b845a02, type: 3}
   isVanish: 0
+  isModeChange: 0
 --- !u!114 &11416974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,7 +345,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 142294}
-  EaseType: 0
 --- !u!114 &11422304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -358,7 +357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 163064}
-  EaseType: 0
 --- !u!114 &11438556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,7 +369,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 189424}
-  EaseType: 0
 --- !u!114 &11444940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -384,7 +381,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 187654}
-  EaseType: 0
 --- !u!114 &11477806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,7 +393,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 134184}
-  EaseType: 0
 --- !u!114 &11478128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -410,7 +405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 181914}
-  EaseType: 0
 --- !u!212 &21209938
 SpriteRenderer:
   m_ObjectHideFlags: 1
