@@ -566,11 +566,11 @@ GameObject:
   - 114: {fileID: 991746068}
   m_Layer: 5
   m_Name: Retly
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &991746067
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1259,6 +1259,10 @@ Prefab:
     - target: {fileID: 492786, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11426586, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}
+      propertyPath: zoneID
+      value: video
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2222d52d86c4149bd9c5a0d2e4b185cc, type: 2}

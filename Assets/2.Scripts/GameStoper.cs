@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class GameStoper : MonoBehaviour {
@@ -61,7 +62,8 @@ public class GameStoper : MonoBehaviour {
 		Time.timeScale = 1.0f;
 
 		//GameMgr.left_block = 0;	// 残りブロック数を初期化
-		Application.LoadLevel (scene);
+//		Application.LoadLevel (scene);
+		SceneManager.LoadScene(scene);
 //		FadeManager.Instance.LoadLevel (scene, 0.1f);
 	}
 		

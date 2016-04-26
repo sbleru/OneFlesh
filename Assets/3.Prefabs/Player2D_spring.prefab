@@ -10,8 +10,8 @@ GameObject:
   - 4: {fileID: 424756}
   - 212: {fileID: 21294738}
   - 50: {fileID: 5025924}
-  - 233: {fileID: 23348522}
   - 58: {fileID: 5849894}
+  - 231: {fileID: 23192620}
   m_Layer: 8
   m_Name: String2D_9
   m_TagString: String
@@ -29,8 +29,8 @@ GameObject:
   - 4: {fileID: 412840}
   - 212: {fileID: 21237616}
   - 50: {fileID: 5091834}
-  - 233: {fileID: 23370862}
   - 58: {fileID: 5856126}
+  - 231: {fileID: 23124270}
   m_Layer: 8
   m_Name: String2D_8
   m_TagString: String
@@ -51,7 +51,7 @@ GameObject:
   - 58: {fileID: 5893128}
   - 114: {fileID: 11408520}
   m_Layer: 0
-  m_Name: Player2D_long
+  m_Name: Player2D_spring
   m_TagString: PlayerA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,8 +67,8 @@ GameObject:
   - 4: {fileID: 402826}
   - 212: {fileID: 21256390}
   - 50: {fileID: 5038942}
-  - 233: {fileID: 23367048}
   - 58: {fileID: 5802992}
+  - 231: {fileID: 23113972}
   m_Layer: 8
   m_Name: String2D_2
   m_TagString: String
@@ -86,8 +86,8 @@ GameObject:
   - 4: {fileID: 404414}
   - 212: {fileID: 21266358}
   - 50: {fileID: 5096090}
-  - 233: {fileID: 23360722}
   - 58: {fileID: 5824748}
+  - 231: {fileID: 23106720}
   m_Layer: 8
   m_Name: String2D_3
   m_TagString: String
@@ -105,8 +105,8 @@ GameObject:
   - 4: {fileID: 472882}
   - 212: {fileID: 21290878}
   - 50: {fileID: 5045682}
-  - 233: {fileID: 23315766}
   - 58: {fileID: 5848838}
+  - 231: {fileID: 23149146}
   m_Layer: 0
   m_Name: Player2D_B
   m_TagString: PlayerB
@@ -124,8 +124,8 @@ GameObject:
   - 4: {fileID: 450902}
   - 212: {fileID: 21263534}
   - 50: {fileID: 5033560}
-  - 233: {fileID: 23328500}
   - 58: {fileID: 5808622}
+  - 231: {fileID: 23164636}
   m_Layer: 8
   m_Name: String2D_4
   m_TagString: String
@@ -143,8 +143,8 @@ GameObject:
   - 4: {fileID: 480260}
   - 212: {fileID: 21212338}
   - 50: {fileID: 5044514}
-  - 233: {fileID: 23343508}
   - 58: {fileID: 5802948}
+  - 231: {fileID: 23169624}
   m_Layer: 8
   m_Name: String2D_7
   m_TagString: String
@@ -162,8 +162,8 @@ GameObject:
   - 4: {fileID: 474106}
   - 212: {fileID: 21209938}
   - 50: {fileID: 5035960}
-  - 233: {fileID: 23396334}
   - 58: {fileID: 5838616}
+  - 231: {fileID: 23191492}
   m_Layer: 8
   m_Name: String2D_5
   m_TagString: String
@@ -181,8 +181,8 @@ GameObject:
   - 4: {fileID: 487298}
   - 212: {fileID: 21290730}
   - 50: {fileID: 5042650}
-  - 233: {fileID: 23323564}
   - 58: {fileID: 5828208}
+  - 231: {fileID: 23165358}
   m_Layer: 8
   m_Name: String2D_6
   m_TagString: String
@@ -200,8 +200,8 @@ GameObject:
   - 4: {fileID: 485552}
   - 212: {fileID: 21279090}
   - 50: {fileID: 5020434}
-  - 233: {fileID: 23394012}
   - 58: {fileID: 5855506}
+  - 231: {fileID: 23192318}
   m_Layer: 8
   m_Name: String2D_1
   m_TagString: String
@@ -1038,123 +1038,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!233 &23315766
-HingeJoint2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145112}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 5025924}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.20749998, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23323564
-HingeJoint2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187654}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 5035960}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.14249992, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23328500
-HingeJoint2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 163064}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 5096090}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.14250016, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23343508
-HingeJoint2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177668}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 5042650}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.14499998, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23348522
-HingeJoint2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115232}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 5091834}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.14499998, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23360722
-HingeJoint2D:
+--- !u!231 &23106720
+SpringJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1165,19 +1050,15 @@ HingeJoint2D:
   m_ConnectedRigidBody: {fileID: 5038942}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.14250016, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23367048
-HingeJoint2D:
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23113972
+SpringJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1188,19 +1069,15 @@ HingeJoint2D:
   m_ConnectedRigidBody: {fileID: 5020434}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.14249992, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23370862
-HingeJoint2D:
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23124270
+SpringJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1211,42 +1088,91 @@ HingeJoint2D:
   m_ConnectedRigidBody: {fileID: 5044514}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.14499998, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23394012
-HingeJoint2D:
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23149146
+SpringJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 189424}
+  m_GameObject: {fileID: 145112}
   m_Enabled: 1
   serializedVersion: 4
   m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 5086594}
+  m_ConnectedRigidBody: {fileID: 5025924}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.80999947, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
---- !u!233 &23396334
-HingeJoint2D:
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23164636
+SpringJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163064}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 5096090}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23165358
+SpringJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187654}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 5035960}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23169624
+SpringJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 177668}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 5042650}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23191492
+SpringJoint2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1257,17 +1183,51 @@ HingeJoint2D:
   m_ConnectedRigidBody: {fileID: 5033560}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.14499998, y: 0}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 10000
-  m_UseLimits: 0
-  m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 360
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23192318
+SpringJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189424}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 5086594}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
+--- !u!231 &23192620
+SpringJoint2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115232}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 5091834}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 0.005
+  m_DampingRatio: 0.5
+  m_Frequency: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

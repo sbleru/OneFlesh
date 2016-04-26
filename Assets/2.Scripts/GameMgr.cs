@@ -21,7 +21,7 @@ public class GameMgr {
 		left_block = 0;
 		isRetire = false;
 		total_score = 0;
-		count_for_ads = 0;
+		count_for_ads = 3;
 
 		for(int i=0; i<30; i++){
 			rank [i] = 1;

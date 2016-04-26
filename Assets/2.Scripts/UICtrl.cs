@@ -123,17 +123,19 @@ public class UICtrl : MonoBehaviour {
 					// タッチした瞬間の座標を保存
 					startXpos = currentXpos;
 					startYpos = currentYpos;
-					// タッチした場所にコントローラを表示
+
+					/* タッチした場所にコントローラを表示
 					controll_area.SetActive (true);
 					controll_stick.SetActive (true);
-
 					controll_area.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
 					controll_stick.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
+					*/
 					touchStart = true;
 				}
-				// エリアは固定 小円は指に追従
+				/* エリアは固定 小円は指に追従
 				Vector3 l = (controll_area.transform.position - Input.mousePosition) * 0.4f;
 				controll_stick.transform.position = new Vector3 (startXpos-l.x, startYpos-l.y, 0.0f);
+				*/
 			}
 			else {
 				// 画面に指が触れていない場合
@@ -169,19 +171,20 @@ public class UICtrl : MonoBehaviour {
 					// タッチした瞬間の座標を保存
 					startXpos = currentXpos;
 					startYpos = currentYpos;
-					// タッチした場所にコントローラを表示
+
+					/* タッチした場所にコントローラを表示
 					controll_area.SetActive (true);
 					controll_stick.SetActive (true);
-			
 					controll_area.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
 					controll_stick.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
+					*/
 					touchStart = true;
 				}
 
-				// エリアは固定 小円は指に追従
+				/* エリアは固定 小円は指に追従
 				Vector3 l = (controll_area.transform.position - Input.mousePosition) * 0.4f;
 				controll_stick.transform.position = new Vector3 (startXpos-l.x, startYpos-l.y, 0.0f);
-
+				*/
 			}
 				
 			// 画面の右側に指があるか判定

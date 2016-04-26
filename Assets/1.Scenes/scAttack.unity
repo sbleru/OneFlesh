@@ -894,7 +894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player2d:
-  - {fileID: 134184, guid: 0afb1371afc0b4bc08ab353ae7ac6c5c, type: 2}
+  - {fileID: 134184, guid: fb1bb91f662044fc3adf527dbbd677e0, type: 2}
   - {fileID: 134184, guid: d2e42228ec99240c68b900019cc15bf0, type: 2}
 --- !u!1 &737027630
 GameObject:
