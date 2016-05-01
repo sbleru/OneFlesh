@@ -1,4 +1,2 @@
 # one_flesh
-git使った開発していきます
-
-これはOneFleshのゲームリポジトリです。
+This is OneFlesh's repository.
