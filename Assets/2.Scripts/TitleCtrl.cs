@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TitleCtrl : MonoBehaviour {
 
-//	[SerializeField]
-//	private GameObject player_a, player_b;
+	[SerializeField]
+	private Text starter_txt;
+	private float timer;
 
 	private Rigidbody2D _player_a;
 	public Rigidbody2D player_a
@@ -24,25 +26,56 @@ public class TitleCtrl : MonoBehaviour {
 		}
 	}
 
-	void Awake(){
-		GameMgr.initialize ();
+	// Use this for initialization
+	void Start () {
+		timer = 0.0f;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		timer += Time.deltaTime;
+		//タイマーの少数部分をアルファ値とすることで文字をフェードアウト
+		starter_txt.color = new Color (1, 1, 1, timer - Mathf.FloorToInt (timer));
+
+		// タップされたら
+		if(timer > 2.0f){
+
+			if(Input.touchCount>0){				
+				StartCoroutine (FadeOut());
+			}
+			if(Input.GetMouseButtonDown(0)){
+				StartCoroutine (FadeOut ());
+			}
+		}
+
 	}
 
-	// スクロールモードでゲーム開始
-	// レベルをなくしてモードを一つにした
-	public void Scroll(){
-		player_a.AddForce(new Vector2(1, -1)*20, ForceMode2D.Impulse);
-		GameMgr.game_mode = "Scroll";
-		GameMgr.scroll_stage_num = 2;
-		FadeManager.Instance.LoadLevel ("scScroll", 0.8f);
+	IEnumerator FadeOut(){
+		player_a.AddForce(new Vector2(1, -10) * 10, ForceMode2D.Impulse);
+		player_b.AddForce(new Vector2(-1, -10) * 10, ForceMode2D.Impulse);
+		FadeManager.Instance.LoadLevel ("scTitle", 1.0f);
+		yield return null;
 	}
-
-
-	// タイムアタックモードでゲーム開始
-	public void TimeAttack(){
-		player_b.AddForce(new Vector2(-1, -1)*20, ForceMode2D.Impulse);
-		GameMgr.game_mode = "TimeAttack";
-		FadeManager.Instance.LoadLevel ("scStageSelect", 0.8f);
-	}
-		
 }
+
+/* コーディング規約
+ * 
+ * 命名規則
+ * 	クラス名　　　　　：CamelCase
+ * 	変数名　　　　　　：lower_separated
+ * 	定数　　　　　　　：kConstantName
+ * 	ローカル変数　　　：_offset
+ * 	クラスのメンバ変数：offset
+ * 
+ * オブジェクトなどを使用時に取得する
+ * 取得していないものを参照してしまうことをなくす
+ * 	private notset notset;
+ * 	public notset notset
+ * 	{
+ * 		get { 
+ * 			notset = notset ?? (notset);
+ * 			return this.notset; 
+ * 		}
+ * 	}
+ * 
+ */

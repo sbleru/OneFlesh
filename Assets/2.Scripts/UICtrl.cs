@@ -16,10 +16,6 @@ public class UICtrl : MonoBehaviour {
 	[SerializeField]
 	private GameObject controll_area, controll_stick;
 
-	// OneFleshモードの確認
-	private bool isOneFlesh;
-
-
 	// Use this for initialization
 	void Start () {
 		currentXpos = 0.0f;
@@ -32,8 +28,6 @@ public class UICtrl : MonoBehaviour {
 		// タッチしていない時はコントローラは非表示
 		controll_area.SetActive (false);
 		controll_stick.SetActive (false);
-
-		isOneFlesh = false;
 	}
 
 	void Update(){

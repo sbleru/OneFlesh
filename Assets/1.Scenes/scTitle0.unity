@@ -184,8 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9962c55b496cd4ec581313352b842d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starter: {fileID: 731544685}
-  playerEaseType: 0
+  starter_txt: {fileID: 731544685}
 --- !u!82 &5755463
 AudioSource:
   m_ObjectHideFlags: 0
@@ -874,8 +873,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2082901129}
+  - 114: {fileID: 2082901130}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -893,6 +893,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &2082901130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2082901128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a1ebf7d8c43147aaa45579ea1d3f30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2137035618
 GameObject:
   m_ObjectHideFlags: 0

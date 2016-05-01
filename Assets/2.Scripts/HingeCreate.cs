@@ -4,7 +4,6 @@ using UnityEngine;
 #endregion
 
 public class HingeCreate : MonoBehaviour {
-	static float DELAYED_TIME = 7f;
 
 	[SerializeField]
 	private GameObject follow_obj;	// ついていくオブジェクト
@@ -14,7 +13,7 @@ public class HingeCreate : MonoBehaviour {
 	{
 		get { 
 			_follow_transform = _follow_transform ?? (follow_obj.GetComponent<Transform>());
-			return this._follow_transform; 
+			return this._follow_transform;
 		}
 	}
 	private Transform _this_transform;

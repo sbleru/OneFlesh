@@ -58,7 +58,11 @@ public class UnityAdsController : MonoBehaviour
 		if(GameMgr.count_for_ads < 1){
 			StartCoroutine (ShowUnityAds(delay));
 		}
-		float count = (GameMgr.count_for_ads > 4) ? GameMgr.count_for_ads = 0 : GameMgr.count_for_ads++;
+		if(GameMgr.count_for_ads > 4){
+			GameMgr.count_for_ads = 0;
+		} else {
+			GameMgr.count_for_ads++;
+		}
 	}
 
 	IEnumerator ShowUnityAds(float delay){

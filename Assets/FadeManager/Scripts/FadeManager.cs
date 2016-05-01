@@ -7,11 +7,10 @@ using UnityEngine.SceneManagement;
 
 
 
-// シーン遷移時のフェードイン・アウトを制御するためのクラス .
+// シーン遷移時のフェードイン・アウトを制御する
 public class FadeManager : MonoBehaviour
 {
-
-	#region Singleton // シングルトン作成
+	#region Singleton
 
 	private static FadeManager instance;
 
