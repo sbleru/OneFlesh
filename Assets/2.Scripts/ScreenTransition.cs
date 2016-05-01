@@ -6,7 +6,6 @@ public class ScreenTransition : MonoBehaviour {
 
 	private int stage_num;
 
-	//
 	public void ToTitle(){
 		FadeManager.Instance.LoadLevel ("scTitle0", 0.1f);
 	}
@@ -17,7 +16,6 @@ public class ScreenTransition : MonoBehaviour {
 	}
 
 	public void ToScroll(){
-//		GameMgr.scroll_stage_num = int.Parse (this.GetComponent<Text> ().text);
 		GameMgr.scroll_stage_num = 2;
 		FadeManager.Instance.LoadLevel ("scScroll", 0.1f);
 	}

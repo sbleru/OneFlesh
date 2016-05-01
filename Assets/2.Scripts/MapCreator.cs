@@ -150,21 +150,6 @@ public class MapCreator : MonoBehaviour {
 	}
 
 
-//	// ブロックを作るかどうか
-//	public bool isCreate(GameObject block){
-//		// レベルデザインのためスコアを渡す
-//		INTERVAL = this.level_ctrl.getPlayerInterval (this.score_ctrl.Return ());
-//
-//		bool ret = false;
-//		// ブロックが出てくる間隔 しきい値で指定する
-//		float block_limit = player_keeper.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN) / 2.0f) + INTERVAL;
-//		if (block.transform.position.x < block_limit) {
-//			this.create_block ();
-//			ret = true;
-//		}
-//		return(ret);
-//	}
-
 	// ブロックを作るかどうか
 	public bool isCreate(float elapsed_time){
 		// レベルデザインのためスコアを渡す
@@ -188,7 +173,6 @@ public class MapCreator : MonoBehaviour {
 		next_block_position = player_keeper.transform.position;
 		// ブロックのX位置
 		next_block_position.x += BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN / 2.0f);
-		//next_block_position.x = Random.Range(next_block_position.x, next_block_position.x + INTERVAL/2);
 		// ブロックのY位置
 		next_block_position.y = Random.Range (-(float)SCREEN_HEIGHT/2.0f, (float)SCREEN_HEIGHT/2.0f);
 		// ブロック作成指示  ステージレベルごとに

@@ -48,19 +48,10 @@ public class BlockCtrl : MonoBehaviour {
 	private GameObject explosion;	// 爆発エフェクトのプレハブ
 	[SerializeField]
 	private AudioClip clip;	// 爆発サウンド
-
-//	private struct Block{
-//		public bool is_link_block;
-//		public bool is_last_link_block;
-//	};
-//
-//	Block link_block;
 	private float elapsed_time;	// ブロックが生成されてからの時間
 
 	// Use this for initialization
 	void Start () {
-//		link_block.is_link_block = false;
-//		link_block.is_last_link_block = false;
 		elapsed_time = 0.0f;
 	}
 	
@@ -86,19 +77,15 @@ public class BlockCtrl : MonoBehaviour {
 					}
 				}
 			}
-	
 		}
 	}
 
 	// 衝突した時
 	void OnCollisionEnter2D(Collision2D collision){
-//	void OnCollisionEnter(Collision collision){
 
 		// block_type 0:赤 1:青
 		if (block_type == 0 && collision.gameObject.tag == "PlayerA") {
 			// Destroyだとエネミー作成していない場合、作成してくれない
-//			this.gameObject.GetComponent<Collider> ().enabled = false;
-//			this.gameObject.GetComponent<Renderer> ().enabled = false;
 			this.gameObject.GetComponent<Collider2D> ().enabled = false;
 			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 			// 爆発エフェクトのプレハブを呼び出す
@@ -115,8 +102,6 @@ public class BlockCtrl : MonoBehaviour {
 			}
 
 		} else if (block_type == 1 && collision.gameObject.tag == "PlayerB") {
-//			this.gameObject.GetComponent<Collider> ().enabled = false;
-//			this.gameObject.GetComponent<Renderer> ().enabled = false;
 			this.gameObject.GetComponent<Collider2D> ().enabled = false;
 			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
 			// 爆発エフェクトのプレハブを呼び出す
@@ -138,20 +123,4 @@ public class BlockCtrl : MonoBehaviour {
 				GameObject.FindWithTag ("PlayerA").SendMessage ("Vanish");
 		}
 	}
-
-	// リンクモード時にタップされたとき呼ばれる
-//	public void LinkBlock(){
-//		// 1度目のタップ
-//		if (!link_block.is_link_block) {
-//			link_block.is_link_block = true;
-//		} else {
-//			// 2度目のタップ
-//			if (!link_block.is_last_link_block) {
-//				ui_ctrl.LinkEnd ();
-//				link_block.is_last_link_block = true;
-//			}
-//		}
-//	}
-
-
 }

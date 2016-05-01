@@ -53,16 +53,8 @@ public class Title0Ctrl : MonoBehaviour {
 	}
 
 	IEnumerator FadeOut(){
-//		iTween.MoveTo(player_a, iTween.Hash("position", Vector3.down,
-//			"islocal", true,
-//			"time", 1,
-//			"easetype", playerEaseType
-//		));
 		player_a.AddForce(new Vector2(1, -10) * 10, ForceMode2D.Impulse);
 		player_b.AddForce(new Vector2(-1, -10) * 10, ForceMode2D.Impulse);
-
-
-
 		FadeManager.Instance.LoadLevel ("scTitle", 1.0f);
 		yield return null;
 	}

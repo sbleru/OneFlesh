@@ -35,7 +35,6 @@ public class TitleCtrl : MonoBehaviour {
 		GameMgr.game_mode = "Scroll";
 		GameMgr.scroll_stage_num = 2;
 		FadeManager.Instance.LoadLevel ("scScroll", 0.8f);
-//		FadeManager.Instance.LoadLevel ("scScrollStageSelect", 0.8f);
 	}
 
 

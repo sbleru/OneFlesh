@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 139192}
-  easeType: 21
+  easeType: 0
 --- !u!114 &11408520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 142294}
-  easeType: 21
+  easeType: 0
 --- !u!114 &11422304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 163064}
-  easeType: 21
+  easeType: 0
 --- !u!114 &11438556
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 189424}
-  easeType: 21
+  easeType: 0
 --- !u!114 &11444940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -385,7 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 187654}
-  easeType: 21
+  easeType: 0
 --- !u!114 &11477806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 134184}
-  easeType: 21
+  easeType: 0
 --- !u!114 &11478128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   follow_obj: {fileID: 181914}
-  easeType: 21
+  easeType: 0
 --- !u!212 &21209938
 SpriteRenderer:
   m_ObjectHideFlags: 1

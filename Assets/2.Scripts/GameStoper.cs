@@ -60,11 +60,7 @@ public class GameStoper : MonoBehaviour {
 		Time.timeScale = 0.3f;	// スローモーションにする
 		yield return new WaitForSeconds (0.5f);
 		Time.timeScale = 1.0f;
-
-		//GameMgr.left_block = 0;	// 残りブロック数を初期化
-//		Application.LoadLevel (scene);
 		SceneManager.LoadScene(scene);
-//		FadeManager.Instance.LoadLevel (scene, 0.1f);
 	}
 		
 }

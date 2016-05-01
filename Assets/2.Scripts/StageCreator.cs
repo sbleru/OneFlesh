@@ -62,36 +62,6 @@ public class StageCreator : MonoBehaviour {
 		create_stage ();
 	}
 
-
-//	void Update(){
-//
-//		if(isModeChange){
-//			time_mode_change -= Time.deltaTime;
-//			if(time_mode_change < 0.0f){
-//				float i = tempObj.transform.position.x;
-//				float j = tempObj.transform.position.y;
-//				Destroy (tempObj);
-//				tempObj = Instantiate(player2d[0],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f))) as GameObject;
-//
-//				tempObj.GetComponent<Player2DCtrl> ().enabled = true;
-//
-//				isModeChange = false;
-//			}
-//		}
-//
-//	}
-
-
-//	public void ModeChange(){
-//
-//		float i = tempObj.transform.position.x;
-//		float j = tempObj.transform.position.y;
-//		Destroy (tempObj);
-//		tempObj = Instantiate(player2d[1],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f))) as GameObject;
-//		isModeChange = true;
-//	}
-
-
 	// ステージ作成
 	private void get_stage_data(){
 
@@ -137,25 +107,20 @@ public class StageCreator : MonoBehaviour {
 					switch(stage_data[i,j]){
 		
 					case 1:	// 中身が1なら赤作成
-//						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 0);
 						block_creator.createBlock(new Vector2((float)i, (float)j), 0);
 						GameMgr.left_block++;	// 残りブロックとして登録
 						break;
 					case 2:	// 中身が2なら青作成
-//						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 1);
 						block_creator.createBlock(new Vector2((float)i, (float)j), 1);
 						GameMgr.left_block++;	// 残りブロックとして登録
 						break;
 					case 3:	// 破壊不可ブロック
-//						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 2);
 						block_creator.createBlock(new Vector2((float)i, (float)j), 2);
 						break;
 					case 4:	// ニードル
-//						block_creator.createBlock(new Vector3((float)i, (float)j, 0.0f), 3);
 						block_creator.createBlock(new Vector2((float)i, (float)j), 3);
 						break;
 					case 9: // プレイヤー
-//						Instantiate(player,new Vector3((float)i, (float)j, 0.0f), Quaternion.Euler(new Vector3(0f,90f,0f)));
 						tempObj = Instantiate(player2d[0],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f))) as GameObject;
 						break;
 					default:

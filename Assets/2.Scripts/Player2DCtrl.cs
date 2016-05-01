@@ -170,13 +170,6 @@ public class Player2DCtrl : MonoBehaviour {
 				velocity_a.x = ui_ctrl.movingXpos * Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
 				velocity_a.y = ui_ctrl.movingYpos * Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
 			}
-			// プレイヤーB
-			//			int X_b = ui_ctrl.movingXpos_b;
-			//			int Y_b = ui_ctrl.movingYpos_b;
-			//			if(X_b != 0 || Y_b != 0){
-			//				velocity_b.x = X_b * Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-			//				velocity_b.y = Y_b * Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-			//			}
 
 
 			if(!Application.isMobilePlatform){
