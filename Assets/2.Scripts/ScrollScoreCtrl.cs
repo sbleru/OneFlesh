@@ -7,20 +7,25 @@ using System.Collections.Generic;
 
 public class ScrollScoreCtrl : MonoBehaviour {
 
-	// スコア表示
-	public Text scoreText;
-	// ハイスコアを表示するGUIText
-	public Text highcoreText;
+	#region private property
 
-	private int high_score;	// ハイスコア
+	[SerializeField]
+	private Text scoreText;
+	[SerializeField]
+	private Text highcoreText;
+	private int high_score;
 
 	[SerializeField]
 	UnityAdsController unity_ads_controller;
 
-
 	// PlayerPrefsで保存するためのキー
-	private string highScoreKey = "scrollhighScore" + GameMgr.scroll_stage_num;
+	private string highScoreKey = "scrollhighScore";
 	private string thistimeScoreKey = "thistimeScore";
+
+	#endregion
+
+
+	#region event
 
 	// Use this for initialization
 	void Start () {
@@ -46,6 +51,11 @@ public class ScrollScoreCtrl : MonoBehaviour {
 		unity_ads_controller.WaitAndShowUnityAds (1.0f);
 	}
 
+	#endregion
+
+
+	#region private method
+
 	// 初期化
 	private void Initialize(){ 
 
@@ -54,7 +64,7 @@ public class ScrollScoreCtrl : MonoBehaviour {
 	}
 
 	// ハイスコアの保存
-	public void Save ()
+	private void Save ()
 	{
 		// ハイスコアを保存する
 		//PlayerPrefs.SetInt (highScoreKey, 0);
@@ -65,4 +75,6 @@ public class ScrollScoreCtrl : MonoBehaviour {
 		// ゲーム開始前の状態に戻す
 		Initialize ();
 	}
+
+	#endregion
 }

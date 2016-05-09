@@ -31,13 +31,21 @@ public class FadeManager : MonoBehaviour
 
 	#endregion Singleton
 
+
+	#region private propety
+
 	// フェード中の透明度
 	private float fadeAlpha = 0;
 	// フェード中かどうか
 	private bool isFading = false;
 	// フェード色
-	public Color fadeColor = Color.black;
+	[SerializeField]
+	private Color fadeColor = Color.black;
 
+	#endregion
+
+
+	#region public method
 
 	public void Awake ()
 	{
@@ -72,6 +80,11 @@ public class FadeManager : MonoBehaviour
 		StartCoroutine (TransScene (scene, interval));
 	}
 
+	#endregion
+
+
+	#region private method
+
 	/// <summary>
 	/// シーン遷移用コルーチン .
 	/// </summary>
@@ -101,5 +114,7 @@ public class FadeManager : MonoBehaviour
 		
 		this.isFading = false;
 	}
+
+	#endregion
 }
 

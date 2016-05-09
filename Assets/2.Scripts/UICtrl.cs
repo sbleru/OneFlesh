@@ -5,9 +5,40 @@ using System.Collections;
 // 画面操作によるプレイヤーの動きの処理
 public class UICtrl : MonoBehaviour {
 
-	private float currentXpos, currentYpos, startXpos, startYpos;
+	#region public property
+
+	private ModeChanger _mode_changer;
+	public ModeChanger mode_changer
+	{
+		get { 
+			_mode_changer = _mode_changer ?? (this.gameObject.GetComponent<ModeChanger>());
+			return this._mode_changer; 
+		}
+	}
+
 	// プレイヤーに渡す移動方向を決める要素
-	public float movingXpos, movingYpos;
+	[SerializeField]
+	private float _movingXpos;
+	public float movingXpos
+	{
+		get { return this._movingXpos; }
+		private set { this._movingXpos = value; }
+	}
+
+	[SerializeField]
+	private float _movingYpos;
+	public float movingYpos
+	{
+		get { return this._movingYpos; }
+		private set { this._movingYpos = value; }
+	}
+
+	#endregion
+
+
+	#region private property
+
+	private float currentXpos, currentYpos, startXpos, startYpos;
 	private bool touchStart;
 	[SerializeField]
 	private Text score;	//ゲームスコア
@@ -16,6 +47,10 @@ public class UICtrl : MonoBehaviour {
 	[SerializeField]
 	private GameObject controll_area, controll_stick;
 
+	#endregion
+
+
+	#region event
 	// Use this for initialization
 	void Start () {
 		currentXpos = 0.0f;
@@ -38,7 +73,7 @@ public class UICtrl : MonoBehaviour {
 		if (!Application.isMobilePlatform) {
 			// Aを入力
 			if(Input.GetKeyDown(KeyCode.A)){
-				SendMessage ("ModeChange");
+				mode_changer.ModeChange ();
 			}
 		}
 		else{
@@ -46,12 +81,16 @@ public class UICtrl : MonoBehaviour {
 			if (Input.touchCount > 1)
 			{
 				if(Input.GetTouch(1).phase == TouchPhase.Ended){
-					SendMessage ("ModeChange");
+					mode_changer.ModeChange ();
 				}
 			}
 		}
 	}
+
+	#endregion
 		
+
+	#region public method
 
 	// 仮想操作パッド
 	public void player_direction(){
@@ -66,19 +105,18 @@ public class UICtrl : MonoBehaviour {
 					// タッチした瞬間の座標を保存
 					startXpos = currentXpos;
 					startYpos = currentYpos;
-
-					/* タッチした場所にコントローラを表示
+					// タッチした場所にコントローラを表示
 					controll_area.SetActive (true);
 					controll_stick.SetActive (true);
 					controll_area.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
 					controll_stick.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
-					*/
+
 					touchStart = true;
 				}
-				/* エリアは固定 小円は指に追従
+				// エリアは固定 小円は指に追従
 				Vector3 l = (controll_area.transform.position - Input.mousePosition) * 0.4f;
 				controll_stick.transform.position = new Vector3 (startXpos-l.x, startYpos-l.y, 0.0f);
-				*/
+
 			}
 			else {
 				// 画面に指が触れていない場合
@@ -108,19 +146,19 @@ public class UICtrl : MonoBehaviour {
 					startXpos = currentXpos;
 					startYpos = currentYpos;
 
-					/* タッチした場所にコントローラを表示
+					//タッチした場所にコントローラを表示
 					controll_area.SetActive (true);
 					controll_stick.SetActive (true);
 					controll_area.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
 					controll_stick.transform.position = new Vector3 (startXpos, startYpos, 0.0f);
-					*/
+
 					touchStart = true;
 				}
 
-				/* エリアは固定 小円は指に追従
+				// エリアは固定 小円は指に追従
 				Vector3 l = (controll_area.transform.position - Input.mousePosition) * 0.4f;
 				controll_stick.transform.position = new Vector3 (startXpos-l.x, startYpos-l.y, 0.0f);
-				*/
+
 			}
 		}
 
@@ -172,13 +210,15 @@ public class UICtrl : MonoBehaviour {
 		}
 	}
 		
-	void StartGame(){
+	public void StartGame(){
 		enabled = true;
 	}
 
-	void GameClear(){
+	public void GameClear(){
 		controll_area.SetActive (false);
 		controll_stick.SetActive (false);
 		enabled = false;
 	}
+
+	#endregion
 }

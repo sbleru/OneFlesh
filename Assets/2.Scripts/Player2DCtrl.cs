@@ -3,11 +3,19 @@ using System.Collections;
 
 
 public class Player2DCtrl : MonoBehaviour {
-	public static float ACCELERATION = 8.0f;
-	public static float SPEED = 8.0f;
+
+	#region const
+
+	private const float ACCELERATION = 8.0f;
+	private const float SPEED = 8.0f;
+
+	#endregion
+
+
+	#region private propety
 
 	private Rigidbody2D _rigidbody_a;
-	public Rigidbody2D rigidbody_a
+	private Rigidbody2D rigidbody_a
 	{
 		get { 
 			_rigidbody_a = _rigidbody_a ?? (GameObject.FindGameObjectWithTag("PlayerA").GetComponent<Rigidbody2D>());
@@ -16,7 +24,7 @@ public class Player2DCtrl : MonoBehaviour {
 	}
 
 	private Rigidbody2D _rigidbody_b;
-	public Rigidbody2D rigidbody_b
+	private Rigidbody2D rigidbody_b
 	{
 		get { 
 			_rigidbody_b = _rigidbody_b ?? (GameObject.FindGameObjectWithTag("PlayerB").GetComponent<Rigidbody2D>());
@@ -25,7 +33,7 @@ public class Player2DCtrl : MonoBehaviour {
 	}
 
 	private Rigidbody _rigidbody_keeper;
-	public Rigidbody rigidbody_keeper
+	private Rigidbody rigidbody_keeper
 	{
 		get { 
 			_rigidbody_keeper = _rigidbody_keeper ?? (GameObject.FindGameObjectWithTag("Keeper").GetComponent<Rigidbody>());
@@ -34,7 +42,7 @@ public class Player2DCtrl : MonoBehaviour {
 	}
 
 	private MapCreator _map_creator;
-	public MapCreator map_creator
+	private MapCreator map_creator
 	{
 		get { 
 			_map_creator = _map_creator ?? (GameObject.FindGameObjectWithTag ("Root").GetComponent<MapCreator> ());
@@ -43,7 +51,7 @@ public class Player2DCtrl : MonoBehaviour {
 	}
 
 	private UICtrl _ui_ctrl;
-	public UICtrl ui_ctrl
+	private UICtrl ui_ctrl
 	{
 		get { 
 			_ui_ctrl = _ui_ctrl ?? (GameObject.FindGameObjectWithTag ("Root").GetComponent<UICtrl> ());
@@ -51,17 +59,8 @@ public class Player2DCtrl : MonoBehaviour {
 		}
 	}
 
-	private SoundMgr _sound_mgr;
-	public SoundMgr sound_mgr
-	{
-		get { 
-			_sound_mgr = _sound_mgr ?? (GameObject.FindGameObjectWithTag ("Root").GetComponent<SoundMgr> ());
-			return this._sound_mgr; 
-		}
-	}
-
 	private StageCreator _stage_creator;
-	public StageCreator stage_creator
+	private StageCreator stage_creator
 	{
 		get { 
 			_stage_creator = _stage_creator ?? (GameObject.FindGameObjectWithTag ("Root").GetComponent<StageCreator> ());
@@ -69,19 +68,18 @@ public class Player2DCtrl : MonoBehaviour {
 		}
 	}
 
-	public float current_speed = 0.0f;	// 現在のスピード
+	private float current_speed = 0.0f;	 // 現在のスピード
+	[SerializeField]
+	private GameObject vanishEffect;     // プレイヤーの消滅エフェクト
+	private bool isVanish;				 // プレイヤーが消滅したか
 
-	public GameObject vanishEffect; // プレイヤーの消滅エフェクト
-
-	public AudioClip clip;	// 消滅サウンド
-	public bool isVanish;	// 消滅したか
-	public bool isModeChange;	// モードチェンジ状態か
+	#endregion
 
 
+	#region
 	// Use this for initialization
 	void Start () {
 		isVanish = false;
-		isModeChange = false;
 	}
 
 	// Update is called once per frame
@@ -92,7 +90,6 @@ public class Player2DCtrl : MonoBehaviour {
 			Vector2 velocity_a = this.rigidbody_a.velocity;  
 
 			// UIボタンからプレイヤーの移動先を決定する
-			// プレイヤーA
 			ui_ctrl.player_direction();
 
 			if(Mathf.Abs(ui_ctrl.movingXpos) > 0.0f || Mathf.Abs(ui_ctrl.movingYpos) > 0.0f){
@@ -120,19 +117,9 @@ public class Player2DCtrl : MonoBehaviour {
 			// 速度を適用
 			this.rigidbody_a.velocity = velocity_a;
 
-			// しきい値からでたらゲームオーバー
-//			if(stage_creator.isOut(this.gameObject)){
-//				if(!isVanish){
-//					// 消滅エフェクトのプレハブを呼び出す
-//					Instantiate (vanishEffect, this.gameObject.transform.position, Quaternion.identity);
-//					sound_mgr.PlayClip (clip);
-//					StartCoroutine ("NextScene");
-//				}
-//				isVanish = true;
-//			}
-			if(stage_creator.isOut(this.gameObject)){
+			if(stage_creator.isOutOfScreen(this.gameObject)){
 				if(!isVanish){
-					StartCoroutine (Vanish());
+					KillPlayer ();
 				}
 				isVanish = true;
 			}
@@ -143,14 +130,12 @@ public class Player2DCtrl : MonoBehaviour {
 		if(GameMgr.game_mode == "Scroll"){
 			// 速度を設定
 			Vector2 velocity_a = this.rigidbody_a.velocity;  
-			Vector2 velocity_b = this.rigidbody_b.velocity;
 			Vector3 velocity_keeper = this.rigidbody_keeper.velocity;
 			// レベルに応じた最高速度
 			this.current_speed = this.map_creator.level_ctrl.getPlayerSpeed ();
 
 			// プレイヤーを加速
 			velocity_a.x += Player2DCtrl.ACCELERATION * Time.deltaTime;
-			velocity_b.x += Player2DCtrl.ACCELERATION * Time.deltaTime;
 			velocity_keeper.x += Player2DCtrl.ACCELERATION * Time.deltaTime;
 
 			// 速度が最高速度の制限を超えたら
@@ -158,11 +143,9 @@ public class Player2DCtrl : MonoBehaviour {
 				// 最高速度の制限以下に保つ
 				velocity_keeper.x *= this.current_speed / Mathf.Abs (velocity_keeper.x);
 				velocity_a.x *= this.current_speed / Mathf.Abs (velocity_a.x);
-				velocity_b.x *= this.current_speed / Mathf.Abs (velocity_b.x);
 			}
 
 			// UIボタンからプレイヤーの移動先を決定する
-			// プレイヤーA
 			ui_ctrl.player_direction();
 
 			if(Mathf.Abs(ui_ctrl.movingXpos) > 0.0f || Mathf.Abs(ui_ctrl.movingYpos) > 0.0f){
@@ -187,59 +170,47 @@ public class Player2DCtrl : MonoBehaviour {
 				if(Input.GetKey(KeyCode.L)){
 					velocity_a.x = Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
 				}
-
-				// プレイヤーBの操作
-				// 順に左、上、右、下
-				if(Input.GetKey(KeyCode.A)){
-					velocity_b.x = -Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if(Input.GetKey(KeyCode.S)){
-					velocity_b.y = Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if(Input.GetKey(KeyCode.D)){
-					velocity_b.y = -Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if(Input.GetKey(KeyCode.F)){
-					velocity_b.x = Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
 			}
 
 
 			// 速度を適用
 			this.rigidbody_a.velocity = velocity_a;
-			this.rigidbody_b.velocity = velocity_b;
 			this.rigidbody_keeper.velocity = velocity_keeper;
 
 			// しきい値からでたらゲームオーバー
-			if(map_creator.isOut(this.gameObject)){
+			if(map_creator.isOutOfScreen(this.gameObject)){
 				if(!isVanish){
-					StartCoroutine (Vanish());
+					KillPlayer ();
 				}
 				isVanish = true;
 			}
 		}
 	}
-		
 
-	// ゲームオーバー
-	IEnumerator Vanish(){
+	#endregion
+
+
+	#region public method
+
+	// プレイヤーを消滅させる
+	public void KillPlayer(){
 		// 消滅エフェクトのプレハブを呼び出す
 		Instantiate (vanishEffect, this.gameObject.transform.position, Quaternion.identity);
-		sound_mgr.PlayClip (clip);
+		SoundManager.Instance.PlaySoundEffect (SoundManager.Instance.sound_vanish);
 		this.gameObject.GetComponent<Renderer> ().enabled = false;
 		GameObject.FindWithTag("PlayerB").GetComponent<Renderer> ().enabled = false;
 
 		// ゲームオーバーをタイムマネージャーに伝える
 		GameObject.FindWithTag ("TimeMgr").SendMessage ("SendGameOver");
-		yield return null;
 	}
 
-	void StartGame(){
-//		Debug.Log ("hoge2");
+	public void StartGame(){
 		enabled = true;
 	}
 
-	void GameClear(){
+	public void GameClear(){
 		enabled = false;
 	}
+
+	#endregion
 }

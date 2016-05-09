@@ -4,38 +4,45 @@ using System.Collections;
 
 public class ModeChanger : MonoBehaviour {
 
+	#region public property
+
+	#endregion
+
+
+	#region private property
+
 	[SerializeField]
-	private GameObject[] player2d;
-	private GameObject tempObj;
+	private GameObject[] player;
+	private GameObject player_before_change, changed_player;
 
 	// プレイヤーのモードを表す列挙体
-	public enum MODE{
+	/* モードの種類を増やす可能性があるので列挙体にしておく */
+	private enum MODE{
 		SNAKE = 0,
 		CHASER = 1,
 	};
-	private MODE _mode = MODE.SNAKE;
+	private MODE player_mode = MODE.SNAKE;
 
+	#endregion
+
+
+	#region public method
 
 	public void ModeChange(){
-		tempObj = GameObject.FindWithTag ("PlayerA");
 
-		float i = tempObj.transform.position.x;
-		float j = tempObj.transform.position.y;
-		Destroy (tempObj);
+		player_before_change = GameObject.FindWithTag ("PlayerA");
+		float i = player_before_change.transform.position.x;
+		float j = player_before_change.transform.position.y;
+		Destroy (player_before_change);
 
-		switch(_mode){
+		/* モードの種類を増やした場合、処理を追加する */
+		switch(player_mode){
 		case MODE.SNAKE:
-			tempObj = Instantiate (player2d [1], new Vector2 ((float)i, (float)j), Quaternion.Euler (new Vector2 (0f, 0f))) 
-				as GameObject;
-			tempObj.GetComponent<Player2DCtrl> ().enabled = true;
-			_mode = MODE.CHASER;
+			player_mode = MODE.CHASER;
 			break;
 
 		case MODE.CHASER:
-			tempObj = Instantiate (player2d [0], new Vector2 ((float)i, (float)j), Quaternion.Euler (new Vector2 (0f, 0f))) 
-				as GameObject;
-			tempObj.GetComponent<Player2DCtrl> ().enabled = true;
-			_mode = MODE.SNAKE;
+			player_mode = MODE.SNAKE;
 			break;
 
 		default:
@@ -43,5 +50,11 @@ public class ModeChanger : MonoBehaviour {
 			
 		}
 
+		changed_player = Instantiate (player [(int)player_mode], new Vector2 ((float)i, (float)j), Quaternion.Euler (new Vector2 (0f, 0f))) 
+			as GameObject;
+		changed_player.GetComponent<Player2DCtrl> ().enabled = true;
+
 	}
+
+	#endregion
 }

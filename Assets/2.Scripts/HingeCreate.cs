@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class HingeCreate : MonoBehaviour {
 
+	#region private property
+
 	[SerializeField]
 	private GameObject follow_obj;	// ついていくオブジェクト
 
 	private Transform _follow_transform;
-	public Transform follow_transform
+	private Transform follow_transform
 	{
 		get { 
 			_follow_transform = _follow_transform ?? (follow_obj.GetComponent<Transform>());
@@ -17,7 +19,7 @@ public class HingeCreate : MonoBehaviour {
 		}
 	}
 	private Transform _this_transform;
-	public Transform this_transform
+	private Transform this_transform
 	{
 		get {
 			_this_transform = _this_transform ?? (this.GetComponent<Transform>());
@@ -25,8 +27,22 @@ public class HingeCreate : MonoBehaviour {
 		}
 	}
 
+	// 移動アニメーションの関数
+	private delegate float EasingFunction(float start, float end, float value);
+	private EasingFunction ease;
+	[SerializeField]
+	private EaseType easeType;
+	private float percentage;
+	private float delayed_time;
+	private Vector3[] vector3s = new Vector3[3];	//[0]:移動対象 [1]:目標 [2]:[0]と[1]のpercentageに応じた移動量
+
+	#endregion
+
+
+	#region enum
+
 	// アニメーションタイプ
-	public enum EaseType{
+	private enum EaseType{
 		easeInQuad,
 		easeOutQuad,
 		easeInOutQuad,
@@ -68,13 +84,10 @@ public class HingeCreate : MonoBehaviour {
 		punch
 	}
 
-	// 移動アニメーションの関数
-	private delegate float EasingFunction(float start, float end, float value);
-	private EasingFunction ease;
-	public EaseType easeType;
-	private float percentage;
-	private float delayed_time;
-	private Vector3[] vector3s = new Vector3[3];	//[0]:移動対象 [1]:目標 [2]:[0]と[1]のpercentageに応じた移動量
+	#endregion
+
+
+	#region event
 
 	// Use this for initialization
 	void Start () {
@@ -104,6 +117,11 @@ public class HingeCreate : MonoBehaviour {
 		}
 
 	}
+
+	#endregion
+
+
+	#region private method
 
 	void GetEasingFunction(){
 		switch (easeType){
@@ -216,6 +234,9 @@ public class HingeCreate : MonoBehaviour {
 			/* GFX47 MOD END */
 		}
 	}
+
+	#endregion
+
 
 	#region Easing Curves
 

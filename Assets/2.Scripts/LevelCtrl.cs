@@ -2,15 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class LevelData{
-	public struct Range{	// 範囲を表す構造体
-		public int min;
-		public int max;
-	};
+class LevelData{
+//	private struct Range{	// 範囲を表す構造体
+//		public int min;
+//		public int max;
+//	};
+//	public int score { get; set; } = 0;
+//	public int player_speed { get; set; } = 5.0f;
+//	public float interval { get; set; } = 18;
 
-	public int score;	// スコア
-	public float player_speed;	// プレイヤーの速度
-	public float interval;	// ブロック出現間隔
+	public int score { get; set; } // スコア
+	public float player_speed { get; set; }	// プレイヤーの速度
+	public float interval { get; set; }	// ブロック出現間隔
 
 	// コンストラクタ
 	public LevelData(){
@@ -21,10 +24,18 @@ public class LevelData{
 }
 
 public class LevelCtrl : MonoBehaviour {
+
+	#region private property
+
 	// リスト：要素数を気にしないでいい
 	private List<LevelData> level_datas = new List<LevelData> ();
 
-	public int level = 0;  // 難易度
+	private int level = 0;  // 難易度
+
+	#endregion
+
+
+	#region public method
 
 	// 他スクリプトでLevelCtrlクラスを扱う時に使う初期化関数
 	public void initialize(){
@@ -118,4 +129,6 @@ public class LevelCtrl : MonoBehaviour {
 	public float getPlayerSpeed(){
 		return this.level_datas [this.level].player_speed;
 	}
+
+	#endregion
 }

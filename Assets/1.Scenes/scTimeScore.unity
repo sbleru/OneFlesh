@@ -688,7 +688,7 @@ MonoBehaviour:
   - {fileID: 80382691}
   - {fileID: 891341386}
   - {fileID: 1105022878}
-  rank_stamp:
+  rank_stamp_hscore:
   - {fileID: 1981083029}
   - {fileID: 1598878447}
   - {fileID: 1227205339}
@@ -697,9 +697,6 @@ MonoBehaviour:
   retire_txt: {fileID: 361064935}
   stampEaseType: 22
   retireEaseType: 24
-  sound_mgr: {fileID: 540926922}
-  stamp_clip: {fileID: 8300000, guid: 442ff32530c494d54b2569d69fa5588d, type: 3}
-  retire_clip: {fileID: 8300000, guid: 2cb9ad0e077544a2eb6db04d6c48c6f1, type: 3}
   unity_ads_controller: {fileID: 549086845}
 --- !u!4 &540926921
 Transform:

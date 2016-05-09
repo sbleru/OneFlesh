@@ -6,43 +6,55 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
 
 public class TimeScoreCtrl : MonoBehaviour {
-	public static int STAGE_NUM = 18;	// 全ステージ数
-	public static int RANK_NUM = 3;		// ランクの段階数（Cランク除く）
 
-	public Text scoreText;	// スコア表示
-	public Text highscoreText;	// ハイスコアを表示するGUIText
+	#region const
+
+	private const int STAGE_NUM = 18;	// 全ステージ数
+	private const int RANK_NUM = 3;		// ランクの段階数（Cランク除く）
+
+	#endregion
+
+
+	#region private property
+
+	[SerializeField]
+	private Text scoreText;		// スコア表示
+	[SerializeField]
+	private Text highscoreText;	// ハイスコアを表示するGUIText
 	private float high_score;	// ハイスコア
 
 	// PlayerPrefsで保存するためのキー　ステージごとに別に保存
-	private string highScoreKey = "highScore" + GameMgr.stage_num;
+	private string highScoreKey     = "highScore" + GameMgr.stage_num;
 	private string thistimeScoreKey = "thistimeScore";
 
-	#region value related rank
 	private TextAsset rank_asset;  // ステージテキストを取り込む
 	string rank_txt;
-	public float[,] rank_data = new float[STAGE_NUM, RANK_NUM];
-	private string rankKey = "rank" + GameMgr.stage_num;
+	private float[,] rank_data = new float[STAGE_NUM, RANK_NUM];
+	private string rankKey    = "rank" + GameMgr.stage_num;
 
-	public GameObject[] rank_stamp_thistime;
-	public GameObject[] rank_stamp;
-	public Text to_next_rank;
-	public GameObject retire_txt;	// リタイアテキスト
+	[SerializeField]
+	private GameObject[] rank_stamp_thistime;
+
+	[SerializeField]
+	private GameObject[] rank_stamp_hscore;
+
+	[SerializeField]
+	private Text to_next_rank;
+
+	[SerializeField]
+	private GameObject retire_txt;	// リタイアテキスト
 	private bool isRegister;
-	#endregion
 
-	public iTween.EaseType stampEaseType;
-	public iTween.EaseType retireEaseType;
-
-	// サウンド
-	public SoundMgr sound_mgr;
-	public AudioClip stamp_clip, retire_clip;
+	[SerializeField]
+	private iTween.EaseType stampEaseType, retireEaseType;
 
 	[SerializeField]
 	UnityAdsController unity_ads_controller;
 
-	void Awake(){
-		
-	}
+	#endregion
+
+
+	#region event
 
 	// Use this for initialization
 	void Start () {
@@ -88,7 +100,6 @@ public class TimeScoreCtrl : MonoBehaviour {
 			scoreText.text = "";
 			retire_txt.SetActive (true);
 			StartCoroutine (RetireAnim (retire_txt));
-//			RetireAnim (retire_txt);
 
 			// ランクが登録されていない状態でリタイアした場合はハイスコアを表示しない
 			if(isRegister){
@@ -112,13 +123,22 @@ public class TimeScoreCtrl : MonoBehaviour {
 			
 		// Unity Ads表示
 		unity_ads_controller.WaitAndShowUnityAds (1.0f);
-		//Save ();
 	}
+
+	#endregion
+
+
+	#region public method
+
+	#endregion
+
+
+	#region private method
 
 	// 初期化
 	private void Initialize(){ 
 		
-		// ハイスコアを取得する。保存されてなければ60を取得する。
+		// ハイスコアを取得する。保存されてなければ100を取得する。
 		high_score = PlayerPrefs.GetFloat (highScoreKey, 100f);
 		isRegister = true;
 		if(high_score > 99f){
@@ -127,7 +147,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 	}
 
 	// ハイスコアの保存
-	public void Save ()
+	private void Save ()
 	{
 		// ハイスコアを保存する
 		PlayerPrefs.SetFloat (highScoreKey, high_score);
@@ -234,14 +254,14 @@ public class TimeScoreCtrl : MonoBehaviour {
 				} else {
 					to_next_rank.text = "Next : " + rank_data [GameMgr.stage_num - 1, i+1];
 				}
-				rank_stamp [i+1].SetActive (true);
+				rank_stamp_hscore [i+1].SetActive (true);
 				isSet = true;
 				break;
 			}
 		}
 		if(!isSet){
 			to_next_rank.text = "Next : " + rank_data [GameMgr.stage_num - 1, 0];
-			rank_stamp[0].SetActive (true);
+			rank_stamp_hscore[0].SetActive (true);
 		}
 	}
 
@@ -252,7 +272,8 @@ public class TimeScoreCtrl : MonoBehaviour {
 			"time", 1,
 			"easetype", stampEaseType
 		));
-		sound_mgr.PlayClip (stamp_clip, 0.7f);
+
+		SoundManager.Instance.PlaySoundEffect (SoundManager.Instance.sound_stamp, 0.7f);
 	}
 
 	// リタイアアニメーション
@@ -272,7 +293,9 @@ public class TimeScoreCtrl : MonoBehaviour {
 			"time", 1,
 			"easetype", retireEaseType
 		));
-		sound_mgr.PlayClip (retire_clip, 0.1f);
+
+		SoundManager.Instance.PlaySoundEffect (SoundManager.Instance.sound_retire, 0.1f);
+
 		yield return new WaitForSeconds (2f);
 
 		float timer = 0.8f;
@@ -285,5 +308,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 				yield return null;
 		}
 	}
+
+	#endregion
 
 }

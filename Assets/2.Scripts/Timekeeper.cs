@@ -2,39 +2,52 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class Timekeeper : MonoBehaviour {
+public class TimeKeeper : MonoBehaviour {
 
-	public Text time;
-	public float elapsedTime; // ゲームの長さ
+	#region private propety
+
+	[SerializeField]
+	private Text time;
+	private float elapsed_secs; // クリアまでの経過時間
 	string text;
 
+	#endregion
+
+
+	#region event
+
 	void Start(){
-		elapsedTime = 0.0f;
+		elapsed_secs = 0.0f;
 	}
-
-
+		
 	// Update is called once per frame
 	void Update () {
-		elapsedTime += Time.deltaTime;
+		elapsed_secs += Time.deltaTime;
 		//表示用のカウント
 		//小数第2位まで
-		//タイマーの時間を切り上げして整数にする
-		elapsedTime = Mathf.CeilToInt (elapsedTime * 100);
-		elapsedTime /= 100;
-		text = elapsedTime.ToString ();
+		elapsed_secs = Mathf.CeilToInt (elapsed_secs * 100);
+		elapsed_secs /= 100;
+		text = elapsed_secs.ToString ();
 		time.color = new Color (1, 1, 1, 1);
 		// 残り時間を更新
 		time.text = text;
 
 	}
 
-	//
-	void StartGame(){
+	#endregion
+
+
+	#region public method
+
+	public void StartGame(){
 		enabled = true;
 	}
 
-	void GameClear(){
-		GameMgr.time_score = elapsedTime;
+	public void GameClear(){
 		enabled = false;
+		GameMgr.time_score = elapsed_secs;
 	}
+
+	#endregion
+
 }

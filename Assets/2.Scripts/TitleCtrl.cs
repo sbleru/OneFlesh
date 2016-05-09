@@ -4,12 +4,14 @@ using System.Collections;
 
 public class TitleCtrl : MonoBehaviour {
 
+	#region private property
+
 	[SerializeField]
 	private Text starter_txt;
 	private float timer;
 
 	private Rigidbody2D _player_a;
-	public Rigidbody2D player_a
+	private Rigidbody2D player_a
 	{
 		get { 
 			_player_a = _player_a ?? (GameObject.FindGameObjectWithTag("PlayerA").GetComponent<Rigidbody2D>());
@@ -18,13 +20,18 @@ public class TitleCtrl : MonoBehaviour {
 	}
 
 	private Rigidbody2D _player_b;
-	public Rigidbody2D player_b
+	private Rigidbody2D player_b
 	{
 		get { 
 			_player_b = _player_b ?? (GameObject.FindGameObjectWithTag("PlayerB").GetComponent<Rigidbody2D>());
 			return this._player_b; 
 		}
 	}
+
+	#endregion
+
+
+	#region event
 
 	// Use this for initialization
 	void Start () {
@@ -37,7 +44,6 @@ public class TitleCtrl : MonoBehaviour {
 		//タイマーの少数部分をアルファ値とすることで文字をフェードアウト
 		starter_txt.color = new Color (1, 1, 1, timer - Mathf.FloorToInt (timer));
 
-		// タップされたら
 		if(timer > 2.0f){
 
 			if(Input.touchCount>0){				
@@ -47,8 +53,12 @@ public class TitleCtrl : MonoBehaviour {
 				StartCoroutine (FadeOut ());
 			}
 		}
-
 	}
+
+	#endregion
+
+
+	#region private method
 
 	IEnumerator FadeOut(){
 		player_a.AddForce(new Vector2(1, -10) * 10, ForceMode2D.Impulse);
@@ -56,7 +66,10 @@ public class TitleCtrl : MonoBehaviour {
 		FadeManager.Instance.LoadLevel ("scTitle", 1.0f);
 		yield return null;
 	}
+
+	#endregion
 }
+	
 
 /* コーディング規約
  * 
@@ -68,7 +81,7 @@ public class TitleCtrl : MonoBehaviour {
  * 	クラスのメンバ変数：offset
  * 
  * オブジェクトなどを使用時に取得する
- * 取得していないものを参照してしまうことをなくす
+ * 順序問題で取得していないものを参照してしまうことをなくす
  * 	private notset notset;
  * 	public notset notset
  * 	{
@@ -77,5 +90,9 @@ public class TitleCtrl : MonoBehaviour {
  * 			return this.notset; 
  * 		}
  * 	}
+ * 
+ * publicな変数はプロパティを使用
+ * inspectorに表示させたいときは, バッキングフィールドに[SerializeField]をつける
+ * spropに割り当てられたフォーマットを使用
  * 
  */

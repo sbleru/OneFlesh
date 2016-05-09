@@ -4,19 +4,19 @@ using System.Collections;
 // タイトルのブロックの破壊の挙動
 public class TitleBlock : MonoBehaviour {
 
-	SoundMgr sound_mgr;	
+	#region private property
 
 	[SerializeField]
 	private GameObject explosion;	// 爆発エフェクトのプレハブ
 	[SerializeField]
-	private AudioClip clip;	// 爆発サウンド
+	private AudioClip clip;	        // 爆発サウンド
 	[SerializeField]
 	private GameObject scroll_button, attack_button;
 
-	// Use this for initialization
-	void Start () {
-		this.sound_mgr = GameObject.FindGameObjectWithTag ("Root").GetComponent<SoundMgr> ();
-	}
+	#endregion
+
+
+	#region private method
 	
 	void OnCollisionEnter2D(Collision2D collision){
 		this.gameObject.GetComponent<Collider2D> ().enabled = false;
@@ -29,6 +29,10 @@ public class TitleBlock : MonoBehaviour {
 		}
 
 		Instantiate (explosion, this.gameObject.transform.position, Quaternion.identity);
-		sound_mgr.PlayClip (clip);
+
+		SoundManager.Instance.PlaySoundEffect (SoundManager.Instance.sound_explosion);
 	}
+
+	#endregion
+
 }

@@ -6,10 +6,16 @@ using System.Collections;
 // 初期化、各種ステージスタンプ、シーン遷移
 public class StageSelect : MonoBehaviour {
 
-	private int stage_num;
+	#region private property
 
+	private int stage_num;
 	[SerializeField]
 	private GameObject[] rank_stamp;
+
+	#endregion
+
+
+	#region event
 
 	void Awake(){
 		GameMgr.left_block = 0;
@@ -45,6 +51,11 @@ public class StageSelect : MonoBehaviour {
 
 	}
 
+	#endregion
+
+
+	#region public method
+
 	//
 	public void ToTitle(){
 		FadeManager.Instance.LoadLevel ("scTitle", 0.1f);
@@ -56,8 +67,9 @@ public class StageSelect : MonoBehaviour {
 	}
 
 	public void ToScroll(){
-		GameMgr.scroll_stage_num = this.stage_num;
 		FadeManager.Instance.LoadLevel ("scScroll", 0.1f);
 	}
+
+	#endregion
 		
 }

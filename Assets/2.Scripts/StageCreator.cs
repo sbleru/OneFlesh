@@ -7,13 +7,22 @@ using System.IO;
 // TimeAttack:テキストデータからステージを作成する
 [RequireComponent (typeof(BlockCreator))]
 public class StageCreator : MonoBehaviour {
-	public static float BLOCK_WIDTH = 1.0f;
-	public static float BLOCK_HEIGHT = 0.2f;
-	public static int BLOCK_NUM_IN_SCREEN = 40;
-	public static int SCREEN_HEIGHT = 24;
+
+	#region const
+
+	private const float BLOCK_WIDTH = 1.0f;
+	private const int BLOCK_NUM_IN_SCREEN = 40, SCREEN_HEIGHT = 24;
+
+	// 生成するブロックの種類に番号を割り当てる
+	private const int RED = 0, BLUE = 1, METAL = 2, NEEDLE = 3;
+
+	#endregion
+
+
+	#region private property
 
 	private BlockCreator _block_creator;
-	public BlockCreator block_creator
+	private BlockCreator block_creator
 	{
 		get { 
 			_block_creator = _block_creator ?? (GameObject.FindGameObjectWithTag ("Root").GetComponent<BlockCreator> ());
@@ -21,52 +30,82 @@ public class StageCreator : MonoBehaviour {
 		}
 	}
 
-	private Timekeeper _time_keeper;
-	public Timekeeper time_keeper
-	{
-		get { 
-			_time_keeper = _time_keeper ?? (GameObject.FindGameObjectWithTag ("TimeMgr").GetComponent<Timekeeper> ());
-			return this._time_keeper; 
-		}
-	}
-
-	private TextAsset stage_asset;  // ステージテキストを取り込む
-	string stage_txt;
 	[SerializeField]
 	private int[,] stage_data = new int[BLOCK_NUM_IN_SCREEN, SCREEN_HEIGHT];
 	[SerializeField]
-	private GameObject player;
-	[SerializeField]
-	private GameObject[] player2d;
+	private GameObject[] player;
 
+	#endregion
+
+
+	#region event
 
 	// Use this for initialization
 	void Start () {
-		// ステージ番号に応じたステージテキストを取り込む
-		stage_asset = Resources.Load ("stage" + GameMgr.stage_num) as TextAsset;
-		stage_txt = stage_asset.text;
-		get_stage_data ();
-
-		// ステージを作成する
+		
+		capture_stage_data ();
 		create_stage ();
 	}
 
-	// ステージ作成
-	private void get_stage_data(){
+	#endregion
 
-		string[] lines = stage_txt.Split ('\n');
+
+	#region public method
+
+	// 渡されたオブジェクトがステージ外へ出ているか 左->右->上->下の順に調べる
+	/* ブロックは左にのみ外れるため左の閾値から調べてはやく返す */
+	public bool isOutOfScreen(GameObject _player){
+
+		// 左のしきい値の計算
+		float limit_left = 0;
+		// ブロックがしきい値をでていたら削除の指示
+		if(_player.transform.position.x < limit_left){
+			return true;
+		}
+		// 右のしきい値の計算
+		float limit_right = (float)BLOCK_NUM_IN_SCREEN;
+		if(_player.transform.position.x > limit_right){
+			return true;
+		}
+		// 上のしきい値の計算
+		float limit_up = (float)SCREEN_HEIGHT;
+		if(_player.transform.position.y > limit_up){
+			return true;
+		}
+		// 上のしきい値の計算
+		float limit_bottom = 0;
+		if(_player.transform.position.y < limit_bottom){
+			return true;
+		}
+
+		return false;
+	}
+
+	#endregion
+
+
+	#region private method
+
+	// ステージ作成
+	private void capture_stage_data(){
+
+		// ステージ番号に応じたステージテキストを取り込む
+		TextAsset _stage_asset = Resources.Load ("stage" + GameMgr.stage_num) as TextAsset;
+
+		string _stage_txt = _stage_asset.text;
+		string[] _lines = _stage_txt.Split ('\n');
 		int i=0, j=0;
 
-		//lines内の各行に対して、順番に処理していくループ
-		foreach(var line in lines){
-			if(line == ""){ //行がなければ
+		// lines内の各行に対して、順番に処理していくループ
+		foreach(var line in _lines){
+			if(line == ""){ // 行がなければ
 				continue;  
 			}
 				
-			string[] words = line.Split ();
+			string[] _words = line.Split ();
 
-			//words内の各ワードに対して、順番に処理していくループ
-			foreach(var word in words){
+			// words内の各ワードに対して、順番に処理していくループ
+			foreach(var word in _words){
 				if(word == ""){
 					continue;
 				}
@@ -77,7 +116,8 @@ public class StageCreator : MonoBehaviour {
 					break;
 				}
 			}
-			j = 0;
+
+			j=0;
 			i++;
 			if (i > BLOCK_NUM_IN_SCREEN-1){
 				break;
@@ -92,62 +132,35 @@ public class StageCreator : MonoBehaviour {
 		for(i=0; i<BLOCK_NUM_IN_SCREEN; i++){
 
 			for(j=0; j<SCREEN_HEIGHT; j++){
-				do {
-					switch(stage_data[i,j]){
+
+				// stage_data[i,j] = 1:赤, 2:青, 3:ブロック, 4:ニードル, 9:プレイヤー
+				// 赤と青ブロックは目標残りブロックとしてカウントする
+				switch(stage_data[i,j]){
 		
-					case 1:	// 中身が1なら赤作成
-						block_creator.createBlock(new Vector2((float)i, (float)j), 0);
-						GameMgr.left_block++;	// 残りブロックとして登録
-						break;
-					case 2:	// 中身が2なら青作成
-						block_creator.createBlock(new Vector2((float)i, (float)j), 1);
-						GameMgr.left_block++;	// 残りブロックとして登録
-						break;
-					case 3:	// 破壊不可ブロック
-						block_creator.createBlock(new Vector2((float)i, (float)j), 2);
-						break;
-					case 4:	// ニードル
-						block_creator.createBlock(new Vector2((float)i, (float)j), 3);
-						break;
-					case 9: // プレイヤー
-						Instantiate(player2d[0],new Vector2((float)i, (float)j), Quaternion.Euler(new Vector2(0f,0f)));
-						break;
-					default:
-						break;
-					}
-				} while(false);
+				case 1:
+					block_creator.createBlock (new Vector2 ((float)i, (float)j), RED);
+					GameMgr.left_block++;
+					break;
+				case 2:
+					block_creator.createBlock (new Vector2 ((float)i, (float)j), BLUE);
+					GameMgr.left_block++;
+					break;
+				case 3:
+					block_creator.createBlock (new Vector2 ((float)i, (float)j), METAL);
+					break;
+				case 4:
+					block_creator.createBlock (new Vector2 ((float)i, (float)j), NEEDLE);
+					break;
+				case 9: 
+					Instantiate (player [0], new Vector2 ((float)i, (float)j), Quaternion.Euler (new Vector2 (0f, 0f)));
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
-		
 
-	// プレイヤーがステージ外へ出ているか
-	public bool isOut(GameObject player){
-		bool ret = false;
-
-		do {
-			// 左のしきい値の計算
-			float limit_left = this.transform.position.x - (((float)BLOCK_NUM_IN_SCREEN + 8) / 2.0f);
-			// ブロックがしきい値をでていたら削除の指示
-			if(player.transform.position.x < limit_left){
-				ret = true;
-				break;
-			}
-			// 上のしきい値の計算
-			float limit_up = this.transform.position.y + (float)SCREEN_HEIGHT;
-			if(player.transform.position.y > limit_up){
-				ret = true;
-				break;
-			}
-			// 上のしきい値の計算
-			float limit_down = this.transform.position.y - (float)SCREEN_HEIGHT;
-			if(player.transform.position.y < limit_down){
-				ret = true;
-				break;
-			}
-		} while(false);
-
-		return ret;
-	}
+	#endregion
 
 }
