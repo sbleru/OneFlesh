@@ -55,13 +55,13 @@ public class UnityAdsController : MonoBehaviour
 	// delayだけ待ってからAds表示
 	public void WaitAndShowUnityAds (float delay)
 	{
-		if(GameMgr.count_for_ads < 1){
+		if(GameManager.Instance.count_for_ads < 1){
 			StartCoroutine (ShowUnityAds(delay));
 		}
-		if(GameMgr.count_for_ads > 4){
-			GameMgr.count_for_ads = 0;
+		if(GameManager.Instance.count_for_ads > 4){
+			GameManager.Instance.count_for_ads = 0;
 		} else {
-			GameMgr.count_for_ads++;
+			GameManager.Instance.count_for_ads++;
 		}
 	}
 

@@ -43,8 +43,8 @@ public class GameStarter : MonoBehaviour {
 	#region event
 
 	void Awake(){
-		GameMgr.left_block = 0;
-		GameMgr.total_score = 0;
+		GameManager.Instance.left_block = 0;
+		GameManager.Instance.total_score = 0;
 		Application.targetFrameRate = 60;
 
 		SoundManager.Instance.PlayBGM ();
@@ -69,7 +69,7 @@ public class GameStarter : MonoBehaviour {
 
 			starter.text = "GO!!";
 			if(count_down_secs < -0.5f){
-				if(GameMgr.game_mode == "TimeAttack"){
+				if(GameManager.Instance.game_mode == "TimeAttack"){
 					time_keeper.StartGame ();
 				}
 				ui_ctrl.StartGame ();

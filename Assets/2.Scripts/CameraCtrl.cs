@@ -20,7 +20,7 @@ public class CameraCtrl : MonoBehaviour {
 			GetComponent<Camera> ().orthographicSize++;
 		}
 
-		if(GameMgr.game_mode == "Scroll"){
+		if(GameManager.Instance.game_mode == "Scroll"){
 			scroll_keeper = GameObject.FindGameObjectWithTag("Keeper");
 			// カメラとプレイヤーの位置の差分を保管
 			position_offset = this.transform.position - scroll_keeper.transform.position;
@@ -29,7 +29,7 @@ public class CameraCtrl : MonoBehaviour {
 
 
 	void LateUpdate(){
-		if (GameMgr.game_mode == "Scroll") {
+		if (GameManager.Instance.game_mode == "Scroll") {
 			
 			// カメラの現在位置をnew_positionに取得
 			Vector3 new_position = this.transform.position;

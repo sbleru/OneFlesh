@@ -67,7 +67,7 @@ public class UICtrl : MonoBehaviour {
 
 	void Update(){
 		// スコア更新
-		score.text = "Score: " + GameMgr.total_score;
+		score.text = "Score: " + GameManager.Instance.total_score;
 
 		// モードチェンジする関数を呼び出す
 		if (!Application.isMobilePlatform) {

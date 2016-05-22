@@ -45,7 +45,7 @@ public class TimeKeeper : MonoBehaviour {
 
 	public void GameClear(){
 		enabled = false;
-		GameMgr.time_score = elapsed_secs;
+		GameManager.Instance.time_score = elapsed_secs;
 	}
 
 	#endregion

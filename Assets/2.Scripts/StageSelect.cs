@@ -18,8 +18,8 @@ public class StageSelect : MonoBehaviour {
 	#region event
 
 	void Awake(){
-		GameMgr.left_block = 0;
-		GameMgr.total_score = 0;
+		GameManager.Instance.left_block = 0;
+		GameManager.Instance.total_score = 0;
 	}
 
 	void Start(){
@@ -62,7 +62,7 @@ public class StageSelect : MonoBehaviour {
 	}
 
 	public void ToTimeAttack(){
-		GameMgr.stage_num = this.stage_num;
+		GameManager.Instance.stage_num = this.stage_num;
 		FadeManager.Instance.LoadLevel ("scAttack", 0.1f);
 	}
 

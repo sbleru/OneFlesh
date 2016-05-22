@@ -13,7 +13,7 @@ public class ScreenTransitionByButton : MonoBehaviour {
 
 	public void ToTimeAttack(){
 		SoundManager.Instance.PlayBGM ();
-		GameMgr.stage_num = int.Parse(this.GetComponent<Text> ().text);
+		GameManager.Instance.stage_num = int.Parse(this.GetComponent<Text> ().text);
 		FadeManager.Instance.LoadLevel ("scAttack", 0.1f);
 	}
 
@@ -21,7 +21,7 @@ public class ScreenTransitionByButton : MonoBehaviour {
 		Time.timeScale = 1.0f;
 		SoundManager.Instance.PlayTitleBGM ();
 
-		if(GameMgr.game_mode == "TimeAttack"){
+		if(GameManager.Instance.game_mode == "TimeAttack"){
 			FadeManager.Instance.LoadLevel ("scStageSelect", 0.1f);
 		}
 	}
@@ -29,10 +29,10 @@ public class ScreenTransitionByButton : MonoBehaviour {
 	public void Redo(){
 		SoundManager.Instance.PlayBGM ();
 
-		if(GameMgr.game_mode == "TimeAttack"){
+		if(GameManager.Instance.game_mode == "TimeAttack"){
 			FadeManager.Instance.LoadLevel ("scAttack", 0.1f);
 
-		} else if(GameMgr.game_mode == "Scroll"){
+		} else if(GameManager.Instance.game_mode == "Scroll"){
 			FadeManager.Instance.LoadLevel ("scScroll", 0.1f);
 		}
 	}

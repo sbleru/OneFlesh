@@ -24,13 +24,13 @@ public class TimeScoreCtrl : MonoBehaviour {
 	private float high_score;	// ハイスコア
 
 	// PlayerPrefsで保存するためのキー　ステージごとに別に保存
-	private string highScoreKey     = "highScore" + GameMgr.stage_num;
+	private string highScoreKey     = "highScore" + GameManager.Instance.stage_num;
 	private string thistimeScoreKey = "thistimeScore";
 
 	private TextAsset rank_asset;  // ステージテキストを取り込む
 	string rank_txt;
 	private float[,] rank_data = new float[STAGE_NUM, RANK_NUM];
-	private string rankKey    = "rank" + GameMgr.stage_num;
+	private string rankKey    = "rank" + GameManager.Instance.stage_num;
 
 	[SerializeField]
 	private GameObject[] rank_stamp_thistime;
@@ -67,19 +67,19 @@ public class TimeScoreCtrl : MonoBehaviour {
 		get_rank_data();
 		#endregion
 
-		string stageID = "stage" + GameMgr.stage_num;
+		string stageID = "stage" + GameManager.Instance.stage_num;
 
 		// ゲームリタイアかどうか
-		if(!GameMgr.isRetire){
+		if(!GameManager.Instance.isRetire){
 			// タイムがはやくなれば
-			if (high_score > GameMgr.time_score) {
-				high_score = GameMgr.time_score;
+			if (high_score > GameManager.Instance.time_score) {
+				high_score = GameManager.Instance.time_score;
 				Save();
 			}
 
 			// スコア・ハイスコアを表示する
 			highscoreText.text = "HIGHSCORE : " + high_score;
-			scoreText.text = "SCORE : " + GameMgr.time_score;
+			scoreText.text = "SCORE : " + GameManager.Instance.time_score;
 
 			// ハイスコアからランクを登録する
 			rank_register();
@@ -90,7 +90,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 			// ゲームクリア時の分析
 			Analytics.CustomEvent("gameClear", new Dictionary<string, object>{
 				{"stage number", stageID},
-				{"thistime score", GameMgr.time_score},
+				{"thistime score", GameManager.Instance.time_score},
 				{"high score", high_score},
 			});
 
@@ -109,7 +109,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 			// ゲームリタイア時の分析
 			Analytics.CustomEvent("gameRetire", new Dictionary<string, object>{
 				{"stage number", stageID},
-				{"thistime score time", GameMgr.time_score},
+				{"thistime score time", GameManager.Instance.time_score},
 			});
 
 		}
@@ -151,7 +151,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 	{
 		// ハイスコアを保存する
 		PlayerPrefs.SetFloat (highScoreKey, high_score);
-		PlayerPrefs.SetFloat (thistimeScoreKey, GameMgr.time_score);
+		PlayerPrefs.SetFloat (thistimeScoreKey, GameManager.Instance.time_score);
 		PlayerPrefs.Save ();
 		// ゲーム開始前の状態に戻す
 		Initialize ();
@@ -207,7 +207,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 		for(int i=RANK_NUM; i>0; i--){
 
 			// 高ランクからチェックして当てはまった時点で保存してbreak
-			if(high_score < rank_data[GameMgr.stage_num-1, i-1]){
+			if(high_score < rank_data[GameManager.Instance.stage_num-1, i-1]){
 				PlayerPrefs.SetInt (rankKey, i+1);
 				PlayerPrefs.Save ();
 				isSet = true;
@@ -227,7 +227,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 		for(int i=RANK_NUM-1; i>=0; i--){
 
 			// 高ランクからチェックして当てはまった時点でアクティブにしてbreak
-			if(GameMgr.time_score < rank_data[GameMgr.stage_num-1, i]){
+			if(GameManager.Instance.time_score < rank_data[GameManager.Instance.stage_num-1, i]){
 				
 				rank_stamp_thistime [i+1].SetActive (true);
 				StampAnim (rank_stamp_thistime [i + 1]);
@@ -248,11 +248,11 @@ public class TimeScoreCtrl : MonoBehaviour {
 
 		for(int i=RANK_NUM-1; i>=0; i--){
 
-			if(high_score < rank_data[GameMgr.stage_num-1, i]){
+			if(high_score < rank_data[GameManager.Instance.stage_num-1, i]){
 				if(i==RANK_NUM-1){
 					to_next_rank.text = "Max Rank";
 				} else {
-					to_next_rank.text = "Next : " + rank_data [GameMgr.stage_num - 1, i+1];
+					to_next_rank.text = "Next : " + rank_data [GameManager.Instance.stage_num - 1, i+1];
 				}
 				rank_stamp_hscore [i+1].SetActive (true);
 				isSet = true;
@@ -260,7 +260,7 @@ public class TimeScoreCtrl : MonoBehaviour {
 			}
 		}
 		if(!isSet){
-			to_next_rank.text = "Next : " + rank_data [GameMgr.stage_num - 1, 0];
+			to_next_rank.text = "Next : " + rank_data [GameManager.Instance.stage_num - 1, 0];
 			rank_stamp_hscore[0].SetActive (true);
 		}
 	}

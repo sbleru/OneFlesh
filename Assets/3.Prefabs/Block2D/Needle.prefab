@@ -11,9 +11,9 @@ GameObject:
   - 212: {fileID: 21294556}
   - 58: {fileID: 5866258}
   - 114: {fileID: 11493220}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Needle
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,8 +55,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda7e8a156038421880edc6e19c63f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block_type: 0
-  isBorder: 0
+  _block_type: 0
+  _isWall: 0
   explosion: {fileID: 161516, guid: ca9f2c832b02845fd83c7276a3f4fc42, type: 2}
   clip: {fileID: 8300000, guid: 1792989a5a33779428d2dbe9a9430605, type: 3}
 --- !u!212 &21294556

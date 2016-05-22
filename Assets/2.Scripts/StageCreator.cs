@@ -14,7 +14,7 @@ public class StageCreator : MonoBehaviour {
 	private const int BLOCK_NUM_IN_SCREEN = 40, SCREEN_HEIGHT = 24;
 
 	// 生成するブロックの種類に番号を割り当てる
-	private const int RED = 0, BLUE = 1, METAL = 2, NEEDLE = 3;
+	private const int RED = 0, BLUE = 1, METAL = 2, NEEDLE = 3, ITEM = 4;
 
 	#endregion
 
@@ -90,7 +90,7 @@ public class StageCreator : MonoBehaviour {
 	private void capture_stage_data(){
 
 		// ステージ番号に応じたステージテキストを取り込む
-		TextAsset _stage_asset = Resources.Load ("stage" + GameMgr.stage_num) as TextAsset;
+		TextAsset _stage_asset = Resources.Load ("stage" + GameManager.Instance.stage_num) as TextAsset;
 
 		string _stage_txt = _stage_asset.text;
 		string[] _lines = _stage_txt.Split ('\n');
@@ -139,17 +139,20 @@ public class StageCreator : MonoBehaviour {
 		
 				case 1:
 					block_creator.createBlock (new Vector2 ((float)i, (float)j), RED);
-					GameMgr.left_block++;
+					GameManager.Instance.left_block++;
 					break;
 				case 2:
 					block_creator.createBlock (new Vector2 ((float)i, (float)j), BLUE);
-					GameMgr.left_block++;
+					GameManager.Instance.left_block++;
 					break;
 				case 3:
 					block_creator.createBlock (new Vector2 ((float)i, (float)j), METAL);
 					break;
 				case 4:
 					block_creator.createBlock (new Vector2 ((float)i, (float)j), NEEDLE);
+					break;
+				case 5:
+					block_creator.createBlock (new Vector2 ((float)i, (float)j), ITEM);
 					break;
 				case 9: 
 					Instantiate (player [0], new Vector2 ((float)i, (float)j), Quaternion.Euler (new Vector2 (0f, 0f)));

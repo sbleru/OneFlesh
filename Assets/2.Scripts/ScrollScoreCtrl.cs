@@ -32,18 +32,18 @@ public class ScrollScoreCtrl : MonoBehaviour {
 		Initialize ();
 
 		// スコアがハイスコアより大きければ
-		if (high_score < GameMgr.total_score) {
-			high_score = GameMgr.total_score;
+		if (high_score < GameManager.Instance.total_score) {
+			high_score = GameManager.Instance.total_score;
 			Save();
 		}
 		// スコア・ハイスコアを表示する
 		highcoreText.text = "HIGHSCORE : " + high_score;
-		scoreText.text = "SCORE : " + GameMgr.total_score;
+		scoreText.text = "SCORE : " + GameManager.Instance.total_score;
 
 		// CustomEvent を作る　クリア時
 		Analytics.CustomEvent ("Clear", new Dictionary<string, object> {
 			{ "scene ID", SceneManager.GetActiveScene().buildIndex },
-			{"thistime score", GameMgr.total_score},
+			{"thistime score", GameManager.Instance.total_score},
 			{ "high score", high_score },
 		});
 
@@ -69,7 +69,7 @@ public class ScrollScoreCtrl : MonoBehaviour {
 		// ハイスコアを保存する
 		//PlayerPrefs.SetInt (highScoreKey, 0);
 		PlayerPrefs.SetInt (highScoreKey, high_score);
-		PlayerPrefs.SetInt (thistimeScoreKey, GameMgr.total_score);
+		PlayerPrefs.SetInt (thistimeScoreKey, GameManager.Instance.total_score);
 		PlayerPrefs.Save ();
 
 		// ゲーム開始前の状態に戻す

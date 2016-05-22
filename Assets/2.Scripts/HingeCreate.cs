@@ -126,7 +126,7 @@ public class HingeCreate : MonoBehaviour {
 	void GetEasingFunction(){
 		switch (easeType){
 		case EaseType.easeInQuad:
-			ease  = new EasingFunction(easeInQuad);
+			ease = new EasingFunction(easeInQuad);
 			break;
 		case EaseType.easeOutQuad:
 			ease = new EasingFunction(easeOutQuad);

@@ -35,7 +35,7 @@ public class SelectMode : MonoBehaviour {
 	#region event
 
 	void Awake(){
-		GameMgr.initialize ();
+//		GameManager.Instance.initialize ();
 
 		time_attack_button.GetComponent<Button> ().enabled = false;
 		scroll_button.GetComponent<Button> ().enabled = false;
@@ -62,7 +62,7 @@ public class SelectMode : MonoBehaviour {
 	// スクロールモードでゲーム開始
 	public void Scroll(){
 		player_a.AddForce(new Vector2(1, -1)*20, ForceMode2D.Impulse);
-		GameMgr.game_mode = "Scroll";
+		GameManager.Instance.game_mode = "Scroll";
 		FadeManager.Instance.LoadLevel ("scScroll", 0.8f);
 	}
 
@@ -70,7 +70,7 @@ public class SelectMode : MonoBehaviour {
 	// タイムアタックモードでゲーム開始
 	public void TimeAttack(){
 		player_b.AddForce(new Vector2(-1, -1)*20, ForceMode2D.Impulse);
-		GameMgr.game_mode = "TimeAttack";
+		GameManager.Instance.game_mode = "TimeAttack";
 		FadeManager.Instance.LoadLevel ("scStageSelect", 0.8f);
 	}
 		

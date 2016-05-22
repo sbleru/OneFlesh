@@ -53,6 +53,15 @@ public class BlockCtrl : MonoBehaviour {
 		}
 	}
 
+	private ModeChanger _mode_changer;
+	public ModeChanger mode_changer
+	{
+		get { 
+			_mode_changer = _mode_changer ?? (GameObject.FindWithTag("Root").GetComponent<ModeChanger>());
+			return this._mode_changer; 
+		}
+	}
+
 	bool isCreateNewBlock = false;
 
 	[SerializeField]
@@ -62,6 +71,7 @@ public class BlockCtrl : MonoBehaviour {
 	private float elapsed_time;	    // ブロックが生成されてからの時間
 
 	#endregion
+
 
 	#region event
 	// Use this for initialization
@@ -73,7 +83,7 @@ public class BlockCtrl : MonoBehaviour {
 	void Update () {
 
 		// スクロールモード
-		if(GameMgr.game_mode == "Scroll"){
+		if(GameManager.Instance.game_mode == "Scroll"){
 			
 			elapsed_time += Time.deltaTime;
 			
@@ -94,13 +104,14 @@ public class BlockCtrl : MonoBehaviour {
 
 	#endregion
 
+
 	#region private method
 	// red_player  : red_block  -> Destroy block
 	// blue_player : blue_block -> Destroy block
 	// player	   : needle     -> Game over
 	void OnCollisionEnter2D(Collision2D collision){
 
-		// block_type = 0:赤, 1:青, 3:ニードル
+		// block_type = 0:赤, 1:青, 3:ニードル, 4:変身アイテム
 		if (block_type == 0 && collision.gameObject.tag == "PlayerA") {
 			
 			// Destroyだとエネミー作成していない場合、作成してくれない
@@ -111,10 +122,10 @@ public class BlockCtrl : MonoBehaviour {
 			Instantiate (explosion, this.gameObject.transform.position, Quaternion.identity);
 			SoundManager.Instance.PlaySoundEffect (SoundManager.Instance.sound_explosion);
 
-			if (GameMgr.game_mode == "TimeAttack") {
-				GameMgr.left_block--;	// 残りブロック数を減らす
+			if (GameManager.Instance.game_mode == "TimeAttack") {
+				GameManager.Instance.left_block--;	// 残りブロック数を減らす
 			} else {
-				score_ctrl.Add (10);
+				score_ctrl.AddScore (10, this.transform.position);
 			}
 
 		} else if (block_type == 1 && collision.gameObject.tag == "PlayerB") {
@@ -126,10 +137,11 @@ public class BlockCtrl : MonoBehaviour {
 			Instantiate (explosion, this.gameObject.transform.position, Quaternion.identity);
 			SoundManager.Instance.PlaySoundEffect (SoundManager.Instance.sound_explosion);
 
-			if (GameMgr.game_mode == "TimeAttack") {
-				GameMgr.left_block--;	// 残りブロック数を更新
+			if (GameManager.Instance.game_mode == "TimeAttack"){
+				GameManager.Instance.left_block--;	// 残りブロック数を更新
 			} else {
-				score_ctrl.Add (30);	// 青ブロックの方が得点が高い
+				// 青ブロックの方が得点が高い	
+				score_ctrl.AddScore (30, this.transform.position);
 			}
 
 		} else if (block_type == 3 && collision.gameObject.tag == "PlayerA" || 
@@ -137,6 +149,12 @@ public class BlockCtrl : MonoBehaviour {
 
 			// プレイヤーの消滅関数呼び出し クラスPlayerCtrl
 			player_2dctrl.KillPlayer ();
+
+		} else if (block_type == 4){ // プレイヤーのどの部分にぶつかっても手に入る
+			this.gameObject.GetComponent<Collider2D> ().enabled = false;
+			this.gameObject.GetComponent<SpriteRenderer> ().enabled = false;
+
+			mode_changer.ModeChange ();
 		}
 	}
 

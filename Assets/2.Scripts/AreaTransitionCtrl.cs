@@ -9,6 +9,7 @@ public class AreaTransitionCtrl : MonoBehaviour {
 	
 	private static readonly int AREA_NUM = 3;	// エリア数
 	private const float AREA_INTERVAL = 300F;	// ステージ選択エリア間隔
+	private const float FLICK_FEEDBACK = 50f;	// フリック時の反応
 
 	#endregion
 
@@ -16,9 +17,11 @@ public class AreaTransitionCtrl : MonoBehaviour {
 	#region private property
 
 	private float currentYpos, startYpos;
-	private bool touchStart, swipestart;
+	private bool touchStart, swipeStart, isSwiped;
 	private int current_area;	// カメラの現在エリア
 	Vector3 start_pos;			// カメラの初期位置
+	Vector3 camera_pos, temp_pos;
+	bool isTransition;
 
 	[SerializeField]
 	private GameObject go_up, go_down;
@@ -33,21 +36,30 @@ public class AreaTransitionCtrl : MonoBehaviour {
 		current_area = 0;
 		go_up.SetActive (false);
 		start_pos = this.gameObject.transform.position;
+
+		isTransition = true;
+		swipeStart = false;
 	}
 
 
 	void Update(){
+		
 		// 仮想操作パッド スワイプ処理
 		for (int i = 0; i < Input.touchCount; i++) {
 			// 
 			if (Input.GetTouch (i).position.x > 0.0f) {
+
 				// 指があった場合、座標を格納
 				currentYpos = Input.GetTouch (i).position.y;
 				if (!touchStart) {
+					camera_pos = this.gameObject.transform.position;
+					isTransition = false;
+
 					// タッチした瞬間の座標を保存
 					startYpos = currentYpos;
 					touchStart = true;
-					swipestart = true;
+					swipeStart = true;
+					isSwiped = true;
 				}
 			}
 		}
@@ -57,18 +69,48 @@ public class AreaTransitionCtrl : MonoBehaviour {
 			currentYpos = 0.0f;
 			startYpos = 0.0f;
 			touchStart = false;
-			swipestart = false;		// スワイプ一回で一つエリアを移動させるための処理
+			swipeStart = false;
+			isSwiped = false;		// スワイプ一回で一つエリアを移動させるための処理
+
+			if(!isTransition){
+				iTween.MoveTo (this.gameObject, camera_pos, 1.0f);
+			}
 		}
 
 		// 移動地計算 Y軸
-		if(swipestart){
+		if(isSwiped){
 			if((startYpos - currentYpos) < (Screen.height * -0.08f)){
-				GoLowerArea ();
-				swipestart = false;	
+
+				// スワイプする前のフィードバックを返す処理
+				if(swipeStart){
+					swipeStart = false;
+					Vector3 target_area = this.gameObject.transform.position;
+					target_area.y = target_area.y - FLICK_FEEDBACK;
+					iTween.MoveTo (this.gameObject, target_area, 1.0f);
+				}
+					
+				// 下エリアへ移動
+				if ((startYpos - currentYpos) < (Screen.height * -0.2f)) {
+					isSwiped = false;
+					GoLowerArea ();
+				}
+
 			} else if ((startYpos - currentYpos) > (Screen.height * 0.08f)){
-				GoHigherArea ();
-				swipestart = false;
-			} 
+
+				// スワイプする前のフィードバックを返す処理
+				if(swipeStart){
+					swipeStart = false;
+					Vector3 target_area = this.gameObject.transform.position;
+					target_area.y = target_area.y + FLICK_FEEDBACK;
+					iTween.MoveTo (this.gameObject, target_area, 1.0f);
+				}
+
+				// 上エリアへ移動
+				if ((startYpos - currentYpos) > (Screen.height * 0.2f)) {
+					isSwiped = false;
+					GoHigherArea ();
+				}
+			}
 		}
 	}
 
@@ -80,8 +122,8 @@ public class AreaTransitionCtrl : MonoBehaviour {
 	/* ボタンを押したときにもエリア移動可能とするため、<current_area>は関数側で処理する */
 	public void GoLowerArea(){
 		// 下限であれば
-		if(current_area++ < AREA_NUM - 1){
-
+		if(current_area < AREA_NUM - 1){
+			current_area++;
 			// 移動するターゲットエリアを計算し、移動アニメーション
 			/* 関数化するべきか */
 			Vector3 target_area = this.gameObject.transform.position;
@@ -93,13 +135,16 @@ public class AreaTransitionCtrl : MonoBehaviour {
 			if(current_area == AREA_NUM - 1){
 				go_down.SetActive (false);
 			}
+
+			isTransition = true;
 		}
 
 	}
 
 	public void GoHigherArea(){
 		// 上限であれば
-		if(current_area-- > 0){
+		if(current_area > 0){
+			current_area--;
 
 			Vector3 target_area = this.gameObject.transform.position;
 			target_area.y = start_pos.y - AREA_INTERVAL * current_area;
@@ -110,6 +155,8 @@ public class AreaTransitionCtrl : MonoBehaviour {
 			if(current_area == 0){
 				go_up.SetActive (false);
 			}
+
+			isTransition = true;
 		}
 	}
 

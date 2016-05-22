@@ -85,7 +85,7 @@ public class Player2DCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// タイムアタックモード
-		if (GameMgr.game_mode == "TimeAttack") {
+		if (GameManager.Instance.game_mode == "TimeAttack") {
 			// 速度を設定
 			Vector2 velocity_a = this.rigidbody_a.velocity;  
 
@@ -127,7 +127,7 @@ public class Player2DCtrl : MonoBehaviour {
 
 
 		// スクロールモード
-		if(GameMgr.game_mode == "Scroll"){
+		if(GameManager.Instance.game_mode == "Scroll"){
 			// 速度を設定
 			Vector2 velocity_a = this.rigidbody_a.velocity;  
 			Vector3 velocity_keeper = this.rigidbody_keeper.velocity;

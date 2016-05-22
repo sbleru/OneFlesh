@@ -184,6 +184,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   starter_txt: {fileID: 731544685}
+--- !u!1 &177277615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 177277616}
+  - 114: {fileID: 177277617}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &177277616
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 177277615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.86, y: 0.48000002, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+--- !u!114 &177277617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 177277615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b605385566236491a881414e72234ece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _game_mode: TimeAttack
+  _stage_num: 1
+  _left_block: 0
+  _time_score: 0
+  _isRetire: 0
+  _total_score: 0
+  _count_for_ads: 3
 --- !u!1001 &554047057
 Prefab:
   m_ObjectHideFlags: 0
@@ -363,8 +409,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 22, y: -4}
-  m_SizeDelta: {x: 470, y: 300}
+  m_AnchoredPosition: {x: 14, y: 0}
+  m_SizeDelta: {x: 510, y: 287}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &731544683
 GameObject:
@@ -1014,10 +1060,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 647476091}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -22, y: -18}
-  m_SizeDelta: {x: 389, y: 242}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -14, y: -23}
+  m_SizeDelta: {x: -83, y: -46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2137035620
 MonoBehaviour:

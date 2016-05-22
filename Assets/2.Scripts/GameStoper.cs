@@ -53,10 +53,10 @@ public class GameStoper : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(GameMgr.game_mode == "TimeAttack"){
+		if(GameManager.Instance.game_mode == "TimeAttack"){
 			if(!isGameClear){
 				// すべてのブロックを破壊したら
-				if(GameMgr.left_block < 1){
+				if(GameManager.Instance.left_block < 1){
 					isGameClear = true;
 					SendGameOver ();
 				}
@@ -73,18 +73,18 @@ public class GameStoper : MonoBehaviour {
 	public void SendGameOver(){
 		// この関数は一回だけ機能するようにする
 		/* クリアと死亡がほぼ同時に起こったときに早い方を判定するため */
-		if(!isExecutedSendGameOver && GameMgr.game_mode == "TimeAttack"){
+		if(!isExecutedSendGameOver && GameManager.Instance.game_mode == "TimeAttack"){
 				
 			//終了の合図を送る
 			time_keeper.GameClear ();
 			ui_ctrl.GameClear ();
 			player_2dctrl.GameClear ();
 			// SendGameOverの送り元からリタイアかクリアか判断する
-			GameMgr.isRetire = isGameClear ? false : true;
+			GameManager.Instance.isRetire = isGameClear ? false : true;
 			StartCoroutine ("NextScene", "scTimeScore");
 
 		} 
-		else if(!isExecutedSendGameOver && GameMgr.game_mode == "Scroll"){
+		else if(!isExecutedSendGameOver && GameManager.Instance.game_mode == "Scroll"){
 			
 			StartCoroutine ("NextScene", "scScrollScore");
 		}
