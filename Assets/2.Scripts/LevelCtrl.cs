@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 class LevelData{
 
-	public int score { get; set; } // スコア
+	public int score { get; set; } 			// スコア
 	public float player_speed { get; set; }	// プレイヤーの速度
-	public float interval { get; set; }	// ブロック出現間隔
+	public float interval { get; set; }		// ブロック出現間隔
 
 	// コンストラクタ
 	public LevelData(){
@@ -20,9 +20,7 @@ public class LevelCtrl : MonoBehaviour {
 
 	#region private property
 
-	// リスト：要素数を気にしないでいい
 	private List<LevelData> level_datas = new List<LevelData> ();
-
 	private int level = 0;  // 難易度
 
 	#endregion

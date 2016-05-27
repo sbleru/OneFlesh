@@ -16,7 +16,7 @@ public class BlockCreator : MonoBehaviour {
 
 	// ブロックを作成する関数
 	// タイプを引数で指定 境界線としてのブロックかどうか指定
-	public void createBlock2(Vector2 block_pos, int block_type, bool isWall){
+	public void CreateBlock(Vector2 block_pos, int block_type, bool isWall){
 
 		GameObject block_obj = Instantiate(blockPrefabs[block_type]) as GameObject;
 
@@ -28,7 +28,7 @@ public class BlockCreator : MonoBehaviour {
 	}
 		
 
-	public void createBlock(Vector2 block_pos, int block_type){
+	public void CreateBlock(Vector2 block_pos, int block_type){
 
 		// ブロックを作成する
 		GameObject block_obj = Instantiate(blockPrefabs[block_type]) as GameObject;

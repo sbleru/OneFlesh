@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine;
 #endregion
 
+// プレイヤーのアニメーションスクリプト
+/* Ease In Quad のアニメーションのみを採用しているがひとまずiTween内のアニメーション関数をすべていれてる */
 public class HingeCreate : MonoBehaviour {
 
 	#region private property

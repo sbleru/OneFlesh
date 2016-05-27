@@ -164,7 +164,7 @@ public class MapCreator : MonoBehaviour {
 		_position.x += BLOCK_WIDTH;
 
 		// ブロック作成指示
-		block_creator.createBlock2 (_position, METAL, true);
+		block_creator.CreateBlock (_position, METAL, true);
 
 		// last_blockを更新
 		wall_block.last_pos = _position;
@@ -182,17 +182,17 @@ public class MapCreator : MonoBehaviour {
 		next_block_position.x += BLOCK_WIDTH * ((float)BLOCK_NUM_IN_SCREEN_WIDTH / 2.0f);
 		next_block_position.y = Random.Range (-(float)BLOCK_NUM_IN_SCREEN_HEIGHT/2.0f, (float)BLOCK_NUM_IN_SCREEN_HEIGHT/2.0f);
 
-		/* TODO : 第三引数に何を渡しているのかわかりやすく */
+		// ランダムな種類でブロックを生成
 		switch(Random.Range(1,5) % 4){
 		case 0:
 		case 1:
-			block_creator.createBlock2 (next_block_position, RED, false);
+			block_creator.CreateBlock (next_block_position, RED, false);
 			break;
 		case 2:
-			block_creator.createBlock2 (next_block_position, BLUE, false);
+			block_creator.CreateBlock (next_block_position, BLUE, false);
 			break;
 		case 3:
-			block_creator.createBlock2 (next_block_position, NEEDLE, false);
+			block_creator.CreateBlock (next_block_position, NEEDLE, false);
 			break;
 		default:
 			break;

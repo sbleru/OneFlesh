@@ -138,21 +138,21 @@ public class StageCreator : MonoBehaviour {
 				switch(stage_data[i,j]){
 		
 				case 1:
-					block_creator.createBlock (new Vector2 ((float)i, (float)j), RED);
+					block_creator.CreateBlock (new Vector2 ((float)i, (float)j), RED);
 					GameManager.Instance.left_block++;
 					break;
 				case 2:
-					block_creator.createBlock (new Vector2 ((float)i, (float)j), BLUE);
+					block_creator.CreateBlock (new Vector2 ((float)i, (float)j), BLUE);
 					GameManager.Instance.left_block++;
 					break;
 				case 3:
-					block_creator.createBlock (new Vector2 ((float)i, (float)j), METAL);
+					block_creator.CreateBlock (new Vector2 ((float)i, (float)j), METAL);
 					break;
 				case 4:
-					block_creator.createBlock (new Vector2 ((float)i, (float)j), NEEDLE);
+					block_creator.CreateBlock (new Vector2 ((float)i, (float)j), NEEDLE);
 					break;
 				case 5:
-					block_creator.createBlock (new Vector2 ((float)i, (float)j), ITEM);
+					block_creator.CreateBlock (new Vector2 ((float)i, (float)j), ITEM);
 					break;
 				case 9: 
 					Instantiate (player [0], new Vector2 ((float)i, (float)j), Quaternion.Euler (new Vector2 (0f, 0f)));
