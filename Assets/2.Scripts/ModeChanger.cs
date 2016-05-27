@@ -4,11 +4,6 @@ using System.Collections;
 
 public class ModeChanger : MonoBehaviour {
 
-	#region public property
-
-	#endregion
-
-
 	#region private property
 
 	[SerializeField]

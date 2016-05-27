@@ -853,6 +853,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99effd7e61a484f7b87efb733cc0bee2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: {fileID: 0}
+  total_score: {fileID: 0}
+  center_obj: {fileID: 0}
 --- !u!114 &528091409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -984,7 +987,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 836252452}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1ec56723e5e6441ca8af1757247f00f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eacf30e3743c44f7a06a537b06b7b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   time: {fileID: 2027605951}
@@ -1034,7 +1037,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 55, y: -49.4}
+  m_AnchoredPosition: {x: 68.94998, y: -77.30003}
   m_SizeDelta: {x: 50.4, y: 76.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1052175101
@@ -1252,7 +1255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6764706, g: 0.308391, b: 0.308391, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1401,7 +1404,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 137, y: -49.4}
+  m_AnchoredPosition: {x: -245, y: -77.3}
   m_SizeDelta: {x: 345, y: 61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027605951
@@ -1416,7 +1419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6745098, g: 0.30588236, b: 0.30588236, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

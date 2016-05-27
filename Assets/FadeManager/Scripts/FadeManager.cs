@@ -15,7 +15,6 @@ public class FadeManager : MonoBehaviour
 	private static FadeManager instance;
 
 	public static FadeManager Instance {
-		// getアクセサ
 		get {
 			if (instance == null) {
 				instance = (FadeManager)FindObjectOfType (typeof(FadeManager));

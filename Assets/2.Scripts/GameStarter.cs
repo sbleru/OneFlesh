@@ -10,12 +10,12 @@ public class GameStarter : MonoBehaviour {
 	private Text starter;
 	private float count_down_secs;
 
-	private TimeKeeper _time_keeper;
-	private TimeKeeper time_keeper
+	private TimeManager _time_manager;
+	private TimeManager time_manager
 	{
 		get { 
-			_time_keeper = _time_keeper ?? (this.gameObject.GetComponent<TimeKeeper>());
-			return this._time_keeper; 
+			_time_manager = _time_manager ?? (this.gameObject.GetComponent<TimeManager>());
+			return this._time_manager; 
 		}
 	}
 
@@ -70,7 +70,7 @@ public class GameStarter : MonoBehaviour {
 			starter.text = "GO!!";
 			if(count_down_secs < -0.5f){
 				if(GameManager.Instance.game_mode == "TimeAttack"){
-					time_keeper.StartGame ();
+					time_manager.StartGame ();
 				}
 				ui_ctrl.StartGame ();
 				player_2dctrl.StartGame ();

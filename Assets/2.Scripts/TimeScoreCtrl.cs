@@ -128,11 +128,6 @@ public class TimeScoreCtrl : MonoBehaviour {
 	#endregion
 
 
-	#region public method
-
-	#endregion
-
-
 	#region private method
 
 	// 初期化
@@ -277,7 +272,6 @@ public class TimeScoreCtrl : MonoBehaviour {
 	}
 
 	// リタイアアニメーション
-//	private void RetireAnim(GameObject obj){
 	IEnumerator RetireAnim(GameObject obj){
 		obj.SetActive (true);
 		obj.GetComponent<Text> ().color = new Color(1, 0, 0, 1);

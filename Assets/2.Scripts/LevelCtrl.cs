@@ -3,13 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 class LevelData{
-//	private struct Range{	// 範囲を表す構造体
-//		public int min;
-//		public int max;
-//	};
-//	public int score { get; set; } = 0;
-//	public int player_speed { get; set; } = 5.0f;
-//	public float interval { get; set; } = 18;
 
 	public int score { get; set; } // スコア
 	public float player_speed { get; set; }	// プレイヤーの速度

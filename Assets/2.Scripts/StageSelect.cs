@@ -56,18 +56,9 @@ public class StageSelect : MonoBehaviour {
 
 	#region public method
 
-	//
-	public void ToTitle(){
-		FadeManager.Instance.LoadLevel ("scTitle", 0.1f);
-	}
-
 	public void ToTimeAttack(){
 		GameManager.Instance.stage_num = this.stage_num;
 		FadeManager.Instance.LoadLevel ("scAttack", 0.1f);
-	}
-
-	public void ToScroll(){
-		FadeManager.Instance.LoadLevel ("scScroll", 0.1f);
 	}
 
 	#endregion

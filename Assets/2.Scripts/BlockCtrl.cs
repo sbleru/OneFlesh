@@ -7,20 +7,8 @@ public class BlockCtrl : MonoBehaviour {
 	#region public property
 
 	// block information
-	[SerializeField]
-	private int _block_type;
-	public int block_type
-	{
-		get { return this._block_type; }
-		set { this._block_type = value; }
-	}
-	[SerializeField]
-	private bool _isWall;
-	public bool isWall
-	{
-		get { return this._isWall; }
-		set { this._isWall = value; }
-	}
+	public int block_type { get; set; }
+	public bool isWall { get; set; }
 
 	#endregion
 

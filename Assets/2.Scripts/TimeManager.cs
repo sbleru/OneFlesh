@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class TimeKeeper : MonoBehaviour {
+public class TimeManager : MonoBehaviour {
 
 	#region private propety
 
@@ -19,7 +19,7 @@ public class TimeKeeper : MonoBehaviour {
 	void Start(){
 		elapsed_secs = 0.0f;
 	}
-		
+
 	// Update is called once per frame
 	void Update () {
 		elapsed_secs += Time.deltaTime;

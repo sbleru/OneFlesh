@@ -97,23 +97,6 @@ public class Player2DCtrl : MonoBehaviour {
 				velocity_a.y = ui_ctrl.movingYpos * Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
 			}
 
-			if (!Application.isMobilePlatform) {
-				// プレイヤーAの操作
-				// 順に左、上、下、右
-				if (Input.GetKey (KeyCode.H)) {
-					velocity_a.x = -Mathf.Sqrt (2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if (Input.GetKey (KeyCode.J)) {
-					velocity_a.y = Mathf.Sqrt (2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if (Input.GetKey (KeyCode.K)) {
-					velocity_a.y = -Mathf.Sqrt (2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if (Input.GetKey (KeyCode.L)) {
-					velocity_a.x = Mathf.Sqrt (2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-			}
-
 			// 速度を適用
 			this.rigidbody_a.velocity = velocity_a;
 
@@ -124,8 +107,7 @@ public class Player2DCtrl : MonoBehaviour {
 				isVanish = true;
 			}
 		}
-
-
+			
 		// スクロールモード
 		if(GameManager.Instance.game_mode == "Scroll"){
 			// 速度を設定
@@ -149,30 +131,10 @@ public class Player2DCtrl : MonoBehaviour {
 			ui_ctrl.player_direction();
 
 			if(Mathf.Abs(ui_ctrl.movingXpos) > 0.0f || Mathf.Abs(ui_ctrl.movingYpos) > 0.0f){
-				//if(X != 0 || Y != 0){
 				velocity_a.x = ui_ctrl.movingXpos * Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
 				velocity_a.y = ui_ctrl.movingYpos * Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
 			}
-
-
-			if(!Application.isMobilePlatform){
-				// プレイヤーAの操作
-				// 順に左、上、下、右
-				if(Input.GetKey(KeyCode.H)){
-					velocity_a.x = -Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if(Input.GetKey(KeyCode.J)){
-					velocity_a.y = Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if(Input.GetKey(KeyCode.K)){
-					velocity_a.y = -Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-				if(Input.GetKey(KeyCode.L)){
-					velocity_a.x = Mathf.Sqrt(2.0f * 9.8f * Player2DCtrl.SPEED);
-				}
-			}
-
-
+				
 			// 速度を適用
 			this.rigidbody_a.velocity = velocity_a;
 			this.rigidbody_keeper.velocity = velocity_keeper;

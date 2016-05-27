@@ -12,12 +12,12 @@ public class GameStoper : MonoBehaviour {
 	[SerializeField]
 	private Text finish;
 
-	private TimeKeeper _time_keeper;
-	private TimeKeeper time_keeper
+	private TimeManager _time_manager;
+	private TimeManager time_manager
 	{
 		get { 
-			_time_keeper = _time_keeper ?? (this.gameObject.GetComponent<TimeKeeper>());
-			return this._time_keeper; 
+			_time_manager = _time_manager ?? (this.gameObject.GetComponent<TimeManager>());
+			return this._time_manager; 
 		}
 	}
 
@@ -76,7 +76,7 @@ public class GameStoper : MonoBehaviour {
 		if(!isExecutedSendGameOver && GameManager.Instance.game_mode == "TimeAttack"){
 				
 			//終了の合図を送る
-			time_keeper.GameClear ();
+			time_manager.GameClear ();
 			ui_ctrl.GameClear ();
 			player_2dctrl.GameClear ();
 			// SendGameOverの送り元からリタイアかクリアか判断する
